@@ -18,10 +18,10 @@ namespace GookBabProgram
         public static DBManager GetInstance() { return instance; }
 
         public string StrConn =
-                "Server=localhost;" +
-                "Database=erp_program;" +
-                "Uid=root;" +
-                "Pwd=0000;" +
+                "Server=115.85.181.212;" +
+                "Database=s5585452;" +
+                "Uid=s5585452;" +
+                "Pwd=s5585452;" +
                 "Charset=utf8";
         public DBManager InitDBManager()
         {

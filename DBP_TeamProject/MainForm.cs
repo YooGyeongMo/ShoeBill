@@ -115,9 +115,14 @@ namespace DBP_TeamProject
 
         private void BtnCloseChlidFrom_Click(object sender, EventArgs e)
         {
+            /*
             if (activeForm != null)
                 activeForm.Close();
-            Reset();
+            Reset();*/
+            this.Close();
+
+            Login loginForm = new Login(); // 로그인 폼 실행
+            loginForm.Show();
         }
         private void Reset()
         {

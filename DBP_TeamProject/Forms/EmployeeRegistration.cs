@@ -20,7 +20,7 @@ namespace DBP_TeamProject.Forms
         private string password;
         private string department;
         private string name;
-        private string age;
+        private string dateOnly;
         private string rate;
         private string zipCode;
         private string addr;
@@ -31,12 +31,16 @@ namespace DBP_TeamProject.Forms
         }
         public void GetTextBoxInfo()
         {
+            DateTime dt = birthdateTimePicker.Value.Date;
+            dateOnly = dt.ToString("yyyy-MM-dd");
+
             id = idTextBox.Text;
             password = passwordTextBox.Text;
-            department = departmentTextBox.Text;
+
             name = nameTextBox.Text;
-            age = ageTextBox.Text;
-            rate = rateTextBox.Text;
+            rate = rateComboBox.Text;
+            department = departmentComboBox.Text;
+
             zipCode = zipCodeTextBox.Text;
             addr = addressTextBox.Text;
         }
@@ -48,7 +52,7 @@ namespace DBP_TeamProject.Forms
             {
                 stringErrorMsg = "로그인";
             }
-            else if (IsAnyTextBoxesEmpty(employeeGroupBox))
+            else if (IsAnyTextBoxesEmpty(employeeGroupBox) || IsAnyComboBoxesEmpty(employeeGroupBox))
             {
                 stringErrorMsg = "사원";
             }
@@ -81,6 +85,14 @@ namespace DBP_TeamProject.Forms
             // 텍스트 박스가 하나라도 비어있으면
             return textBoxes.Any(textBox => string.IsNullOrEmpty(textBox.Text));
         }
+        private bool IsAnyComboBoxesEmpty(GroupBox groupBox)
+        {
+            // 그룹박스 안에 있는 모든 콤보박스
+            var comboBoxes = groupBox.Controls.OfType<ComboBox>();
+
+            // 콤보박스가 하나라도 선택된 항목이 없으면
+            return comboBoxes.Any(comboBox => comboBox.SelectedIndex == -1);
+        }
         public bool IsDuplicateId(string id)
         {
             string query = Query.GetInstance().
@@ -95,10 +107,40 @@ namespace DBP_TeamProject.Forms
         public void InsertDB()
         {
             string query = Query.GetInstance().
-                            insert("사원 (사원ID, 비밀번호, 부서ID, 이름, 나이, 직급, 우편번호, 주소)").
-                            values($"('{id}','{password}', '{department}','{name}','{age}','{rate}','{zipCode}','{addr}')").exec();
-            DBManager.GetInstance().InitDBManager().ExecuteNonQueury(query);
+                            insert("사원 (사원ID, 비밀번호, 부서이름, 이름, 생년월일, 직급, 우편번호, 주소)").
+                            values($"('{id}','{password}', '{department}','{name}','{dateOnly}','{rate}','{zipCode}','{addr}')").exec();
+            int isSave = DBManager.GetInstance().InitDBManager().ExecuteNonQueury(query);
+            if (isSave > 0)
+            {
+                MessageBox.Show("정보가 입력되었습니다.");
+            }
             DBManager.GetInstance().CloseConnection();
+        }
+
+        private void loadAddressButton_Click(object sender, EventArgs e)
+        {
+            Address address = new Address();
+            // 모달로 폼을 열고, DialogResult를 확인하여 사용자가 폼을 어떻게 닫았는지 확인
+            if (address.ShowDialog() == DialogResult.OK)
+            {
+                // 사용자가 OK 버튼을 눌렀을 때만 값을 가져와서 처리
+                string road = address.Road;
+                string zip = address.Zip;
+
+                addressTextBox.Enabled = true;
+                zipCodeTextBox.Enabled = true;
+                // 값 처리
+                SetAddressText(road);
+                SetZipCodeText(zip);
+            }
+        }
+        public void SetAddressText(string txt)
+        {
+            addressTextBox.Text = txt;
+        }
+        public void SetZipCodeText(string txt)
+        {
+            zipCodeTextBox.Text = txt;
         }
     }
 }

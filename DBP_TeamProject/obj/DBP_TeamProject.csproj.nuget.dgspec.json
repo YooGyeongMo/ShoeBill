@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\user\\Desktop\\source\\repos\\DBP_TeamProject\\DBP_TeamProject\\DBP_TeamProject\\DBP_TeamProject.csproj": {}
+    "C:\\Users\\user\\Desktop\\Git\\ShoeBill\\DBP_TeamProject\\DBP_TeamProject.csproj": {}
   },
   "projects": {
-    "C:\\Users\\user\\Desktop\\source\\repos\\DBP_TeamProject\\DBP_TeamProject\\DBP_TeamProject\\DBP_TeamProject.csproj": {
+    "C:\\Users\\user\\Desktop\\Git\\ShoeBill\\DBP_TeamProject\\DBP_TeamProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\user\\Desktop\\source\\repos\\DBP_TeamProject\\DBP_TeamProject\\DBP_TeamProject\\DBP_TeamProject.csproj",
+        "projectUniqueName": "C:\\Users\\user\\Desktop\\Git\\ShoeBill\\DBP_TeamProject\\DBP_TeamProject.csproj",
         "projectName": "DBP_TeamProject",
-        "projectPath": "C:\\Users\\user\\Desktop\\source\\repos\\DBP_TeamProject\\DBP_TeamProject\\DBP_TeamProject\\DBP_TeamProject.csproj",
+        "projectPath": "C:\\Users\\user\\Desktop\\Git\\ShoeBill\\DBP_TeamProject\\DBP_TeamProject.csproj",
         "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\user\\Desktop\\source\\repos\\DBP_TeamProject\\DBP_TeamProject\\DBP_TeamProject\\obj\\",
+        "outputPath": "C:\\Users\\user\\Desktop\\Git\\ShoeBill\\DBP_TeamProject\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -40,9 +40,17 @@
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
           "dependencies": {
+            "Microsoft.Web.WebView2": {
+              "target": "Package",
+              "version": "[1.0.2151.40, )"
+            },
             "MySql.Data": {
               "target": "Package",
               "version": "[8.2.0, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
             }
           },
           "imports": [

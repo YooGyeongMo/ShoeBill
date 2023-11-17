@@ -63,6 +63,7 @@
             // 
             // UserNameTextBox
             // 
+            UserNameTextBox.AcceptsReturn = true;
             UserNameTextBox.ForeColor = SystemColors.WindowText;
             UserNameTextBox.Location = new Point(78, 16);
             UserNameTextBox.Name = "UserNameTextBox";
@@ -81,16 +82,16 @@
             // ReloadMemberRecord
             // 
             ReloadMemberRecord.AutoSize = true;
-            ReloadMemberRecord.Location = new Point(100, 181);
+            ReloadMemberRecord.Location = new Point(104, 181);
             ReloadMemberRecord.Name = "ReloadMemberRecord";
-            ReloadMemberRecord.Size = new Size(162, 19);
+            ReloadMemberRecord.Size = new Size(134, 19);
             ReloadMemberRecord.TabIndex = 5;
-            ReloadMemberRecord.Text = "재접속 시 사원 정보 기록";
+            ReloadMemberRecord.Text = "재접속 시 정보 기록";
             ReloadMemberRecord.UseVisualStyleBackColor = true;
             // 
             // LoginButton
             // 
-            LoginButton.Location = new Point(99, 206);
+            LoginButton.Location = new Point(90, 206);
             LoginButton.Name = "LoginButton";
             LoginButton.Size = new Size(163, 40);
             LoginButton.TabIndex = 8;
@@ -146,6 +147,8 @@
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "Login";
             Text = "로그인";
+            FormClosing += Login_FormClosing;
+            Load += Login_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
