@@ -4,6 +4,15 @@
     <Compile Update="Forms\Address.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forms\Approval\ApproveList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Forms\Approval\ContinueApprove.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Forms\Approval\NewApprove.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="Forms\AttendanceManagement.cs">
       <SubType>UserControl</SubType>
     </Compile>

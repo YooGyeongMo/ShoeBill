@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,9 @@ namespace DBP_TeamProject
     {
         private string id;
         private string pwd;
+
+        LoginedUser loginedUser = LoginedUser.getInstance();
+
         public Login()
         {
             InitializeComponent();
@@ -42,6 +46,7 @@ namespace DBP_TeamProject
             {
                 if (pwd.Equals(dbPassword))
                 {
+                    loginedUser.UserId = int.Parse(this.id);
                     MainForm main = new MainForm();
                     this.Hide(); // 현재 폼을 감춤
                     main.ShowDialog();
