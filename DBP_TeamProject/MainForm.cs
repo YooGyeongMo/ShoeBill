@@ -27,12 +27,8 @@ namespace DBP_TeamProject
 
         private Color SelectThemColor()
         {
-            int index = random.Next(ThemeColor.ColorList.Count);
-            while (tempIndex == index)
-            {
-                index = random.Next(ThemeColor.ColorList.Count);
-            }
-            tempIndex = index;
+            int index = 0;
+
             string Color = ThemeColor.ColorList[index];
             return ColorTranslator.FromHtml(Color);
         }

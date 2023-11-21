@@ -41,6 +41,12 @@ namespace GookBabProgram
         {
             connection.Close();
         }
+        // 글로벌적으로 참여할 수 있는 Connection
+        public MySqlConnection Connection
+        {
+            get { return connection; }
+        }
+
         public int ExecuteNonQueury(string query)
         {
             MySqlCommand cmd = new MySqlCommand(query, connection);
