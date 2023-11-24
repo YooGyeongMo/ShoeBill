@@ -62,9 +62,9 @@
             panelMenu.Dock = DockStyle.Left;
             panelMenu.ForeColor = Color.White;
             panelMenu.Location = new Point(0, 0);
-            panelMenu.Margin = new Padding(4);
+            panelMenu.Margin = new Padding(2, 2, 2, 2);
             panelMenu.Name = "panelMenu";
-            panelMenu.Size = new Size(310, 983);
+            panelMenu.Size = new Size(155, 461);
             panelMenu.TabIndex = 0;
             // 
             // Btnchat
@@ -76,11 +76,11 @@
             Btnchat.ForeColor = Color.Gainsboro;
             Btnchat.Image = Properties.Resources.채팅;
             Btnchat.ImageAlign = ContentAlignment.MiddleLeft;
-            Btnchat.Location = new Point(0, 410);
-            Btnchat.Margin = new Padding(4);
+            Btnchat.Location = new Point(0, 192);
+            Btnchat.Margin = new Padding(2, 2, 2, 2);
             Btnchat.Name = "Btnchat";
-            Btnchat.Padding = new Padding(16, 0, 0, 0);
-            Btnchat.Size = new Size(310, 77);
+            Btnchat.Padding = new Padding(8, 0, 0, 0);
+            Btnchat.Size = new Size(155, 36);
             Btnchat.TabIndex = 5;
             Btnchat.Text = "   채팅";
             Btnchat.TextAlign = ContentAlignment.MiddleLeft;
@@ -97,11 +97,11 @@
             Btbmessage.ForeColor = Color.Gainsboro;
             Btbmessage.Image = Properties.Resources.쪽지;
             Btbmessage.ImageAlign = ContentAlignment.MiddleLeft;
-            Btbmessage.Location = new Point(0, 333);
-            Btbmessage.Margin = new Padding(4);
+            Btbmessage.Location = new Point(0, 156);
+            Btbmessage.Margin = new Padding(2, 2, 2, 2);
             Btbmessage.Name = "Btbmessage";
-            Btbmessage.Padding = new Padding(16, 0, 0, 0);
-            Btbmessage.Size = new Size(310, 77);
+            Btbmessage.Padding = new Padding(8, 0, 0, 0);
+            Btbmessage.Size = new Size(155, 36);
             Btbmessage.TabIndex = 4;
             Btbmessage.Text = "   쪽지";
             Btbmessage.TextAlign = ContentAlignment.MiddleLeft;
@@ -118,11 +118,11 @@
             Btnapproval.ForeColor = Color.Gainsboro;
             Btnapproval.Image = Properties.Resources.결제;
             Btnapproval.ImageAlign = ContentAlignment.MiddleLeft;
-            Btnapproval.Location = new Point(0, 256);
-            Btnapproval.Margin = new Padding(4);
+            Btnapproval.Location = new Point(0, 120);
+            Btnapproval.Margin = new Padding(2, 2, 2, 2);
             Btnapproval.Name = "Btnapproval";
-            Btnapproval.Padding = new Padding(16, 0, 0, 0);
-            Btnapproval.Size = new Size(310, 77);
+            Btnapproval.Padding = new Padding(8, 0, 0, 0);
+            Btnapproval.Size = new Size(155, 36);
             Btnapproval.TabIndex = 3;
             Btnapproval.Text = "   결재";
             Btnapproval.TextAlign = ContentAlignment.MiddleLeft;
@@ -139,11 +139,11 @@
             Btnwork.ForeColor = Color.Gainsboro;
             Btnwork.Image = Properties.Resources.업무;
             Btnwork.ImageAlign = ContentAlignment.MiddleLeft;
-            Btnwork.Location = new Point(0, 179);
-            Btnwork.Margin = new Padding(4);
+            Btnwork.Location = new Point(0, 84);
+            Btnwork.Margin = new Padding(2, 2, 2, 2);
             Btnwork.Name = "Btnwork";
-            Btnwork.Padding = new Padding(16, 0, 0, 0);
-            Btnwork.Size = new Size(310, 77);
+            Btnwork.Padding = new Padding(8, 0, 0, 0);
+            Btnwork.Size = new Size(155, 36);
             Btnwork.TabIndex = 2;
             Btnwork.Text = "   업무";
             Btnwork.TextAlign = ContentAlignment.MiddleLeft;
@@ -160,11 +160,11 @@
             Btnemployee.ForeColor = Color.Gainsboro;
             Btnemployee.Image = Properties.Resources.인사;
             Btnemployee.ImageAlign = ContentAlignment.MiddleLeft;
-            Btnemployee.Location = new Point(0, 102);
-            Btnemployee.Margin = new Padding(4);
+            Btnemployee.Location = new Point(0, 48);
+            Btnemployee.Margin = new Padding(2, 2, 2, 2);
             Btnemployee.Name = "Btnemployee";
-            Btnemployee.Padding = new Padding(16, 0, 0, 0);
-            Btnemployee.Size = new Size(310, 77);
+            Btnemployee.Padding = new Padding(8, 0, 0, 0);
+            Btnemployee.Size = new Size(155, 36);
             Btnemployee.TabIndex = 1;
             Btnemployee.Text = "   인사";
             Btnemployee.TextAlign = ContentAlignment.MiddleLeft;
@@ -178,9 +178,9 @@
             panelLogo.Controls.Add(label1);
             panelLogo.Dock = DockStyle.Top;
             panelLogo.Location = new Point(0, 0);
-            panelLogo.Margin = new Padding(4);
+            panelLogo.Margin = new Padding(2, 2, 2, 2);
             panelLogo.Name = "panelLogo";
-            panelLogo.Size = new Size(310, 102);
+            panelLogo.Size = new Size(155, 48);
             panelLogo.TabIndex = 0;
             // 
             // label1
@@ -188,10 +188,10 @@
             label1.AutoSize = true;
             label1.Font = new Font("맑은 고딕", 12F, FontStyle.Regular, GraphicsUnit.Point);
             label1.ForeColor = Color.LightGray;
-            label1.Location = new Point(12, 28);
-            label1.Margin = new Padding(4, 0, 4, 0);
+            label1.Location = new Point(6, 13);
+            label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(276, 45);
+            label1.Size = new Size(138, 21);
             label1.TabIndex = 0;
             label1.Text = "회사관리프로그램";
             label1.Click += label1_Click;
@@ -204,10 +204,10 @@
             panelTitleBar.Controls.Add(btnClose);
             panelTitleBar.Controls.Add(lblTitle);
             panelTitleBar.Dock = DockStyle.Top;
-            panelTitleBar.Location = new Point(310, 0);
-            panelTitleBar.Margin = new Padding(4);
+            panelTitleBar.Location = new Point(155, 0);
+            panelTitleBar.Margin = new Padding(2, 2, 2, 2);
             panelTitleBar.Name = "panelTitleBar";
-            panelTitleBar.Size = new Size(1578, 102);
+            panelTitleBar.Size = new Size(789, 48);
             panelTitleBar.TabIndex = 1;
             panelTitleBar.MouseDown += panelTitleBar_MouseDown;
             // 
@@ -219,9 +219,9 @@
             BtnCloseChlidFrom.Font = new Font("맑은 고딕", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             BtnCloseChlidFrom.ForeColor = Color.White;
             BtnCloseChlidFrom.Location = new Point(0, 0);
-            BtnCloseChlidFrom.Margin = new Padding(4);
+            BtnCloseChlidFrom.Margin = new Padding(2, 2, 2, 2);
             BtnCloseChlidFrom.Name = "BtnCloseChlidFrom";
-            BtnCloseChlidFrom.Size = new Size(138, 102);
+            BtnCloseChlidFrom.Size = new Size(69, 48);
             BtnCloseChlidFrom.TabIndex = 1;
             BtnCloseChlidFrom.Text = "로그아웃";
             BtnCloseChlidFrom.UseVisualStyleBackColor = true;
@@ -234,10 +234,10 @@
             btnMinimize.FlatStyle = FlatStyle.Flat;
             btnMinimize.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Bold, GraphicsUnit.Point);
             btnMinimize.ForeColor = Color.White;
-            btnMinimize.Location = new Point(1462, 0);
-            btnMinimize.Margin = new Padding(4);
+            btnMinimize.Location = new Point(731, 0);
+            btnMinimize.Margin = new Padding(2, 2, 2, 2);
             btnMinimize.Name = "btnMinimize";
-            btnMinimize.Size = new Size(56, 51);
+            btnMinimize.Size = new Size(28, 24);
             btnMinimize.TabIndex = 4;
             btnMinimize.Text = "ㅡ";
             btnMinimize.TextAlign = ContentAlignment.MiddleRight;
@@ -251,10 +251,10 @@
             btnClose.FlatStyle = FlatStyle.Flat;
             btnClose.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point);
             btnClose.ForeColor = Color.White;
-            btnClose.Location = new Point(1522, 0);
-            btnClose.Margin = new Padding(4);
+            btnClose.Location = new Point(761, 0);
+            btnClose.Margin = new Padding(2, 2, 2, 2);
             btnClose.Name = "btnClose";
-            btnClose.Size = new Size(56, 51);
+            btnClose.Size = new Size(28, 24);
             btnClose.TabIndex = 2;
             btnClose.Text = "X";
             btnClose.UseVisualStyleBackColor = true;
@@ -266,10 +266,10 @@
             lblTitle.AutoSize = true;
             lblTitle.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Regular, GraphicsUnit.Point);
             lblTitle.ForeColor = Color.White;
-            lblTitle.Location = new Point(688, 28);
-            lblTitle.Margin = new Padding(4, 0, 4, 0);
+            lblTitle.Location = new Point(344, 13);
+            lblTitle.Margin = new Padding(2, 0, 2, 0);
             lblTitle.Name = "lblTitle";
-            lblTitle.Size = new Size(140, 46);
+            lblTitle.Size = new Size(72, 25);
             lblTitle.TabIndex = 0;
             lblTitle.Text = "HOME";
             // 
@@ -277,10 +277,10 @@
             // 
             panelDesktopPanel.Controls.Add(pictureBox);
             panelDesktopPanel.Dock = DockStyle.Fill;
-            panelDesktopPanel.Location = new Point(310, 102);
-            panelDesktopPanel.Margin = new Padding(4);
+            panelDesktopPanel.Location = new Point(155, 48);
+            panelDesktopPanel.Margin = new Padding(2, 2, 2, 2);
             panelDesktopPanel.Name = "panelDesktopPanel";
-            panelDesktopPanel.Size = new Size(1578, 881);
+            panelDesktopPanel.Size = new Size(789, 413);
             panelDesktopPanel.TabIndex = 2;
             // 
             // pictureBox
@@ -288,22 +288,23 @@
             pictureBox.Dock = DockStyle.Fill;
             pictureBox.Image = Properties.Resources.ShoBill;
             pictureBox.Location = new Point(0, 0);
-            pictureBox.Margin = new Padding(4);
+            pictureBox.Margin = new Padding(2, 2, 2, 2);
             pictureBox.Name = "pictureBox";
-            pictureBox.Size = new Size(1578, 881);
+            pictureBox.Size = new Size(789, 413);
+            pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox.TabIndex = 3;
             pictureBox.TabStop = false;
             // 
             // MainForm
             // 
-            AutoScaleDimensions = new SizeF(14F, 32F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1888, 983);
+            ClientSize = new Size(944, 461);
             Controls.Add(panelDesktopPanel);
             Controls.Add(panelTitleBar);
             Controls.Add(panelMenu);
             FormBorderStyle = FormBorderStyle.FixedSingle;
-            Margin = new Padding(4);
+            Margin = new Padding(2, 2, 2, 2);
             Name = "MainForm";
             Text = "회사관리 프로그램";
             Load += MainForm_Load;

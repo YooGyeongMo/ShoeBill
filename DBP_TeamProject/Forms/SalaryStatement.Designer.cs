@@ -28,10 +28,45 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            salaryDataGridView = new DataGridView();
+            salaryLoadButton = new Button();
+            ((System.ComponentModel.ISupportInitialize)salaryDataGridView).BeginInit();
+            SuspendLayout();
+            // 
+            // salaryDataGridView
+            // 
+            salaryDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            salaryDataGridView.Location = new Point(23, 18);
+            salaryDataGridView.Name = "salaryDataGridView";
+            salaryDataGridView.RowTemplate.Height = 25;
+            salaryDataGridView.Size = new Size(574, 270);
+            salaryDataGridView.TabIndex = 1;
+            // 
+            // salaryLoadButton
+            // 
+            salaryLoadButton.Location = new Point(606, 298);
+            salaryLoadButton.Name = "salaryLoadButton";
+            salaryLoadButton.Size = new Size(107, 48);
+            salaryLoadButton.TabIndex = 2;
+            salaryLoadButton.Text = "급여 조회하기";
+            salaryLoadButton.UseVisualStyleBackColor = true;
+            salaryLoadButton.Click += salaryLoadButton_Click;
+            // 
+            // SalaryStatement
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(salaryLoadButton);
+            Controls.Add(salaryDataGridView);
+            Name = "SalaryStatement";
+            Size = new Size(728, 362);
+            ((System.ComponentModel.ISupportInitialize)salaryDataGridView).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion
+
+        private DataGridView salaryDataGridView;
+        private Button salaryLoadButton;
     }
 }

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "Z:\\Desktop\\DBP팀\\ShoeBill\\DBP_TeamProject\\DBP_TeamProject.csproj": {}
+    "C:\\Users\\user\\Desktop\\MyProject\\ShoeBill\\DBP_TeamProject\\DBP_TeamProject.csproj": {}
   },
   "projects": {
-    "Z:\\Desktop\\DBP팀\\ShoeBill\\DBP_TeamProject\\DBP_TeamProject.csproj": {
+    "C:\\Users\\user\\Desktop\\MyProject\\ShoeBill\\DBP_TeamProject\\DBP_TeamProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "Z:\\Desktop\\DBP팀\\ShoeBill\\DBP_TeamProject\\DBP_TeamProject.csproj",
+        "projectUniqueName": "C:\\Users\\user\\Desktop\\MyProject\\ShoeBill\\DBP_TeamProject\\DBP_TeamProject.csproj",
         "projectName": "DBP_TeamProject",
-        "projectPath": "Z:\\Desktop\\DBP팀\\ShoeBill\\DBP_TeamProject\\DBP_TeamProject.csproj",
-        "packagesPath": "C:\\Users\\yoogyeongmo\\.nuget\\packages\\",
-        "outputPath": "Z:\\Desktop\\DBP팀\\ShoeBill\\DBP_TeamProject\\obj\\",
+        "projectPath": "C:\\Users\\user\\Desktop\\MyProject\\ShoeBill\\DBP_TeamProject\\DBP_TeamProject.csproj",
+        "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\user\\Desktop\\MyProject\\ShoeBill\\DBP_TeamProject\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\yoogyeongmo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -72,7 +72,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }
