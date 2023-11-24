@@ -146,6 +146,7 @@
             departmentComboBox.Name = "departmentComboBox";
             departmentComboBox.Size = new Size(121, 23);
             departmentComboBox.TabIndex = 13;
+            departmentComboBox.DropDown += departmentComboBox_DropDown;
             // 
             // EmployeeSearch
             // 

@@ -19,14 +19,16 @@ namespace DBP_TeamProject
             if (instance == null) { instance = new LoginedUser(); }
             return instance;
         }
-        private int userId;
+        private string userId;
         private string name;
         private string department;
         private string position;
+        private string level;
 
-        public int UserId { get => userId; set => userId = value; }
+        public string UserId { get => userId; set => userId = value; }
         public string Name { get => name; set => name = value; }
         public string Department { get => department; set => department = value; }
         public string Position { get => position; set => position = value; }
+        public string Level { get => level; set => level = value; }
     }
 }

@@ -13,6 +13,8 @@ namespace DBP_TeamProject.Forms
 {
     public partial class FormPersonnel_Management : Form
     {
+        private Control currentControl;
+
         public static FormPersonnel_Management pmForm;
         private EmployeeRegistration registPanel; // 사원 등록 패널
 
@@ -20,29 +22,23 @@ namespace DBP_TeamProject.Forms
         private EmployeeManagement.EmployeeModDel employeeModifyPanel; // 사원관리 - 사원 수정/삭제 패널
 
         private AttendanceManagement attendancePanel; // 출근부 관리 패널
-        private DepartmentManagement departmentPanel; // 부서 관리 패널
+        private DepartmentManagement departmentPanel; // 부서관리 -부서 등록 수정 패널
+        private DepartmentSearching departmentsearchingPanel;// 부서관리 - 부서 현황 패널
+
         private SalaryStatement salaryPanel; // 급여 관리
 
+        private HumanResourcesOrganizationChart humanOrganizationChartPanel; // 인사 조직도
         public FormPersonnel_Management()
         {
             InitializeComponent();
-            InitPanels(); // 패널 초기화
-            AddPanels(); // 패널 추가 
-            HideAllPanels(); // 패널 안보이게
+            AddControls(); // 패널 추가 
+            HideAllControls(); // 패널 안보이게
             pmForm = this;
-        }
-        private void InitPanels()
-        {
-            registPanel = new EmployeeRegistration();
 
-            employSearchPanel = new EmployeeSearch();
-            employeeModifyPanel = new EmployeeModDel();
-
-            departmentPanel = new DepartmentManagement();
-            attendancePanel = new AttendanceManagement();
-            salaryPanel = new SalaryStatement();
+            attendancePanel = new AttendanceManagement(); // 출근부 관리로 폼 시작
+            ShowControl(attendancePanel);
         }
-        private void AddPanels()
+        private void AddControls()
         {
             // 모든 패널 추가
             loadPanel.Controls.Add(registPanel);
@@ -51,18 +47,34 @@ namespace DBP_TeamProject.Forms
             loadPanel.Controls.Add(employeeModifyPanel);
 
             loadPanel.Controls.Add(departmentPanel);
+            loadPanel.Controls.Add(departmentsearchingPanel);
+
             loadPanel.Controls.Add(attendancePanel);
             loadPanel.Controls.Add(salaryPanel);
+
+            loadPanel.Controls.Add(humanOrganizationChartPanel);
         }
-        private void HideAllPanels()
+        private void HideAllControls()
         {
-            // 모든 패널을 숨김
-            registPanel.Visible = false;
-            employSearchPanel.Visible = false;
-            employeeModifyPanel.Visible = false;
-            departmentPanel.Visible = false;
-            attendancePanel.Visible = false;
-            salaryPanel.Visible = false;
+            if (currentControl != null)
+            {
+                currentControl.Dispose(); // 이전 컨트롤 제거
+                currentControl = null;
+            }
+        }
+        private void ShowControl(Control control)
+        {
+            if (currentControl != control)
+            {
+                HideAllControls();
+                currentControl = control;
+
+                if (!loadPanel.Controls.Contains(currentControl))
+                {
+                    loadPanel.Controls.Add(currentControl);
+                    currentControl.Dock = DockStyle.Fill;
+                }
+            }
         }
         private void FormPersonnel_Management_Load(object sender, EventArgs e)
         {
@@ -83,38 +95,67 @@ namespace DBP_TeamProject.Forms
             //label4.ForeColor = ThemeColor.SecondaryColor;
             //label5.ForeColor = ThemeColor.PrimaryColor;
         }
-
-        private void 사원등록ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            HideAllPanels();
-            registPanel.Visible = true;
-        }
-        private void 사원검색ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            HideAllPanels();
-            employSearchPanel.Visible = true;
-        }
-        private void 사원수정ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            HideAllPanels();
-            employeeModifyPanel.Visible = true;
-        }
+        // [#1] 출근부 관리
         private void 출근부관리ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            HideAllPanels();
-            attendancePanel.Visible = true;
+            HideAllControls();
+            attendancePanel = new AttendanceManagement(); // 새로운 객체 생성
+            ShowControl(attendancePanel);
         }
-
-        private void 부서관리ToolStripMenuItem_Click(object sender, EventArgs e)
+        // [#2] 사원 등록
+        private void 사원등록ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            HideAllPanels();
-            departmentPanel.Visible = true;
+            HideAllControls();
+            registPanel = new EmployeeRegistration(); // 새로운 객체 생성
+            ShowControl(registPanel);
+        }
+        // [#3-1] 사원 관리 - 사원 검색
+        private void 사원검색ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            HideAllControls();
+            employSearchPanel = new EmployeeSearch(); // 새로운 객체 생성
+            ShowControl(employSearchPanel);
+        }
+        // [#3-2] 사원 관리 - 사원 수정/삭제
+        private void 사원수정ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            HideAllControls();
+            employeeModifyPanel = new EmployeeModDel(); // 새로운 객체 생성
+            ShowControl(employeeModifyPanel);
         }
 
+        // [#4] 부서 관리 - 부서 등록/수정/삭제
+        private void 부서등록수정삭제ToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            HideAllControls();
+            departmentPanel = new DepartmentManagement(); // 새로운 객체 생성
+            ShowControl(departmentPanel);
+        }
+        // [#4] 부서 관리 - 부서 현황 조회
+        private void 부서현황조회ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            HideAllControls();
+            departmentsearchingPanel = new DepartmentSearching();
+            ShowControl(departmentsearchingPanel);
+        }
+
+        // [#5] 급여 관리
         private void 급여관리ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            HideAllPanels();
-            salaryPanel.Visible = true;
+            HideAllControls();
+            salaryPanel = new SalaryStatement(); // 새로운 객체 생성
+            ShowControl(salaryPanel);
         }
+        // [#6] 인사 조직도
+        private void 인사조직ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            HideAllControls();
+            humanOrganizationChartPanel = new HumanResourcesOrganizationChart(); // 새로운 객체 생성
+            ShowControl(humanOrganizationChartPanel);
+        }
+
+     
+
+      
     }
 }

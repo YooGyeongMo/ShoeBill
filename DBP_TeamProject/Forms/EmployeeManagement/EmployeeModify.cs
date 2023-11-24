@@ -1,5 +1,4 @@
-﻿using GookBabProgram;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -95,7 +94,7 @@ namespace DBP_TeamProject.Forms.EmployeeManagement
         }
 
         private void memberdataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
-        { 
+        {
             if (e.RowIndex >= 0)
             {
                 flag = true;
@@ -137,10 +136,27 @@ namespace DBP_TeamProject.Forms.EmployeeManagement
                         DBManager.GetInstance().CloseConnection();
                     }
                 }
-                else{
+                else
+                {
                     MessageBox.Show("사원 정보를 선택해주세요.");
-                }  
+                }
             }
+        }
+
+        // 부서 이름 콤보박스 드롭 다운 이벤트 
+        private void departmentComboBox_DropDown(object sender, EventArgs e)
+        {
+            List<string> departmentNames = new List<string>();
+
+            departmentComboBox.Items.Clear(); // 콤보박스 내용 초기화
+            string query = Query.GetInstance().
+                            select("부서이름").
+                            from("부서").
+                            exec();
+            departmentNames = DBManager.GetInstance().InitDBManager().GetList(query,"부서이름");
+            DBManager.GetInstance().CloseConnection();
+
+            departmentComboBox.Items.AddRange(departmentNames.ToArray());
         }
     }
 }

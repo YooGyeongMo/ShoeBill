@@ -19,6 +19,9 @@
     <Compile Update="Forms\DepartmentManagement.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="Forms\DepartmentSearching.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="Forms\EmployeeManagement\EmployeeSearch.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -26,6 +29,9 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Forms\EmployeeRegistration.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Forms\HumanResourcesOrganizationChart.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Forms\SalaryStatement.cs">

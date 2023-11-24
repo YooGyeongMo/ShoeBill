@@ -1,5 +1,4 @@
-﻿using GookBabProgram;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -141,6 +140,21 @@ namespace DBP_TeamProject.Forms
         public void SetZipCodeText(string txt)
         {
             zipCodeTextBox.Text = txt;
+        }
+        // 부서 이름 콤보박스 드롭 다운 이벤트 
+        private void rateComboBox_DropDown(object sender, EventArgs e)
+        {
+            List<string> departmentNames = new List<string>();
+
+            departmentComboBox.Items.Clear(); // 콤보박스 내용 초기화
+            string query = Query.GetInstance().
+                            select("부서이름").
+                            from("부서").
+                            exec();
+            departmentNames = DBManager.GetInstance().InitDBManager().GetList(query,"부서이름");
+            DBManager.GetInstance().CloseConnection();
+
+            departmentComboBox.Items.AddRange(departmentNames.ToArray());
         }
     }
 }

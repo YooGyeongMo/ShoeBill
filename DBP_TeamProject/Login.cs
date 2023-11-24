@@ -1,5 +1,4 @@
 ﻿using DBP_TeamProject.Forms;
-using GookBabProgram;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,8 +17,9 @@ namespace DBP_TeamProject
     {
         private string id;
         private string pwd;
+        private string level;
 
-        LoginedUser loginedUser = LoginedUser.getInstance();
+       
 
         public Login()
         {
@@ -28,6 +28,20 @@ namespace DBP_TeamProject
         public string getId()
         {
             return id;
+        }
+        //직급 받아오는것.
+        public void Get_level()
+        {
+            string query = Query.GetInstance().
+                select("직급").
+                from("사원").
+                where($"사원ID='{id}'").
+                exec();
+            string dbLevel = DBManager.GetInstance().InitDBManager().getLevel(query);
+            DBManager.GetInstance().CloseConnection();
+
+            LoginedUser.getInstance().Level = dbLevel; 
+
         }
         public void CheckPassword()
         {
@@ -46,7 +60,8 @@ namespace DBP_TeamProject
             {
                 if (pwd.Equals(dbPassword))
                 {
-                    loginedUser.UserId = int.Parse(this.id);
+                    LoginedUser.getInstance().UserId = this.id; 
+
                     MainForm main = new MainForm();
                     this.Hide(); // 현재 폼을 감춤
                     main.ShowDialog();
@@ -91,6 +106,7 @@ namespace DBP_TeamProject
             if (id.Length != 0 && pwd.Length != 0)
             {
                 CheckPassword();
+                Get_level();
             }
         }
         private void UserNameTextBox_Clicked(object sender, EventArgs e)

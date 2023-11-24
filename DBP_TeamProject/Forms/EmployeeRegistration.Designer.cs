@@ -63,16 +63,18 @@
             // 
             departmentPanel.Controls.Add(saveEmployeeButton);
             departmentPanel.Controls.Add(employeeInputGroupBox);
-            departmentPanel.Location = new Point(22, 13);
+            departmentPanel.Location = new Point(28, 17);
+            departmentPanel.Margin = new Padding(4, 4, 4, 4);
             departmentPanel.Name = "departmentPanel";
-            departmentPanel.Size = new Size(747, 463);
+            departmentPanel.Size = new Size(960, 617);
             departmentPanel.TabIndex = 11;
             // 
             // saveEmployeeButton
             // 
-            saveEmployeeButton.Location = new Point(150, 306);
+            saveEmployeeButton.Location = new Point(193, 408);
+            saveEmployeeButton.Margin = new Padding(4, 4, 4, 4);
             saveEmployeeButton.Name = "saveEmployeeButton";
-            saveEmployeeButton.Size = new Size(457, 46);
+            saveEmployeeButton.Size = new Size(588, 61);
             saveEmployeeButton.TabIndex = 1;
             saveEmployeeButton.Text = "사원 등록";
             saveEmployeeButton.UseVisualStyleBackColor = true;
@@ -84,9 +86,11 @@
             employeeInputGroupBox.Controls.Add(addressGroupBox);
             employeeInputGroupBox.Controls.Add(employeeGroupBox);
             employeeInputGroupBox.Controls.Add(loginGroupBox);
-            employeeInputGroupBox.Location = new Point(24, 13);
+            employeeInputGroupBox.Location = new Point(31, 17);
+            employeeInputGroupBox.Margin = new Padding(4, 4, 4, 4);
             employeeInputGroupBox.Name = "employeeInputGroupBox";
-            employeeInputGroupBox.Size = new Size(701, 278);
+            employeeInputGroupBox.Padding = new Padding(4, 4, 4, 4);
+            employeeInputGroupBox.Size = new Size(901, 371);
             employeeInputGroupBox.TabIndex = 1;
             employeeInputGroupBox.TabStop = false;
             employeeInputGroupBox.Text = "사원 정보 입력";
@@ -94,9 +98,10 @@
             // errorMsgLabel
             // 
             errorMsgLabel.AutoSize = true;
-            errorMsgLabel.Location = new Point(19, 253);
+            errorMsgLabel.Location = new Point(24, 337);
+            errorMsgLabel.Margin = new Padding(4, 0, 4, 0);
             errorMsgLabel.Name = "errorMsgLabel";
-            errorMsgLabel.Size = new Size(0, 15);
+            errorMsgLabel.Size = new Size(0, 20);
             errorMsgLabel.TabIndex = 12;
             // 
             // addressGroupBox
@@ -106,18 +111,21 @@
             addressGroupBox.Controls.Add(label41);
             addressGroupBox.Controls.Add(zipCodeTextBox);
             addressGroupBox.Controls.Add(label42);
-            addressGroupBox.Location = new Point(16, 141);
+            addressGroupBox.Location = new Point(21, 188);
+            addressGroupBox.Margin = new Padding(4, 4, 4, 4);
             addressGroupBox.Name = "addressGroupBox";
-            addressGroupBox.Size = new Size(353, 105);
+            addressGroupBox.Padding = new Padding(4, 4, 4, 4);
+            addressGroupBox.Size = new Size(454, 140);
             addressGroupBox.TabIndex = 6;
             addressGroupBox.TabStop = false;
             addressGroupBox.Text = "주소 정보";
             // 
             // loadAddressButton
             // 
-            loadAddressButton.Location = new Point(237, 64);
+            loadAddressButton.Location = new Point(304, 81);
+            loadAddressButton.Margin = new Padding(4, 4, 4, 4);
             loadAddressButton.Name = "loadAddressButton";
-            loadAddressButton.Size = new Size(99, 23);
+            loadAddressButton.Size = new Size(127, 31);
             loadAddressButton.TabIndex = 12;
             loadAddressButton.Text = "주소 불러오기";
             loadAddressButton.UseVisualStyleBackColor = true;
@@ -126,34 +134,38 @@
             // addressTextBox
             // 
             addressTextBox.Enabled = false;
-            addressTextBox.Location = new Point(77, 32);
+            addressTextBox.Location = new Point(99, 43);
+            addressTextBox.Margin = new Padding(4, 4, 4, 4);
             addressTextBox.Name = "addressTextBox";
-            addressTextBox.Size = new Size(259, 23);
+            addressTextBox.Size = new Size(332, 27);
             addressTextBox.TabIndex = 3;
             // 
             // label41
             // 
             label41.AutoSize = true;
-            label41.Location = new Point(43, 37);
+            label41.Location = new Point(55, 49);
+            label41.Margin = new Padding(4, 0, 4, 0);
             label41.Name = "label41";
-            label41.Size = new Size(31, 15);
+            label41.Size = new Size(39, 20);
             label41.TabIndex = 2;
             label41.Text = "주소";
             // 
             // zipCodeTextBox
             // 
             zipCodeTextBox.Enabled = false;
-            zipCodeTextBox.Location = new Point(77, 61);
+            zipCodeTextBox.Location = new Point(99, 83);
+            zipCodeTextBox.Margin = new Padding(4, 4, 4, 4);
             zipCodeTextBox.Name = "zipCodeTextBox";
-            zipCodeTextBox.Size = new Size(151, 23);
+            zipCodeTextBox.Size = new Size(193, 27);
             zipCodeTextBox.TabIndex = 1;
             // 
             // label42
             // 
             label42.AutoSize = true;
-            label42.Location = new Point(21, 66);
+            label42.Location = new Point(27, 90);
+            label42.Margin = new Padding(4, 0, 4, 0);
             label42.Name = "label42";
-            label42.Size = new Size(55, 15);
+            label42.Size = new Size(69, 20);
             label42.TabIndex = 0;
             label42.Text = "우편번호";
             // 
@@ -168,9 +180,11 @@
             employeeGroupBox.Controls.Add(label39);
             employeeGroupBox.Controls.Add(label40);
             employeeGroupBox.ForeColor = SystemColors.WindowText;
-            employeeGroupBox.Location = new Point(386, 31);
+            employeeGroupBox.Location = new Point(496, 41);
+            employeeGroupBox.Margin = new Padding(4, 4, 4, 4);
             employeeGroupBox.Name = "employeeGroupBox";
-            employeeGroupBox.Size = new Size(292, 215);
+            employeeGroupBox.Padding = new Padding(4, 4, 4, 4);
+            employeeGroupBox.Size = new Size(375, 287);
             employeeGroupBox.TabIndex = 5;
             employeeGroupBox.TabStop = false;
             employeeGroupBox.Text = "사원 정보";
@@ -179,67 +193,76 @@
             // 
             departmentComboBox.FormattingEnabled = true;
             departmentComboBox.Items.AddRange(new object[] { "인사 부서", "개발 부서", "기획 부서" });
-            departmentComboBox.Location = new Point(108, 165);
+            departmentComboBox.Location = new Point(139, 220);
+            departmentComboBox.Margin = new Padding(4, 4, 4, 4);
             departmentComboBox.Name = "departmentComboBox";
-            departmentComboBox.Size = new Size(121, 23);
+            departmentComboBox.Size = new Size(154, 28);
             departmentComboBox.TabIndex = 14;
             // 
             // rateComboBox
             // 
             rateComboBox.FormattingEnabled = true;
             rateComboBox.Items.AddRange(new object[] { "일반 사원", "부서장", "사장" });
-            rateComboBox.Location = new Point(108, 121);
+            rateComboBox.Location = new Point(139, 161);
+            rateComboBox.Margin = new Padding(4, 4, 4, 4);
             rateComboBox.Name = "rateComboBox";
-            rateComboBox.Size = new Size(121, 23);
+            rateComboBox.Size = new Size(154, 28);
             rateComboBox.TabIndex = 13;
+            rateComboBox.DropDown += rateComboBox_DropDown;
             // 
             // birthdateTimePicker
             // 
-            birthdateTimePicker.Location = new Point(108, 78);
+            birthdateTimePicker.Location = new Point(139, 104);
+            birthdateTimePicker.Margin = new Padding(4, 4, 4, 4);
             birthdateTimePicker.Name = "birthdateTimePicker";
-            birthdateTimePicker.Size = new Size(165, 23);
+            birthdateTimePicker.Size = new Size(211, 27);
             birthdateTimePicker.TabIndex = 12;
             // 
             // label37
             // 
             label37.AutoSize = true;
-            label37.Location = new Point(74, 125);
+            label37.Location = new Point(95, 167);
+            label37.Margin = new Padding(4, 0, 4, 0);
             label37.Name = "label37";
-            label37.Size = new Size(31, 15);
+            label37.Size = new Size(39, 20);
             label37.TabIndex = 10;
             label37.Text = "직급";
             // 
             // label38
             // 
             label38.AutoSize = true;
-            label38.Location = new Point(50, 82);
+            label38.Location = new Point(64, 109);
+            label38.Margin = new Padding(4, 0, 4, 0);
             label38.Name = "label38";
-            label38.Size = new Size(55, 15);
+            label38.Size = new Size(69, 20);
             label38.TabIndex = 8;
             label38.Text = "생년월일";
             // 
             // nameTextBox
             // 
-            nameTextBox.Location = new Point(108, 34);
+            nameTextBox.Location = new Point(139, 45);
+            nameTextBox.Margin = new Padding(4, 4, 4, 4);
             nameTextBox.Name = "nameTextBox";
-            nameTextBox.Size = new Size(111, 23);
+            nameTextBox.Size = new Size(142, 27);
             nameTextBox.TabIndex = 7;
             // 
             // label39
             // 
             label39.AutoSize = true;
-            label39.Location = new Point(48, 39);
+            label39.Location = new Point(62, 52);
+            label39.Margin = new Padding(4, 0, 4, 0);
             label39.Name = "label39";
-            label39.Size = new Size(59, 15);
+            label39.Size = new Size(74, 20);
             label39.TabIndex = 6;
             label39.Text = "사원 이름";
             // 
             // label40
             // 
             label40.AutoSize = true;
-            label40.Location = new Point(46, 169);
+            label40.Location = new Point(59, 225);
+            label40.Margin = new Padding(4, 0, 4, 0);
             label40.Name = "label40";
-            label40.Size = new Size(59, 15);
+            label40.Size = new Size(74, 20);
             label40.TabIndex = 4;
             label40.Text = "부서 이름";
             // 
@@ -249,52 +272,59 @@
             loginGroupBox.Controls.Add(label43);
             loginGroupBox.Controls.Add(idTextBox);
             loginGroupBox.Controls.Add(label44);
-            loginGroupBox.Location = new Point(157, 31);
+            loginGroupBox.Location = new Point(202, 41);
+            loginGroupBox.Margin = new Padding(4, 4, 4, 4);
             loginGroupBox.Name = "loginGroupBox";
-            loginGroupBox.Size = new Size(212, 100);
+            loginGroupBox.Padding = new Padding(4, 4, 4, 4);
+            loginGroupBox.Size = new Size(273, 133);
             loginGroupBox.TabIndex = 2;
             loginGroupBox.TabStop = false;
             loginGroupBox.Text = "로그인 정보";
             // 
             // passwordTextBox
             // 
-            passwordTextBox.Location = new Point(77, 58);
+            passwordTextBox.Location = new Point(99, 77);
+            passwordTextBox.Margin = new Padding(4, 4, 4, 4);
             passwordTextBox.Name = "passwordTextBox";
-            passwordTextBox.Size = new Size(111, 23);
+            passwordTextBox.Size = new Size(142, 27);
             passwordTextBox.TabIndex = 3;
             // 
             // label43
             // 
             label43.AutoSize = true;
-            label43.Location = new Point(20, 63);
+            label43.Location = new Point(26, 84);
+            label43.Margin = new Padding(4, 0, 4, 0);
             label43.Name = "label43";
-            label43.Size = new Size(55, 15);
+            label43.Size = new Size(69, 20);
             label43.TabIndex = 2;
             label43.Text = "비밀번호";
             // 
             // idTextBox
             // 
-            idTextBox.Location = new Point(77, 29);
+            idTextBox.Location = new Point(99, 39);
+            idTextBox.Margin = new Padding(4, 4, 4, 4);
             idTextBox.Name = "idTextBox";
-            idTextBox.Size = new Size(111, 23);
+            idTextBox.Size = new Size(142, 27);
             idTextBox.TabIndex = 1;
             // 
             // label44
             // 
             label44.AutoSize = true;
-            label44.Location = new Point(31, 34);
+            label44.Location = new Point(40, 45);
+            label44.Margin = new Padding(4, 0, 4, 0);
             label44.Name = "label44";
-            label44.Size = new Size(43, 15);
+            label44.Size = new Size(54, 20);
             label44.TabIndex = 0;
             label44.Text = "아이디";
             // 
             // EmployeeRegistration
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(9F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(departmentPanel);
+            Margin = new Padding(4, 4, 4, 4);
             Name = "EmployeeRegistration";
-            Size = new Size(789, 493);
+            Size = new Size(1014, 657);
             departmentPanel.ResumeLayout(false);
             employeeInputGroupBox.ResumeLayout(false);
             employeeInputGroupBox.PerformLayout();

@@ -1,6 +1,6 @@
-﻿namespace DBP_TeamProject.Forms.Approval
+﻿namespace DBP_TeamProject.Forms
 {
-    partial class ContinueApprove
+    partial class HumanResourcesOrganizationChart
     {
         /// <summary> 
         /// 필수 디자이너 변수입니다.
@@ -28,10 +28,28 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            HumanResourcesTreeView = new TreeView();
+            SuspendLayout();
+            // 
+            // HumanResourcesTreeView
+            // 
+            HumanResourcesTreeView.Location = new Point(40, 33);
+            HumanResourcesTreeView.Name = "HumanResourcesTreeView";
+            HumanResourcesTreeView.Size = new Size(400, 292);
+            HumanResourcesTreeView.TabIndex = 0;
+            // 
+            // HumanResourcesOrganizationChart
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(HumanResourcesTreeView);
+            Name = "HumanResourcesOrganizationChart";
+            Size = new Size(839, 361);
+            ResumeLayout(false);
         }
 
         #endregion
+
+        private TreeView HumanResourcesTreeView;
     }
 }

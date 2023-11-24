@@ -1,5 +1,4 @@
-﻿using GookBabProgram;
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -28,12 +27,20 @@ namespace DBP_TeamProject.Forms
             dbManager = DBManager.GetInstance();
         }
 
+        // [#1] 출근 버튼 클릭 이벤트
         private void GoToWork_btn_Click(object sender, EventArgs e)
         {
             dbManager.InitDBManager();
             try
             {
                 id_input = Employee_ID_inputbox.Text;
+
+                if (!LoginedUser.getInstance().UserId.Equals(id_input))  // 로그인 정보와 사용자 아이디가 일치하지 않는다면
+                {
+                    MessageBox.Show("본인 사번을 입력하세요.");
+                    return;
+                }
+
                 // 데이터베이스에서 사원의 이름을 조회
                 query = Query.GetInstance()
                              .select("이름, 직급")
@@ -60,24 +67,11 @@ namespace DBP_TeamProject.Forms
                 }
                 reader.Close();
 
-                // 현재 시간으로 출근 시간 기록
-                // 출근 시간 기록
-                DateTime currentTime = DateTime.Now;
-                string formattedTime = currentTime.ToString("yyyy-MM-dd HH:mm:ss");
-                string insertQuery = Query.GetInstance()
-                                          .insert("출근부 (사원ID, 출근날짜, 출근시간)")
-                                          .values($"('{id_input}', CURDATE(), '{formattedTime}')")
-                                          .on_duplicate_key_update($"출근시간 = '{formattedTime}'")
-                                          .exec();
+                if (IsLeaveWork()) // 퇴근상태인지 확인
+                {
+                    InsertAttendanceInfoDB();
+                }
 
-                dbManager.ExecuteNonQueury(insertQuery);
-
-                // 데이터 그리드 뷰 갱신
-                UpdateAttendanceGridView();
-
-                string attendence_Text = "출근하였습니다.";
-                WorkOrHome_Screen.Text = attendence_Text;
-                WorkOrHome_Screen.Visible = true;
             }
             catch (MySqlException ex)
             {
@@ -91,19 +85,37 @@ namespace DBP_TeamProject.Forms
 
         }
 
-        private void UpdateAttendanceGridView()
+        // [#1] 퇴근 상태인지 확인
+        public bool IsLeaveWork()
         {
-            //24시간으로 표시해서 시간과 날짜별로 짤라서 표현
+            string query = Query.GetInstance()
+                                .select("*")
+                                .from("출근부")
+                                .where($"사원ID='{id_input}' AND 출근날짜 = CURDATE() AND 퇴근여부 = 'N'")
+                                .exec();
 
-            query = Query.GetInstance()
-                        .select("사원ID, DATE_FORMAT(출근날짜, '%Y-%m-%d') as 출근날짜, DATE_FORMAT(출근시간, '%H:%i:%s') as 출근시간")
-                        .from("출근부")
-                        .groupBy("사원ID, 출근날짜, 출근시간")
-                        .exec();
+            bool isDuplicated = dbManager.InitDBManager().IsDuplicated(query);
 
-            DataTable dataTable = dbManager.FindDataTable(query);
-            AttendanceTime_GV.DataSource = dataTable;
-            AttendanceTime_GV.Visible = true;
+            if (isDuplicated)
+            {
+                MessageBox.Show("출근 중입니다.");
+                return false;
+            }
+            return true;
+        }
+        // [#1] DB에 출근정보 저장
+        public void InsertAttendanceInfoDB()
+        {
+            string insertQuery = Query.GetInstance()
+                                          .insert("출근부 (사원ID, 출근날짜, 출근시간, 퇴근여부)")
+                                          .values($"('{id_input}', CURDATE(), NOW(), 'N')")
+                                          .exec();
+
+            dbManager.ExecuteNonQueury(insertQuery);
+
+            string attendence_Text = "님 출근하였습니다.";
+            WorkOrHome_Screen.Text = attendence_Text;
+            WorkOrHome_Screen.Visible = true;
         }
 
         private void Employee_ID_inputbox_Click(object sender, EventArgs e)
@@ -111,12 +123,19 @@ namespace DBP_TeamProject.Forms
             Employee_ID_inputbox.Text = "";
         }
 
+        // [#2] 퇴근 버튼 클릭 이벤트
         private void GoHome_btn_Click(object sender, EventArgs e)
         {
             dbManager.InitDBManager();
             try
             {
                 id_input = Employee_ID_inputbox.Text;
+
+                if (!LoginedUser.getInstance().UserId.Equals(id_input))  // 로그인 정보와 사용자 아이디가 일치하지 않는다면
+                {
+                    MessageBox.Show("본인사번 입력하세요.");
+                    return;
+                }
                 // 데이터베이스에서 사원의 이름을 조회
                 query = Query.GetInstance()
                              .select("이름, 직급")
@@ -143,28 +162,8 @@ namespace DBP_TeamProject.Forms
                 }
                 reader.Close();
 
-                // 현재 시간으로 퇴근 시간 기록
-                //퇴근 시간 기록
-                DateTime currentTime = DateTime.Now;
-                string formattedTime = currentTime.ToString("yyyy-MM-dd HH:mm:ss");
-                string updateQuery = Query.GetInstance()
-                          .update("출근부")
-                          .set($"퇴근날짜 = CURDATE(), 퇴근시간 = '{formattedTime}', 총근무시간 = TIMESTAMPDIFF(HOUR, 출근시간, '{formattedTime}')")
-                          .where($"사원ID = '{id_input}' AND 출근날짜 = CURDATE()")
-                          .exec();
+                InsertLeaveWorkInfoDB(); // DB에 퇴근정보 저장 
 
-                dbManager.ExecuteNonQueury(updateQuery);
-
-
-
-
-
-                // 데이터 그리드 뷰 갱신
-                UpdateGoHomeGridView();
-
-                string departure_Text = "퇴근하였습니다.";
-                WorkOrHome_Screen.Text = departure_Text;
-                WorkOrHome_Screen.Visible = true;
             }
             catch (MySqlException ex)
             {
@@ -177,21 +176,47 @@ namespace DBP_TeamProject.Forms
             }
 
         }
-        private void UpdateGoHomeGridView()
+        // [#2] DB에 퇴근정보 저장 
+        public void InsertLeaveWorkInfoDB()
         {
-          
-            query = Query.GetInstance()
-                        .select("사원ID, DATE_FORMAT(퇴근날짜, '%Y-%m-%d') as 퇴근날짜, DATE_FORMAT(퇴근시간, '%H:%i:%s') as 퇴근시간")
-                        .from("출근부")
-                        .groupBy("사원ID, 퇴근날짜, 퇴근시간")
-                        .exec();
+            string updateQuery = Query.GetInstance()
+                          .update("출근부")
+                          .set($"퇴근날짜 = NOW(), 퇴근시간 = (DATE_ADD(NOW(), INTERVAL 8 HOUR)), 퇴근여부='Y'")
+                          .where($"사원ID = '{id_input}' AND 출근날짜 = CURDATE() AND 퇴근여부='N'")
+                          .exec();
 
-            DataTable dataTable = dbManager.FindDataTable(query);
-            GoToHomeTime_GV.DataSource = dataTable;
-            GoToHomeTime_GV.Visible = true;
+            dbManager.ExecuteNonQueury(updateQuery);
+
+            string departure_Text = "퇴근하였습니다.";
+            WorkOrHome_Screen.Text = departure_Text;
+            WorkOrHome_Screen.Visible = true;
         }
 
+        // [#3] 조회버튼 클릭 이벤트
+        private void loadButton_Click(object sender, EventArgs e)
+        {
+            id_input = Employee_ID_inputbox.Text;
+            // 데이터 그리드 뷰 갱신
+            UpdateAttendanceGridView(id_input);
+        }
+        // [#3] 출퇴근 현황 조회
+        private void UpdateAttendanceGridView(string id_input)
+        {
+            //24시간으로 표시해서 시간과 날짜별로 짤라서 표현
+            query = Query.GetInstance()
+                        .select("사원ID AS ID, DATE_FORMAT(출근날짜, '%Y-%m-%d') as 출퇴근날짜, " +
+                        "DATE_FORMAT(출근시간, '%H:%i:%s') as 출근시간, " +
+                        "DATE_FORMAT(퇴근시간, '%H:%i:%s') as 퇴근시간")
+                        .from("출근부")
+                        .where($"사원ID='{id_input}'")
+                        .groupBy("사원ID, 출근날짜, 출근시간, 퇴근날짜, 퇴근시간")
+                        .exec();
 
+            DataTable dataTable = dbManager.InitDBManager().FindDataTable(query);
 
+            AttendanceTime_GV.DataSource = dataTable;
+            AttendanceTime_GV.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            AttendanceTime_GV.Visible = true;
+        }
     }
 }

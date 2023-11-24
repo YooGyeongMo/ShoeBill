@@ -1,5 +1,4 @@
-﻿using GookBabProgram;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -44,7 +43,7 @@ namespace DBP_TeamProject.Forms.EmployeeManagement
                 age = ageTextBox.Text;
 
                 string query = Query.GetInstance().
-                    select("b.부서이름, b.부서장, s.이름, TIMESTAMPDIFF(YEAR, s.생년월일, CURDATE()) AS 나이, s.직급, s.우편번호, s.주소 "). // 나이 출력
+                    select("b.부서이름, b.부서장이름, s.이름, TIMESTAMPDIFF(YEAR, s.생년월일, CURDATE()) AS 나이, s.직급, s.우편번호, s.주소 "). // 나이 출력
                     from("부서 b").
                     innerJoin("사원 s ON b.부서이름 = s.부서이름").
                     where($"b.부서이름='{department}' " +
@@ -59,7 +58,20 @@ namespace DBP_TeamProject.Forms.EmployeeManagement
                 DBManager.GetInstance().CloseConnection();
             }
         }
+        // 부서 이름 콤보박스 드롭 다운 이벤트 
+        private void departmentComboBox_DropDown(object sender, EventArgs e)
+        {
+            List<string> departmentNames = new List<string>();
 
+            departmentComboBox.Items.Clear(); // 콤보박스 내용 초기화
+            string query = Query.GetInstance().
+                            select("부서이름").
+                            from("부서").
+                            exec();
+            departmentNames = DBManager.GetInstance().InitDBManager().GetList(query, "부서이름");
+            DBManager.GetInstance().CloseConnection();
 
+            departmentComboBox.Items.AddRange(departmentNames.ToArray());
+        }
     }
 }

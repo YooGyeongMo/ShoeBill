@@ -1,3 +1,4 @@
+using DBP_TeamProject.Properties;
 using System.CodeDom.Compiler;
 using System.Runtime.InteropServices;
 
@@ -5,7 +6,7 @@ namespace DBP_TeamProject
 {
     public partial class MainForm : Form
     {
-        //ÇÊµå
+        //ï¿½Êµï¿½
         private Button currentButton;
         private Random random;
         private int tempIndex;
@@ -117,7 +118,7 @@ namespace DBP_TeamProject
             Reset();*/
             this.Close();
 
-            Login loginForm = new Login(); // ·Î±×ÀÎ Æû ½ÇÇà
+            Login loginForm = new Login(); // ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             loginForm.Show();
         }
         private void Reset()
@@ -152,6 +153,25 @@ namespace DBP_TeamProject
         {
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            //Btnemployee.PerformClick();
+            try
+            {
+                pictureBox.Image = Properties.Resources.ShoBill;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("ì´ë¯¸ì§€ ë¡œë“œì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤: " + ex.Message);
+            }
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

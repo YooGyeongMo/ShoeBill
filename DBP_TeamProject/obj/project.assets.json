@@ -1976,11 +1976,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "\\\\Mac\\Home\\Desktop\\ShoeBill\\DBP_TeamProject\\DBP_TeamProject.csproj",
+      "projectUniqueName": "Z:\\Desktop\\DBP팀\\ShoeBill\\DBP_TeamProject\\DBP_TeamProject.csproj",
       "projectName": "DBP_TeamProject",
-      "projectPath": "\\\\Mac\\Home\\Desktop\\ShoeBill\\DBP_TeamProject\\DBP_TeamProject.csproj",
+      "projectPath": "Z:\\Desktop\\DBP팀\\ShoeBill\\DBP_TeamProject\\DBP_TeamProject.csproj",
       "packagesPath": "C:\\Users\\yoogyeongmo\\.nuget\\packages\\",
-      "outputPath": "\\\\Mac\\Home\\Desktop\\ShoeBill\\DBP_TeamProject\\obj\\",
+      "outputPath": "Z:\\Desktop\\DBP팀\\ShoeBill\\DBP_TeamProject\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\yoogyeongmo\\AppData\\Roaming\\NuGet\\NuGet.Config",

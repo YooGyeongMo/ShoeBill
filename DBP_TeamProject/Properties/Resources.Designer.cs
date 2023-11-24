@@ -63,6 +63,16 @@ namespace DBP_TeamProject.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap ShoBill {
+            get {
+                object obj = ResourceManager.GetObject("ShoBill", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap 결제 {
             get {
                 object obj = ResourceManager.GetObject("결제", resourceCulture);

@@ -30,6 +30,7 @@
         {
             departmentPanel = new Panel();
             modGroupBox = new GroupBox();
+            deleteButton = new Button();
             errMsg = new Label();
             currRateLabel = new Label();
             label9 = new Label();
@@ -48,7 +49,6 @@
             label1 = new Label();
             loadButton = new Button();
             memberdataGridView = new DataGridView();
-            deleteButton = new Button();
             departmentPanel.SuspendLayout();
             modGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)memberdataGridView).BeginInit();
@@ -57,9 +57,10 @@
             // departmentPanel
             // 
             departmentPanel.Controls.Add(modGroupBox);
-            departmentPanel.Location = new Point(22, 21);
+            departmentPanel.Location = new Point(28, 28);
+            departmentPanel.Margin = new Padding(4, 4, 4, 4);
             departmentPanel.Name = "departmentPanel";
-            departmentPanel.Size = new Size(747, 463);
+            departmentPanel.Size = new Size(960, 617);
             departmentPanel.TabIndex = 13;
             // 
             // modGroupBox
@@ -83,36 +84,52 @@
             modGroupBox.Controls.Add(label1);
             modGroupBox.Controls.Add(loadButton);
             modGroupBox.Controls.Add(memberdataGridView);
-            modGroupBox.Location = new Point(39, 3);
+            modGroupBox.Location = new Point(50, 4);
+            modGroupBox.Margin = new Padding(4, 4, 4, 4);
             modGroupBox.Name = "modGroupBox";
-            modGroupBox.Size = new Size(676, 337);
+            modGroupBox.Padding = new Padding(4, 4, 4, 4);
+            modGroupBox.Size = new Size(869, 449);
             modGroupBox.TabIndex = 15;
             modGroupBox.TabStop = false;
             modGroupBox.Text = "사원 수정/삭제";
             // 
+            // deleteButton
+            // 
+            deleteButton.Location = new Point(743, 21);
+            deleteButton.Margin = new Padding(4, 4, 4, 4);
+            deleteButton.Name = "deleteButton";
+            deleteButton.Size = new Size(118, 51);
+            deleteButton.TabIndex = 38;
+            deleteButton.Text = "삭제하기";
+            deleteButton.UseVisualStyleBackColor = true;
+            deleteButton.Click += deleteButton_Click;
+            // 
             // errMsg
             // 
             errMsg.AutoSize = true;
-            errMsg.Location = new Point(204, 305);
+            errMsg.Location = new Point(262, 407);
+            errMsg.Margin = new Padding(4, 0, 4, 0);
             errMsg.Name = "errMsg";
-            errMsg.Size = new Size(0, 15);
+            errMsg.Size = new Size(0, 20);
             errMsg.TabIndex = 37;
             // 
             // currRateLabel
             // 
             currRateLabel.AutoSize = true;
             currRateLabel.ForeColor = SystemColors.HotTrack;
-            currRateLabel.Location = new Point(111, 303);
+            currRateLabel.Location = new Point(143, 404);
+            currRateLabel.Margin = new Padding(4, 0, 4, 0);
             currRateLabel.Name = "currRateLabel";
-            currRateLabel.Size = new Size(0, 15);
+            currRateLabel.Size = new Size(0, 20);
             currRateLabel.TabIndex = 36;
             // 
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(46, 303);
+            label9.Location = new Point(59, 404);
+            label9.Margin = new Padding(4, 0, 4, 0);
             label9.Name = "label9";
-            label9.Size = new Size(59, 15);
+            label9.Size = new Size(74, 20);
             label9.TabIndex = 35;
             label9.Text = "현재 직급";
             // 
@@ -120,17 +137,19 @@
             // 
             currDepartmentLabel.AutoSize = true;
             currDepartmentLabel.ForeColor = SystemColors.HotTrack;
-            currDepartmentLabel.Location = new Point(111, 276);
+            currDepartmentLabel.Location = new Point(143, 368);
+            currDepartmentLabel.Margin = new Padding(4, 0, 4, 0);
             currDepartmentLabel.Name = "currDepartmentLabel";
-            currDepartmentLabel.Size = new Size(0, 15);
+            currDepartmentLabel.Size = new Size(0, 20);
             currDepartmentLabel.TabIndex = 34;
             // 
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(46, 276);
+            label7.Location = new Point(59, 368);
+            label7.Margin = new Padding(4, 0, 4, 0);
             label7.Name = "label7";
-            label7.Size = new Size(59, 15);
+            label7.Size = new Size(74, 20);
             label7.TabIndex = 33;
             label7.Text = "현재 부서";
             // 
@@ -138,35 +157,39 @@
             // 
             rateComboBox.FormattingEnabled = true;
             rateComboBox.Items.AddRange(new object[] { "일반 사원", "부서장", "사장" });
-            rateComboBox.Location = new Point(459, 249);
+            rateComboBox.Location = new Point(590, 332);
+            rateComboBox.Margin = new Padding(4, 4, 4, 4);
             rateComboBox.Name = "rateComboBox";
-            rateComboBox.Size = new Size(107, 23);
+            rateComboBox.Size = new Size(136, 28);
             rateComboBox.TabIndex = 32;
             // 
             // idLabel
             // 
             idLabel.AutoSize = true;
             idLabel.ForeColor = SystemColors.HotTrack;
-            idLabel.Location = new Point(111, 250);
+            idLabel.Location = new Point(143, 333);
+            idLabel.Margin = new Padding(4, 0, 4, 0);
             idLabel.Name = "idLabel";
-            idLabel.Size = new Size(0, 15);
+            idLabel.Size = new Size(0, 20);
             idLabel.TabIndex = 31;
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.ForeColor = SystemColors.Highlight;
-            label2.Location = new Point(39, 98);
+            label2.Location = new Point(50, 131);
+            label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(179, 15);
+            label2.Size = new Size(223, 20);
             label2.TabIndex = 30;
             label2.Text = "수정/삭제할 사원을 선택하세요.";
             // 
             // modifyButton
             // 
-            modifyButton.Location = new Point(568, 287);
+            modifyButton.Location = new Point(730, 383);
+            modifyButton.Margin = new Padding(4, 4, 4, 4);
             modifyButton.Name = "modifyButton";
-            modifyButton.Size = new Size(92, 38);
+            modifyButton.Size = new Size(118, 51);
             modifyButton.TabIndex = 29;
             modifyButton.Text = "수정하기";
             modifyButton.UseVisualStyleBackColor = true;
@@ -175,27 +198,30 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(385, 253);
+            label3.Location = new Point(495, 337);
+            label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
-            label3.Size = new Size(71, 15);
+            label3.Size = new Size(89, 20);
             label3.TabIndex = 27;
             label3.Text = "수정할 직급";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(34, 250);
+            label4.Location = new Point(44, 333);
+            label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
-            label4.Size = new Size(71, 15);
+            label4.Size = new Size(89, 20);
             label4.TabIndex = 25;
             label4.Text = "사원 아이디";
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(201, 252);
+            label5.Location = new Point(258, 336);
+            label5.Margin = new Padding(4, 0, 4, 0);
             label5.Name = "label5";
-            label5.Size = new Size(71, 15);
+            label5.Size = new Size(89, 20);
             label5.TabIndex = 24;
             label5.Text = "수정할 부서";
             // 
@@ -203,40 +229,46 @@
             // 
             departmentComboBox.FormattingEnabled = true;
             departmentComboBox.Items.AddRange(new object[] { "인사 부서 ", "개발 부서 ", "기획 부서" });
-            departmentComboBox.Location = new Point(275, 248);
+            departmentComboBox.Location = new Point(354, 331);
+            departmentComboBox.Margin = new Padding(4, 4, 4, 4);
             departmentComboBox.Name = "departmentComboBox";
-            departmentComboBox.Size = new Size(102, 23);
+            departmentComboBox.Size = new Size(130, 28);
             departmentComboBox.TabIndex = 23;
+            departmentComboBox.DropDown += departmentComboBox_DropDown;
             // 
             // errorMsgLabel
             // 
             errorMsgLabel.AutoSize = true;
-            errorMsgLabel.Location = new Point(98, 70);
+            errorMsgLabel.Location = new Point(126, 93);
+            errorMsgLabel.Margin = new Padding(4, 0, 4, 0);
             errorMsgLabel.Name = "errorMsgLabel";
-            errorMsgLabel.Size = new Size(0, 15);
+            errorMsgLabel.Size = new Size(0, 20);
             errorMsgLabel.TabIndex = 22;
             // 
             // idTextBox
             // 
-            idTextBox.Location = new Point(98, 35);
+            idTextBox.Location = new Point(126, 47);
+            idTextBox.Margin = new Padding(4, 4, 4, 4);
             idTextBox.Name = "idTextBox";
-            idTextBox.Size = new Size(100, 23);
+            idTextBox.Size = new Size(127, 27);
             idTextBox.TabIndex = 19;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(36, 39);
+            label1.Location = new Point(46, 52);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(59, 15);
+            label1.Size = new Size(74, 20);
             label1.TabIndex = 18;
             label1.Text = "사원 이름";
             // 
             // loadButton
             // 
-            loadButton.Location = new Point(222, 36);
+            loadButton.Location = new Point(285, 48);
+            loadButton.Margin = new Padding(4, 4, 4, 4);
             loadButton.Name = "loadButton";
-            loadButton.Size = new Size(117, 23);
+            loadButton.Size = new Size(150, 31);
             loadButton.TabIndex = 15;
             loadButton.Text = "수정할 사원 검색";
             loadButton.UseVisualStyleBackColor = true;
@@ -245,30 +277,23 @@
             // memberdataGridView
             // 
             memberdataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            memberdataGridView.Location = new Point(39, 123);
+            memberdataGridView.Location = new Point(50, 164);
+            memberdataGridView.Margin = new Padding(4, 4, 4, 4);
             memberdataGridView.Name = "memberdataGridView";
+            memberdataGridView.RowHeadersWidth = 51;
             memberdataGridView.RowTemplate.Height = 25;
-            memberdataGridView.Size = new Size(459, 100);
+            memberdataGridView.Size = new Size(590, 133);
             memberdataGridView.TabIndex = 14;
             memberdataGridView.CellClick += memberdataGridView_CellClick;
             // 
-            // deleteButton
-            // 
-            deleteButton.Location = new Point(578, 16);
-            deleteButton.Name = "deleteButton";
-            deleteButton.Size = new Size(92, 38);
-            deleteButton.TabIndex = 38;
-            deleteButton.Text = "삭제하기";
-            deleteButton.UseVisualStyleBackColor = true;
-            deleteButton.Click += deleteButton_Click;
-            // 
             // EmployeeModDel
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(9F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(departmentPanel);
+            Margin = new Padding(4, 4, 4, 4);
             Name = "EmployeeModDel";
-            Size = new Size(791, 504);
+            Size = new Size(1017, 672);
             departmentPanel.ResumeLayout(false);
             modGroupBox.ResumeLayout(false);
             modGroupBox.PerformLayout();
