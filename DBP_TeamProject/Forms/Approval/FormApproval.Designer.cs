@@ -41,24 +41,29 @@
             buttonApproveAgree = new Button();
             buttonApproveContinue = new Button();
             NewApproval = new TabPage();
-            groupBox2 = new GroupBox();
-            comboBox1 = new ComboBox();
+            groupBoxWork = new GroupBox();
+            label8 = new Label();
+            comboBoxMediumWork = new ComboBox();
+            label7 = new Label();
+            comboBoxLargeWork = new ComboBox();
+            comboBoxSubWork = new ComboBox();
+            label1 = new Label();
+            groupBoxLastApprover = new GroupBox();
+            comboBoxLastDepartment = new ComboBox();
             label3 = new Label();
-            comboBox5 = new ComboBox();
+            comboBoxLastApprover = new ComboBox();
             label6 = new Label();
-            groupBox3 = new GroupBox();
-            textBox1 = new TextBox();
+            groupBoxApproveContent = new GroupBox();
+            textBoxTitle = new TextBox();
             approveTitle = new Label();
             label2 = new Label();
-            comboBox4 = new ComboBox();
-            textBox4 = new TextBox();
-            label1 = new Label();
-            groupBox1 = new GroupBox();
-            comboBox3 = new ComboBox();
+            textBoxDescription = new TextBox();
+            groupBoxFirstApprover = new GroupBox();
+            comboBoxFirstDepartment = new ComboBox();
             label5 = new Label();
-            comboBox2 = new ComboBox();
+            comboBoxFirstApprover = new ComboBox();
             label4 = new Label();
-            button1 = new Button();
+            buttonApproveCreate = new Button();
             tabControl1.SuspendLayout();
             MyApproval.SuspendLayout();
             tabControlApproveData.SuspendLayout();
@@ -67,9 +72,10 @@
             tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
             NewApproval.SuspendLayout();
-            groupBox2.SuspendLayout();
-            groupBox3.SuspendLayout();
-            groupBox1.SuspendLayout();
+            groupBoxWork.SuspendLayout();
+            groupBoxLastApprover.SuspendLayout();
+            groupBoxApproveContent.SuspendLayout();
+            groupBoxFirstApprover.SuspendLayout();
             SuspendLayout();
             // 
             // tabControl1
@@ -83,6 +89,7 @@
             tabControl1.SelectedIndex = 0;
             tabControl1.Size = new Size(789, 413);
             tabControl1.TabIndex = 0;
+            tabControl1.Click += tabControl1_Click;
             // 
             // MyApproval
             // 
@@ -128,6 +135,7 @@
             buttonApproveDisagree.TabIndex = 4;
             buttonApproveDisagree.Text = "결재 반려";
             buttonApproveDisagree.UseVisualStyleBackColor = true;
+            buttonApproveDisagree.Click += buttonApproveDisagree_Click;
             // 
             // tabControlApproveData
             // 
@@ -192,8 +200,9 @@
             buttonApproveAgree.Name = "buttonApproveAgree";
             buttonApproveAgree.Size = new Size(205, 55);
             buttonApproveAgree.TabIndex = 2;
-            buttonApproveAgree.Text = "결재 승인";
+            buttonApproveAgree.Text = "결재 진행";
             buttonApproveAgree.UseVisualStyleBackColor = true;
+            buttonApproveAgree.Click += buttonApproveAgree_Click;
             // 
             // buttonApproveContinue
             // 
@@ -207,10 +216,11 @@
             // 
             // NewApproval
             // 
-            NewApproval.Controls.Add(groupBox2);
-            NewApproval.Controls.Add(groupBox3);
-            NewApproval.Controls.Add(groupBox1);
-            NewApproval.Controls.Add(button1);
+            NewApproval.Controls.Add(groupBoxWork);
+            NewApproval.Controls.Add(groupBoxLastApprover);
+            NewApproval.Controls.Add(groupBoxApproveContent);
+            NewApproval.Controls.Add(groupBoxFirstApprover);
+            NewApproval.Controls.Add(buttonApproveCreate);
             NewApproval.Location = new Point(4, 30);
             NewApproval.Name = "NewApproval";
             NewApproval.Padding = new Padding(3);
@@ -219,26 +229,102 @@
             NewApproval.Text = "신규결재등록";
             NewApproval.UseVisualStyleBackColor = true;
             // 
-            // groupBox2
+            // groupBoxWork
             // 
-            groupBox2.Controls.Add(comboBox1);
-            groupBox2.Controls.Add(label3);
-            groupBox2.Controls.Add(comboBox5);
-            groupBox2.Controls.Add(label6);
-            groupBox2.Location = new Point(537, 6);
-            groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(236, 153);
-            groupBox2.TabIndex = 23;
-            groupBox2.TabStop = false;
-            groupBox2.Text = "중간 결재자 선택";
+            groupBoxWork.Controls.Add(label8);
+            groupBoxWork.Controls.Add(comboBoxMediumWork);
+            groupBoxWork.Controls.Add(label7);
+            groupBoxWork.Controls.Add(comboBoxLargeWork);
+            groupBoxWork.Controls.Add(comboBoxSubWork);
+            groupBoxWork.Controls.Add(label1);
+            groupBoxWork.Location = new Point(248, 6);
+            groupBoxWork.Name = "groupBoxWork";
+            groupBoxWork.Size = new Size(283, 309);
+            groupBoxWork.TabIndex = 25;
+            groupBoxWork.TabStop = false;
+            groupBoxWork.Text = "관련 업무";
             // 
-            // comboBox1
+            // label8
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(89, 44);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(121, 29);
-            comboBox1.TabIndex = 19;
+            label8.AutoSize = true;
+            label8.Font = new Font("맑은 고딕", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label8.Location = new Point(19, 117);
+            label8.Name = "label8";
+            label8.Size = new Size(58, 21);
+            label8.TabIndex = 25;
+            label8.Text = "중분류";
+            // 
+            // comboBoxMediumWork
+            // 
+            comboBoxMediumWork.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxMediumWork.FormattingEnabled = true;
+            comboBoxMediumWork.Location = new Point(105, 114);
+            comboBoxMediumWork.Name = "comboBoxMediumWork";
+            comboBoxMediumWork.Size = new Size(130, 29);
+            comboBoxMediumWork.TabIndex = 24;
+            comboBoxMediumWork.SelectedValueChanged += comboBoxMediumWork_SelectedValueChanged;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("맑은 고딕", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label7.Location = new Point(19, 33);
+            label7.Name = "label7";
+            label7.Size = new Size(58, 21);
+            label7.TabIndex = 23;
+            label7.Text = "대분류";
+            // 
+            // comboBoxLargeWork
+            // 
+            comboBoxLargeWork.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxLargeWork.FormattingEnabled = true;
+            comboBoxLargeWork.Location = new Point(105, 30);
+            comboBoxLargeWork.Name = "comboBoxLargeWork";
+            comboBoxLargeWork.Size = new Size(130, 29);
+            comboBoxLargeWork.TabIndex = 21;
+            comboBoxLargeWork.SelectedValueChanged += comboBoxLargeWork_SelectedValueChanged;
+            // 
+            // comboBoxSubWork
+            // 
+            comboBoxSubWork.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxSubWork.FormattingEnabled = true;
+            comboBoxSubWork.Location = new Point(105, 200);
+            comboBoxSubWork.Name = "comboBoxSubWork";
+            comboBoxSubWork.Size = new Size(130, 29);
+            comboBoxSubWork.TabIndex = 22;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("맑은 고딕", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Location = new Point(19, 203);
+            label1.Name = "label1";
+            label1.Size = new Size(58, 21);
+            label1.TabIndex = 7;
+            label1.Text = "소분류";
+            // 
+            // groupBoxLastApprover
+            // 
+            groupBoxLastApprover.Controls.Add(comboBoxLastDepartment);
+            groupBoxLastApprover.Controls.Add(label3);
+            groupBoxLastApprover.Controls.Add(comboBoxLastApprover);
+            groupBoxLastApprover.Controls.Add(label6);
+            groupBoxLastApprover.Location = new Point(537, 162);
+            groupBoxLastApprover.Name = "groupBoxLastApprover";
+            groupBoxLastApprover.Size = new Size(236, 153);
+            groupBoxLastApprover.TabIndex = 23;
+            groupBoxLastApprover.TabStop = false;
+            groupBoxLastApprover.Text = "최종 결재자 선택";
+            // 
+            // comboBoxLastDepartment
+            // 
+            comboBoxLastDepartment.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxLastDepartment.FormattingEnabled = true;
+            comboBoxLastDepartment.Location = new Point(89, 44);
+            comboBoxLastDepartment.Name = "comboBoxLastDepartment";
+            comboBoxLastDepartment.Size = new Size(121, 29);
+            comboBoxLastDepartment.TabIndex = 19;
+            comboBoxLastDepartment.SelectedIndexChanged += comboBoxLastDepartment_SelectedIndexChanged;
             // 
             // label3
             // 
@@ -249,13 +335,14 @@
             label3.TabIndex = 20;
             label3.Text = "부서";
             // 
-            // comboBox5
+            // comboBoxLastApprover
             // 
-            comboBox5.FormattingEnabled = true;
-            comboBox5.Location = new Point(89, 108);
-            comboBox5.Name = "comboBox5";
-            comboBox5.Size = new Size(121, 29);
-            comboBox5.TabIndex = 17;
+            comboBoxLastApprover.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxLastApprover.FormattingEnabled = true;
+            comboBoxLastApprover.Location = new Point(89, 108);
+            comboBoxLastApprover.Name = "comboBoxLastApprover";
+            comboBoxLastApprover.Size = new Size(121, 29);
+            comboBoxLastApprover.TabIndex = 17;
             // 
             // label6
             // 
@@ -266,28 +353,26 @@
             label6.TabIndex = 18;
             label6.Text = "결재자";
             // 
-            // groupBox3
+            // groupBoxApproveContent
             // 
-            groupBox3.Controls.Add(textBox1);
-            groupBox3.Controls.Add(approveTitle);
-            groupBox3.Controls.Add(label2);
-            groupBox3.Controls.Add(comboBox4);
-            groupBox3.Controls.Add(textBox4);
-            groupBox3.Controls.Add(label1);
-            groupBox3.Location = new Point(8, 6);
-            groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(234, 309);
-            groupBox3.TabIndex = 24;
-            groupBox3.TabStop = false;
-            groupBox3.Text = "결재 내용";
+            groupBoxApproveContent.Controls.Add(textBoxTitle);
+            groupBoxApproveContent.Controls.Add(approveTitle);
+            groupBoxApproveContent.Controls.Add(label2);
+            groupBoxApproveContent.Controls.Add(textBoxDescription);
+            groupBoxApproveContent.Location = new Point(8, 6);
+            groupBoxApproveContent.Name = "groupBoxApproveContent";
+            groupBoxApproveContent.Size = new Size(234, 309);
+            groupBoxApproveContent.TabIndex = 24;
+            groupBoxApproveContent.TabStop = false;
+            groupBoxApproveContent.Text = "결재 내용";
             // 
-            // textBox1
+            // textBoxTitle
             // 
-            textBox1.Font = new Font("맑은 고딕", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox1.Location = new Point(94, 36);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(130, 29);
-            textBox1.TabIndex = 2;
+            textBoxTitle.Font = new Font("맑은 고딕", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            textBoxTitle.Location = new Point(94, 36);
+            textBoxTitle.Name = "textBoxTitle";
+            textBoxTitle.Size = new Size(130, 29);
+            textBoxTitle.TabIndex = 2;
             // 
             // approveTitle
             // 
@@ -303,59 +388,43 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("맑은 고딕", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(8, 173);
+            label2.Location = new Point(8, 86);
             label2.Name = "label2";
             label2.Size = new Size(80, 21);
             label2.TabIndex = 11;
             label2.Text = "결재 내용";
             // 
-            // comboBox4
+            // textBoxDescription
             // 
-            comboBox4.FormattingEnabled = true;
-            comboBox4.Location = new Point(94, 111);
-            comboBox4.Name = "comboBox4";
-            comboBox4.Size = new Size(130, 29);
-            comboBox4.TabIndex = 21;
+            textBoxDescription.Font = new Font("맑은 고딕", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            textBoxDescription.Location = new Point(94, 83);
+            textBoxDescription.Multiline = true;
+            textBoxDescription.Name = "textBoxDescription";
+            textBoxDescription.Size = new Size(130, 111);
+            textBoxDescription.TabIndex = 12;
             // 
-            // textBox4
+            // groupBoxFirstApprover
             // 
-            textBox4.Font = new Font("맑은 고딕", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox4.Location = new Point(94, 170);
-            textBox4.Multiline = true;
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(130, 111);
-            textBox4.TabIndex = 12;
+            groupBoxFirstApprover.Controls.Add(comboBoxFirstDepartment);
+            groupBoxFirstApprover.Controls.Add(label5);
+            groupBoxFirstApprover.Controls.Add(comboBoxFirstApprover);
+            groupBoxFirstApprover.Controls.Add(label4);
+            groupBoxFirstApprover.Location = new Point(537, 6);
+            groupBoxFirstApprover.Name = "groupBoxFirstApprover";
+            groupBoxFirstApprover.Size = new Size(236, 153);
+            groupBoxFirstApprover.TabIndex = 22;
+            groupBoxFirstApprover.TabStop = false;
+            groupBoxFirstApprover.Text = "중간 결재자 선택";
             // 
-            // label1
+            // comboBoxFirstDepartment
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("맑은 고딕", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(8, 111);
-            label1.Name = "label1";
-            label1.Size = new Size(80, 21);
-            label1.TabIndex = 7;
-            label1.Text = "관련 업무";
-            // 
-            // groupBox1
-            // 
-            groupBox1.Controls.Add(comboBox3);
-            groupBox1.Controls.Add(label5);
-            groupBox1.Controls.Add(comboBox2);
-            groupBox1.Controls.Add(label4);
-            groupBox1.Location = new Point(270, 6);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(236, 153);
-            groupBox1.TabIndex = 22;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "중간 결재자 선택";
-            // 
-            // comboBox3
-            // 
-            comboBox3.FormattingEnabled = true;
-            comboBox3.Location = new Point(89, 44);
-            comboBox3.Name = "comboBox3";
-            comboBox3.Size = new Size(121, 29);
-            comboBox3.TabIndex = 19;
+            comboBoxFirstDepartment.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxFirstDepartment.FormattingEnabled = true;
+            comboBoxFirstDepartment.Location = new Point(89, 44);
+            comboBoxFirstDepartment.Name = "comboBoxFirstDepartment";
+            comboBoxFirstDepartment.Size = new Size(121, 29);
+            comboBoxFirstDepartment.TabIndex = 19;
+            comboBoxFirstDepartment.SelectedIndexChanged += comboBoxFirstDepartment_SelectedIndexChanged;
             // 
             // label5
             // 
@@ -366,13 +435,14 @@
             label5.TabIndex = 20;
             label5.Text = "부서";
             // 
-            // comboBox2
+            // comboBoxFirstApprover
             // 
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(89, 111);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(121, 29);
-            comboBox2.TabIndex = 17;
+            comboBoxFirstApprover.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxFirstApprover.FormattingEnabled = true;
+            comboBoxFirstApprover.Location = new Point(89, 111);
+            comboBoxFirstApprover.Name = "comboBoxFirstApprover";
+            comboBoxFirstApprover.Size = new Size(121, 29);
+            comboBoxFirstApprover.TabIndex = 17;
             // 
             // label4
             // 
@@ -383,14 +453,15 @@
             label4.TabIndex = 18;
             label4.Text = "결재자";
             // 
-            // button1
+            // buttonApproveCreate
             // 
-            button1.Location = new Point(8, 321);
-            button1.Name = "button1";
-            button1.Size = new Size(770, 47);
-            button1.TabIndex = 0;
-            button1.Text = "결재 등록";
-            button1.UseVisualStyleBackColor = true;
+            buttonApproveCreate.Location = new Point(8, 321);
+            buttonApproveCreate.Name = "buttonApproveCreate";
+            buttonApproveCreate.Size = new Size(770, 47);
+            buttonApproveCreate.TabIndex = 0;
+            buttonApproveCreate.Text = "결재 등록";
+            buttonApproveCreate.UseVisualStyleBackColor = true;
+            buttonApproveCreate.Click += ApproveCreateClick;
             // 
             // FormApproval
             // 
@@ -409,12 +480,14 @@
             tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
             NewApproval.ResumeLayout(false);
-            groupBox2.ResumeLayout(false);
-            groupBox2.PerformLayout();
-            groupBox3.ResumeLayout(false);
-            groupBox3.PerformLayout();
-            groupBox1.ResumeLayout(false);
-            groupBox1.PerformLayout();
+            groupBoxWork.ResumeLayout(false);
+            groupBoxWork.PerformLayout();
+            groupBoxLastApprover.ResumeLayout(false);
+            groupBoxLastApprover.PerformLayout();
+            groupBoxApproveContent.ResumeLayout(false);
+            groupBoxApproveContent.PerformLayout();
+            groupBoxFirstApprover.ResumeLayout(false);
+            groupBoxFirstApprover.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -423,25 +496,25 @@
         private TabControl tabControl1;
         private TabPage NewApproval;
         private TabPage MyApproval;
-        private TextBox textBox1;
+        private TextBox textBoxTitle;
         private Label approveTitle;
-        private Button button1;
+        private Button buttonApproveCreate;
         private Label label1;
-        private TextBox textBox4;
+        private TextBox textBoxDescription;
         private Label label2;
         private Label label4;
-        private ComboBox comboBox2;
-        private GroupBox groupBox3;
-        private ComboBox comboBox4;
-        private GroupBox groupBox1;
+        private ComboBox comboBoxFirstApprover;
+        private GroupBox groupBoxApproveContent;
+        private ComboBox comboBoxLargeWork;
+        private GroupBox groupBoxFirstApprover;
         private Button buttonApproveAgree;
         private Button buttonApproveContinue;
-        private GroupBox groupBox2;
-        private ComboBox comboBox1;
+        private GroupBox groupBoxLastApprover;
+        private ComboBox comboBoxLastDepartment;
         private Label label3;
-        private ComboBox comboBox5;
+        private ComboBox comboBoxLastApprover;
         private Label label6;
-        private ComboBox comboBox3;
+        private ComboBox comboBoxFirstDepartment;
         private Label label5;
         private TabControl tabControlApproveData;
         private TabPage tabPage1;
@@ -451,5 +524,10 @@
         private Button buttonApproveDone;
         private Button buttonApproveDisagree;
         private DataGridView dataGridView2;
+        private Label label7;
+        private ComboBox comboBoxSubWork;
+        private GroupBox groupBoxWork;
+        private Label label8;
+        private ComboBox comboBoxMediumWork;
     }
 }

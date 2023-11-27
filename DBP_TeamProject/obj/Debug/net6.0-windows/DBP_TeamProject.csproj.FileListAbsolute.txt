@@ -351,9 +351,6 @@ C:\Users\DevToolsUser\Desktop\ShoeBill\DBP_TeamProject\obj\Debug\net6.0-windows\
 C:\Users\DevToolsUser\Desktop\ShoeBill\DBP_TeamProject\obj\Debug\net6.0-windows\DBP_TeamProject.pdb
 C:\Users\DevToolsUser\Desktop\ShoeBill\DBP_TeamProject\obj\Debug\net6.0-windows\DBP_TeamProject.genruntimeconfig.cache
 C:\Users\DevToolsUser\Desktop\ShoeBill\DBP_TeamProject\obj\Debug\net6.0-windows\ref\DBP_TeamProject.dll
-C:\Users\DevToolsUser\Desktop\ShoeBill\DBP_TeamProject\obj\Debug\net6.0-windows\DBP_TeamProject.Forms.Approval.ApproveList.resources
-C:\Users\DevToolsUser\Desktop\ShoeBill\DBP_TeamProject\obj\Debug\net6.0-windows\DBP_TeamProject.Forms.Approval.ContinueApprove.resources
-C:\Users\DevToolsUser\Desktop\ShoeBill\DBP_TeamProject\obj\Debug\net6.0-windows\DBP_TeamProject.Forms.Approval.NewApprove.resources
 \\Mac\Home\Desktop\ShoeBill\DBP_TeamProject\obj\Debug\net6.0-windows\DBP_TeamProject.csproj.AssemblyReference.cache
 \\Mac\Home\Desktop\ShoeBill\DBP_TeamProject\obj\Debug\net6.0-windows\DBP_TeamProject.Forms.Address.resources
 \\Mac\Home\Desktop\ShoeBill\DBP_TeamProject\obj\Debug\net6.0-windows\DBP_TeamProject.Forms.Approval.ApproveList.resources
@@ -719,3 +716,7 @@ C:\Users\user\Desktop\MyProject\ShoeBill\DBP_TeamProject\obj\Debug\net6.0-window
 C:\Users\user\Desktop\MyProject\ShoeBill\DBP_TeamProject\obj\Debug\net6.0-windows\DBP_TeamProject.pdb
 C:\Users\user\Desktop\MyProject\ShoeBill\DBP_TeamProject\obj\Debug\net6.0-windows\DBP_TeamProject.genruntimeconfig.cache
 C:\Users\user\Desktop\MyProject\ShoeBill\DBP_TeamProject\obj\Debug\net6.0-windows\ref\DBP_TeamProject.dll
+C:\Users\DevToolsUser\Desktop\ShoeBill\DBP_TeamProject\obj\Debug\net6.0-windows\DBP_TeamProject.Forms.Approval.FormApproveContinue.resources
+C:\Users\DevToolsUser\Desktop\ShoeBill\DBP_TeamProject\obj\Debug\net6.0-windows\DBP_TeamProject.Forms.Approval.FormUnApprove.resources
+C:\Users\DevToolsUser\Desktop\ShoeBill\DBP_TeamProject\obj\Debug\net6.0-windows\DBP_TeamProject.Forms.DepartmentSearching.resources
+C:\Users\DevToolsUser\Desktop\ShoeBill\DBP_TeamProject\obj\Debug\net6.0-windows\DBP_TeamProject.Forms.HumanResourcesOrganizationChart.resources
