@@ -13,6 +13,9 @@
     <Compile Update="Forms\Approval\FormUnApprove.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forms\Approval\FormUnApproveList.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Forms\AttendanceManagement.cs">
       <SubType>UserControl</SubType>
     </Compile>

@@ -1,3 +1,4 @@
 .vs/
 DBP_TeamProject/.vs/
-DBP_TeamProject/bin/
+bin/
+obj/

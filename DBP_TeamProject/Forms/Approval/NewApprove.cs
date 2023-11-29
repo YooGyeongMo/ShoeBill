@@ -57,7 +57,8 @@ namespace DBP_TeamProject.Forms.Approval
         }
         public void getDeparmentMember()
         {
-            foreach(string i in departments.ToArray())
+            departmentMember.Clear();
+            foreach (string i in departments.ToArray())
             {
                 query.select("사원ID, 이름, 부서이름, 직급").from("s5585452.사원").where($"부서이름 = '{i}'");
                 DataTable dt = dbManager.FindDataTable(query.query);
@@ -71,13 +72,13 @@ namespace DBP_TeamProject.Forms.Approval
                     member.Position = dr[3].ToString();
                     members.Add(member);
                 }
-                departmentMember.Clear();
                 departmentMember.Add(i, members);
             }
         }
         public void getWorkCategory()
         {
-            foreach(string i in departments.ToArray())
+            workCategory.Clear();
+            foreach (string i in departments.ToArray())
             {
                 query.select("대분류명, 중분류명, 소분류명")
                     .from("s5585452.분류_대분류 as large left join s5585452.분류_중분류 as middle on large.대분류ID = middle.대분류ID " +
@@ -93,7 +94,6 @@ namespace DBP_TeamProject.Forms.Approval
                     work.SubCategory = dr[2].ToString();
                     workList.Add(work);
                 }
-                workCategory.Clear();
                 workCategory.Add(i, workList);
             }
         }

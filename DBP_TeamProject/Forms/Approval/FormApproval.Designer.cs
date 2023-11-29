@@ -64,6 +64,11 @@
             comboBoxFirstApprover = new ComboBox();
             label4 = new Label();
             buttonApproveCreate = new Button();
+            tabPage3 = new TabPage();
+            buttonAdminAllSearch = new Button();
+            buttonAdminEndedSearch = new Button();
+            buttonAdminContinuingSearch = new Button();
+            dataGridView3 = new DataGridView();
             tabControl1.SuspendLayout();
             MyApproval.SuspendLayout();
             tabControlApproveData.SuspendLayout();
@@ -76,12 +81,15 @@
             groupBoxLastApprover.SuspendLayout();
             groupBoxApproveContent.SuspendLayout();
             groupBoxFirstApprover.SuspendLayout();
+            tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView3).BeginInit();
             SuspendLayout();
             // 
             // tabControl1
             // 
             tabControl1.Controls.Add(MyApproval);
             tabControl1.Controls.Add(NewApproval);
+            tabControl1.Controls.Add(tabPage3);
             tabControl1.Dock = DockStyle.Fill;
             tabControl1.Font = new Font("맑은 고딕", 12F, FontStyle.Regular, GraphicsUnit.Point);
             tabControl1.Location = new Point(0, 0);
@@ -89,6 +97,7 @@
             tabControl1.SelectedIndex = 0;
             tabControl1.Size = new Size(789, 413);
             tabControl1.TabIndex = 0;
+            tabControl1.SelectedIndexChanged += tabControl1_SelectedIndexChanged;
             tabControl1.Click += tabControl1_Click;
             // 
             // MyApproval
@@ -175,10 +184,10 @@
             // tabPage2
             // 
             tabPage2.Controls.Add(dataGridView2);
-            tabPage2.Location = new Point(4, 30);
+            tabPage2.Location = new Point(4, 24);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(557, 349);
+            tabPage2.Size = new Size(557, 355);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "결재해야 할 업무";
             tabPage2.UseVisualStyleBackColor = true;
@@ -191,8 +200,9 @@
             dataGridView2.Name = "dataGridView2";
             dataGridView2.RowTemplate.Height = 25;
             dataGridView2.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView2.Size = new Size(551, 343);
+            dataGridView2.Size = new Size(551, 349);
             dataGridView2.TabIndex = 0;
+            dataGridView2.CellDoubleClick += dataGridView2_CellDoubleClick;
             // 
             // buttonApproveAgree
             // 
@@ -463,6 +473,59 @@
             buttonApproveCreate.UseVisualStyleBackColor = true;
             buttonApproveCreate.Click += ApproveCreateClick;
             // 
+            // tabPage3
+            // 
+            tabPage3.Controls.Add(buttonAdminAllSearch);
+            tabPage3.Controls.Add(buttonAdminEndedSearch);
+            tabPage3.Controls.Add(buttonAdminContinuingSearch);
+            tabPage3.Controls.Add(dataGridView3);
+            tabPage3.Location = new Point(4, 30);
+            tabPage3.Name = "tabPage3";
+            tabPage3.Size = new Size(781, 379);
+            tabPage3.TabIndex = 2;
+            tabPage3.Text = "전체 결재";
+            tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // buttonAdminAllSearch
+            // 
+            buttonAdminAllSearch.Location = new Point(8, 3);
+            buttonAdminAllSearch.Name = "buttonAdminAllSearch";
+            buttonAdminAllSearch.Size = new Size(205, 55);
+            buttonAdminAllSearch.TabIndex = 9;
+            buttonAdminAllSearch.Text = "전체 결재 검색";
+            buttonAdminAllSearch.UseVisualStyleBackColor = true;
+            buttonAdminAllSearch.Click += buttonAdminAllSearch_Click;
+            // 
+            // buttonAdminEndedSearch
+            // 
+            buttonAdminEndedSearch.Location = new Point(9, 144);
+            buttonAdminEndedSearch.Name = "buttonAdminEndedSearch";
+            buttonAdminEndedSearch.Size = new Size(205, 55);
+            buttonAdminEndedSearch.TabIndex = 8;
+            buttonAdminEndedSearch.Text = "결재 완료 검색";
+            buttonAdminEndedSearch.UseVisualStyleBackColor = true;
+            buttonAdminEndedSearch.Click += buttonAdminEndedSearch_Click;
+            // 
+            // buttonAdminContinuingSearch
+            // 
+            buttonAdminContinuingSearch.Location = new Point(9, 83);
+            buttonAdminContinuingSearch.Name = "buttonAdminContinuingSearch";
+            buttonAdminContinuingSearch.Size = new Size(205, 55);
+            buttonAdminContinuingSearch.TabIndex = 7;
+            buttonAdminContinuingSearch.Text = "결재 중 검색";
+            buttonAdminContinuingSearch.UseVisualStyleBackColor = true;
+            buttonAdminContinuingSearch.Click += buttonAdminContinuingSearch_Click;
+            // 
+            // dataGridView3
+            // 
+            dataGridView3.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView3.Location = new Point(219, 0);
+            dataGridView3.Name = "dataGridView3";
+            dataGridView3.ReadOnly = true;
+            dataGridView3.RowTemplate.Height = 25;
+            dataGridView3.Size = new Size(562, 379);
+            dataGridView3.TabIndex = 0;
+            // 
             // FormApproval
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -488,6 +551,8 @@
             groupBoxApproveContent.PerformLayout();
             groupBoxFirstApprover.ResumeLayout(false);
             groupBoxFirstApprover.PerformLayout();
+            tabPage3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridView3).EndInit();
             ResumeLayout(false);
         }
 
@@ -529,5 +594,10 @@
         private GroupBox groupBoxWork;
         private Label label8;
         private ComboBox comboBoxMediumWork;
+        private TabPage tabPage3;
+        private DataGridView dataGridView3;
+        private Button buttonAdminAllSearch;
+        private Button buttonAdminEndedSearch;
+        private Button buttonAdminContinuingSearch;
     }
 }

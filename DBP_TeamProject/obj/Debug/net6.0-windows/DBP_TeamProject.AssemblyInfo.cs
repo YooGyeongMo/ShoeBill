@@ -14,7 +14,11 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DBP_TeamProject")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
+<<<<<<< Updated upstream
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+=======
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cc844d0943d60b2f1fef18e682d74e4b40d56e9b")]
+>>>>>>> Stashed changes
 [assembly: System.Reflection.AssemblyProductAttribute("DBP_TeamProject")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DBP_TeamProject")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

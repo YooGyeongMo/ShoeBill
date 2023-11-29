@@ -40,7 +40,7 @@ namespace DBP_TeamProject
             string dbLevel = DBManager.GetInstance().InitDBManager().getLevel(query);
             DBManager.GetInstance().CloseConnection();
 
-            LoginedUser.getInstance().Level = dbLevel; 
+            LoginedUser.getInstance().Level = dbLevel;
 
         }
         public void CheckPassword()
@@ -60,6 +60,7 @@ namespace DBP_TeamProject
             {
                 if (pwd.Equals(dbPassword))
                 {
+                    Get_level();
                     LoginedUser.getInstance().UserId = this.id; 
 
                     MainForm main = new MainForm();

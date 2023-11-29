@@ -720,6 +720,7 @@ C:\Users\DevToolsUser\Desktop\ShoeBill\DBP_TeamProject\obj\Debug\net6.0-windows\
 C:\Users\DevToolsUser\Desktop\ShoeBill\DBP_TeamProject\obj\Debug\net6.0-windows\DBP_TeamProject.Forms.Approval.FormUnApprove.resources
 C:\Users\DevToolsUser\Desktop\ShoeBill\DBP_TeamProject\obj\Debug\net6.0-windows\DBP_TeamProject.Forms.DepartmentSearching.resources
 C:\Users\DevToolsUser\Desktop\ShoeBill\DBP_TeamProject\obj\Debug\net6.0-windows\DBP_TeamProject.Forms.HumanResourcesOrganizationChart.resources
+<<<<<<< Updated upstream
 C:\Users\dwc07\OneDrive\바탕 화면\DBP_TeamProject\ShoeBill\DBP_TeamProject\obj\Debug\net6.0-windows\DBP_TeamProject.csproj.AssemblyReference.cache
 C:\Users\dwc07\OneDrive\바탕 화면\DBP_TeamProject\ShoeBill\DBP_TeamProject\obj\Debug\net6.0-windows\DBP_TeamProject.Forms.Address.resources
 C:\Users\dwc07\OneDrive\바탕 화면\DBP_TeamProject\ShoeBill\DBP_TeamProject\obj\Debug\net6.0-windows\DBP_TeamProject.Forms.FormApproval.resources
@@ -788,3 +789,6 @@ C:\Users\dwc07\OneDrive\바탕 화면\DBP_TeamProject\ShoeBill\DBP_TeamProject\b
 C:\Users\dwc07\OneDrive\바탕 화면\DBP_TeamProject\ShoeBill\DBP_TeamProject\obj\Debug\net6.0-windows\DBP_TeamProject.csproj.CopyComplete
 C:\Users\dwc07\OneDrive\바탕 화면\DBP_TeamProject\ShoeBill\DBP_TeamProject\obj\Debug\net6.0-windows\DBP_TeamProject.genruntimeconfig.cache
 C:\Users\dwc07\OneDrive\바탕 화면\DBP_TeamProject\ShoeBill\DBP_TeamProject\obj\Debug\net6.0-windows\ref\DBP_TeamProject.dll
+=======
+C:\Users\DevToolsUser\Desktop\ShoeBill\DBP_TeamProject\obj\Debug\net6.0-windows\DBP_TeamProject.Forms.Approval.FormUnApproveList.resources
+>>>>>>> Stashed changes

@@ -15,8 +15,8 @@ namespace DBP_TeamProject.Forms
         LoginedUser loginedUser = LoginedUser.getInstance();
 
         NewApprove newApprove = new NewApprove();
+        AdminApproveSearch adminApproveSearch = new AdminApproveSearch();
 
-        
 
 
         public void tabControlSelected()
@@ -129,6 +129,12 @@ namespace DBP_TeamProject.Forms
             comboBoxLargeWork.Items.Clear();
             comboBoxFirstDepartment.Items.Clear();
             comboBoxLastDepartment.Items.Clear();
+            comboBoxFirstApprover.Items.Clear();
+            comboBoxLastApprover.Items.Clear();
+            comboBoxMediumWork.Items.Clear();
+            comboBoxSubWork.Items.Clear();
+            textBoxTitle.Clear();
+            textBoxDescription.Clear();
             comboBoxLargeWork.Items.AddRange(NewApprove.departments.ToArray());
             comboBoxFirstDepartment.Items.AddRange(NewApprove.departments.ToArray());
             comboBoxLastDepartment.Items.AddRange(NewApprove.departments.ToArray());
@@ -211,36 +217,43 @@ namespace DBP_TeamProject.Forms
 
         private void buttonApproveAgree_Click(object sender, EventArgs e)
         {
-            int userId = int.Parse(dataGridView2.SelectedRows[0].Cells[1].Value.ToString());
-            
-            // 기안자가 나인 결재를 선택 후 결재 진행버튼을 눌렀을 때
-            if (userId == int.Parse(loginedUser.UserId))
+            // 아무것도 없을때 결재 진행 누르면 죽는거 해결하자
+
+            try
             {
-                int approveId = int.Parse(dataGridView2.SelectedRows[0].Cells[0].Value.ToString());
-                string title = dataGridView2.SelectedRows[0].Cells[3].Value.ToString();
-                string description = dataGridView2.SelectedRows[0].Cells[4].Value.ToString();
-
-                FormApproveContinue formApproveContinue = new FormApproveContinue(approveId, title, description);
-                formApproveContinue.ShowDialog();
-            }
-            // 기안자가 내가 아닌 결재를 선택 후 결재 진행버튼을 눌렀을 때
-            else
-            {
-                string approveTime = DateTime.Now.ToString("g");
-                int approveId = int.Parse(dataGridView2.SelectedRows[0].Cells[0].Value.ToString());
-                string title = dataGridView2.SelectedRows[0].Cells[3].Value.ToString();
-
-
-                query.insert("s5585452.Approver(approvalId, approver, approveTime, approveResult)")
-                .values($"({approveId}, {int.Parse(loginedUser.UserId)}, '{approveTime}', true)");
-
-                int status1 = dbManager.ExecuteNonQueury(query.query);
-                int status2 = updateCurrApprover(approveId);
-                
-                if (status1 > 0 && status2 > 0)
+                int userId = int.Parse(dataGridView2.SelectedRows[0].Cells[1].Value.ToString());
+                if (userId == int.Parse(loginedUser.UserId))
                 {
-                    MessageBox.Show("결재가 진행 되었습니다!");
+                    int approveId = int.Parse(dataGridView2.SelectedRows[0].Cells[0].Value.ToString());
+                    string title = dataGridView2.SelectedRows[0].Cells[3].Value.ToString();
+                    string description = dataGridView2.SelectedRows[0].Cells[4].Value.ToString();
+
+                    FormApproveContinue formApproveContinue = new FormApproveContinue(approveId, title, description);
+                    formApproveContinue.ShowDialog();
                 }
+                // 기안자가 내가 아닌 결재를 선택 후 결재 진행버튼을 눌렀을 때
+                else
+                {
+                    string approveTime = DateTime.Now.ToString("g");
+                    int approveId = int.Parse(dataGridView2.SelectedRows[0].Cells[0].Value.ToString());
+                    string title = dataGridView2.SelectedRows[0].Cells[3].Value.ToString();
+
+
+                    query.insert("s5585452.Approver(approvalId, approver, approveTime, approveResult)")
+                    .values($"({approveId}, {int.Parse(loginedUser.UserId)}, '{approveTime}', true)");
+
+                    int status1 = dbManager.ExecuteNonQueury(query.query);
+                    int status2 = updateCurrApprover(approveId);
+
+                    if (status1 > 0 && status2 > 0)
+                    {
+                        MessageBox.Show("결재가 진행 되었습니다!");
+                    }
+                }
+            }
+            catch
+            {
+                MessageBox.Show("선택된 결재가 없습니다!");
             }
             approveListUpdate();
         }
@@ -288,17 +301,62 @@ namespace DBP_TeamProject.Forms
 
         private void buttonApproveDisagree_Click(object sender, EventArgs e)
         {
-            int userId = int.Parse(dataGridView2.SelectedRows[0].Cells[1].Value.ToString());
-            if(userId == int.Parse(loginedUser.UserId))
+            // 아무것도 없을때 누르면 죽는거 해걸해야 함
+            try
             {
-                MessageBox.Show("내가 등록한 결재는 반려가 불가능합니다.");
-                return;
+                int userId = int.Parse(dataGridView2.SelectedRows[0].Cells[1].Value.ToString());
+                if (userId == int.Parse(loginedUser.UserId))
+                {
+                    MessageBox.Show("내가 등록한 결재는 반려가 불가능합니다.");
+                    return;
+                }
+                int approveId = int.Parse(dataGridView2.SelectedRows[0].Cells[0].Value.ToString());
+                string title = dataGridView2.SelectedRows[0].Cells[3].Value.ToString();
+                string description = dataGridView2.SelectedRows[0].Cells[4].Value.ToString();
+                FormUnApprove formUnApprove = new FormUnApprove(approveId, title, description);
+                formUnApprove.ShowDialog();
             }
-            int approveId = int.Parse(dataGridView2.SelectedRows[0].Cells[0].Value.ToString());
-            string title = dataGridView2.SelectedRows[0].Cells[3].Value.ToString();
-            string description = dataGridView2.SelectedRows[0].Cells[4].Value.ToString();
-            FormUnApprove formUnApprove = new FormUnApprove(approveId, title, description);
-            formUnApprove.ShowDialog();
+            catch
+            {
+                MessageBox.Show("선택된 결재가 없습니다!");
+            }
+        }
+
+        private void dataGridView2_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                FormUnApproveList formUnApproveList = new FormUnApproveList(int.Parse(dataGridView2.SelectedRows[0].Cells[0].Value.ToString()));
+                formUnApproveList.ShowDialog();
+            }
+            catch { }
+        }
+
+        private void buttonAdminAllSearch_Click(object sender, EventArgs e)
+        {
+            DataTable dt = adminApproveSearch.allApproveSearch();
+            dataGridView3.DataSource = dt;
+        }
+
+        private void buttonAdminContinuingSearch_Click(object sender, EventArgs e)
+        {
+            DataTable dt = adminApproveSearch.continuingApproveSearch();
+            dataGridView3.DataSource = dt;
+        }
+
+        private void buttonAdminEndedSearch_Click(object sender, EventArgs e)
+        {
+            DataTable dt = adminApproveSearch.endedApproveSearch();
+            dataGridView3.DataSource = dt;
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(tabControl1.SelectedIndex == 2 && !loginedUser.Level.Equals("사장"))
+            {
+                tabControl1.SelectedIndex = 0;
+                MessageBox.Show("사장만 사용할 수 있는 페이지입니다!");
+            }
         }
     }
 }
