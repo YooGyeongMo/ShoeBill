@@ -57,7 +57,34 @@ namespace DBP_TeamProject
             int count = Convert.ToInt32(cmd.ExecuteScalar());
             return count > 0;
         }
-      
+        public string GetInfo(string query)
+        {
+            string result = null;
+            MySqlCommand cmd = new MySqlCommand(query, connection);
+            try
+            {
+                MySqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    result = reader[0].ToString(); // 첫 번째 열 값을 가져오기
+                    if (result == null)
+                    {
+                        result = "0";
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("해당 아이디가 없습니다.");
+                    return null;
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Query 오류: " + ex.Message);
+                return null;
+            }
+            return result;
+        }
         public string GetPassword(string query)
         {
             string result = null;
@@ -82,7 +109,7 @@ namespace DBP_TeamProject
             return result;
         }
         // 부서 이름 찾기
-        public List<string> GetList(string query,string getValue)
+        public List<string> GetList(string query, string getValue)
         {
             List<string> departmentName = new List<string>();
             MySqlCommand cmd = new MySqlCommand(query, connection);
@@ -132,7 +159,7 @@ namespace DBP_TeamProject
             return level;
         }
 
-        public (string,string) getPasswordAndRate(string query)
+        public (string, string) getPasswordAndRate(string query)
         {
             string password = null;
             string position = null;

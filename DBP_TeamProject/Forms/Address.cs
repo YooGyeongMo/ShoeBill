@@ -89,7 +89,7 @@ namespace DBP_TeamProject.Forms
                 MessageBox.Show("오류가 발생했습니다: " + ex.Message);
             }
         }
-        
+
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)

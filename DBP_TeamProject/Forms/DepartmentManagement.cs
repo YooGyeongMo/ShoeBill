@@ -145,7 +145,7 @@ namespace DBP_TeamProject.Forms
                 }
 
                 // 콤보박스의 선택을 새로운 부서 이름으로 설정하거나 초기화
-                recent_department_list_combobox.Text = ""; 
+                recent_department_list_combobox.Text = "";
             }
             catch (Exception ex)
             {
@@ -196,7 +196,7 @@ namespace DBP_TeamProject.Forms
                         dbManager.ExecuteNonQueury(deleteDepartmentQuery);
                         MessageBox.Show("부서명을 성공적으로 삭제했습니다.", "성공", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         UpdateUI();
-                    
+
                     }
                 }
                 else
@@ -252,7 +252,7 @@ namespace DBP_TeamProject.Forms
 
             try
             {
-                
+
                 // 현재 부서장 조회
                 string checkLeaderQuery = Query.GetInstance()
                     .select("부서장이름")
@@ -275,19 +275,19 @@ namespace DBP_TeamProject.Forms
                       .exec();
 
                     message = "부서장이 업데이트되었습니다.";
-                   
+
                 }
                 else
                 {
                     // 부서장이 이미 있을 경우 부서장 정보 업데이트
-                   updateQuery = Query.GetInstance()
-                        .update("부서")
-                        .set($"부서장이름 = '{newLeaderName}'")
-                        .where($"부서이름 = '{selectedDepartment}'")
-                        .exec();
+                    updateQuery = Query.GetInstance()
+                         .update("부서")
+                         .set($"부서장이름 = '{newLeaderName}'")
+                         .where($"부서이름 = '{selectedDepartment}'")
+                         .exec();
 
                     message = "부서장이 업데이트되었습니다.";
-                   
+
                 }
 
                 dbManager.ExecuteNonQueury(updateQuery);

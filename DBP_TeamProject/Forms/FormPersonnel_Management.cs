@@ -25,7 +25,8 @@ namespace DBP_TeamProject.Forms
         private DepartmentManagement departmentPanel; // 부서관리 -부서 등록 수정 패널
         private DepartmentSearching departmentsearchingPanel;// 부서관리 - 부서 현황 패널
 
-        private SalaryStatement salaryPanel; // 급여 관리
+        private SalaryManagement.SalaryStatement salaryPanel; // 급여 관리
+        private SalaryManagement.SalaryList salaryList; // 급여 내역
 
         private HumanResourcesOrganizationChart humanOrganizationChartPanel; // 인사 조직도
         public FormPersonnel_Management()
@@ -53,6 +54,7 @@ namespace DBP_TeamProject.Forms
             loadPanel.Controls.Add(salaryPanel);
 
             loadPanel.Controls.Add(humanOrganizationChartPanel);
+            loadPanel.Controls.Add(salaryList);
         }
         private void HideAllControls()
         {
@@ -138,13 +140,19 @@ namespace DBP_TeamProject.Forms
             departmentsearchingPanel = new DepartmentSearching();
             ShowControl(departmentsearchingPanel);
         }
-
         // [#5] 급여 관리
-        private void 급여관리ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void 급여계산ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HideAllControls();
-            salaryPanel = new SalaryStatement(); // 새로운 객체 생성
+            salaryPanel = new SalaryManagement.SalaryStatement(); // 새로운 객체 생성
             ShowControl(salaryPanel);
+        }
+        // [#5] 급여 내역
+        private void 급여내역ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            HideAllControls();
+            salaryList = new SalaryManagement.SalaryList();
+            ShowControl(salaryList);
         }
         // [#6] 인사 조직도
         private void 인사조직ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -154,8 +162,5 @@ namespace DBP_TeamProject.Forms
             ShowControl(humanOrganizationChartPanel);
         }
 
-     
-
-      
     }
 }

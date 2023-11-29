@@ -34,8 +34,32 @@
     <Compile Update="Forms\HumanResourcesOrganizationChart.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Forms\SalaryStatement.cs">
+    <Compile Update="Forms\MasterDeleter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\MasterMaker.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\MasterUpdater.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\MasterUpdater.Desinger.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\SalaryManagement\SalaryList.cs">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Forms\SalaryManagement\SalaryStatement.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Forms\WorkDeleter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\WorkSearcher.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\WorkUpdater.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Update="MainForm.cs">
       <SubType>Form</SubType>
