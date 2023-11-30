@@ -123,6 +123,13 @@ namespace DBP_TeamProject.Forms
 
             TimeSpan endTime = new TimeSpan(etime, emin, 00);
 
+            if (startTime >= endTime)
+            {
+                MessageBox.Show("업무 시작 시간이 업무 종료 시간보다 뒤에 있습니다. 올바른 시간을 입력하세요.", "경고", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+
             if (string.IsNullOrWhiteSpace(bigCategory) || string.IsNullOrWhiteSpace(midCategory) ||
                 string.IsNullOrWhiteSpace(smallCategory) || string.IsNullOrWhiteSpace(memo) ||
                  (stime == null && smin == null) || (etime == null && emin == null))
@@ -135,12 +142,13 @@ namespace DBP_TeamProject.Forms
             string useId = LoginedUser.getInstance().UserId;
             //int userId = loginForm.loginedUser.UserId; // 업무등록자 정보
 
+            string userId = LoginedUser.getInstance().UserId;
 
             // 새로운 업무의 시작 시간과 종료 시간
             TimeSpan newStartTime = startTime;
             TimeSpan newEndTime = endTime;
             // 기존 업무와 겹치는지 확인
-            if (IsWorkPeriodOverlap(newStartTime, newEndTime))
+            if (IsWorkPeriodOverlap(userId, newStartTime, newEndTime))
             {
                 MessageBox.Show("이미 등록된 기간과 업무 시간이 겹칩니다. 다른 시간을 선택하세요.", "경고", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return; // 겹치면 등록 중단
@@ -155,8 +163,8 @@ namespace DBP_TeamProject.Forms
                 connection.Open();
 
                 // SQL 쿼리 작성 
-                string query = "INSERT INTO s5585452.일일업무 (대분류명, 중분류명, 소분류명, 업무등록자, 업무시작시간, 업무종료시간, 비고, 업무등록시간) " +
-                    "VALUES (@대분류명, @중분류명, @소분류명, @업무등록자, @업무시작시간, @업무종료시간, @비고, @업무등록시간)";
+                string query = "INSERT INTO s5585452.일일업무 (대분류명, 중분류명, 소분류명, 업무등록자, 업무시작시간, 업무종료시간, 비고, 업무등록일자) " +
+                    "VALUES (@대분류명, @중분류명, @소분류명, @업무등록자, @업무시작시간, @업무종료시간, @비고, @업무등록일자)";
 
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
@@ -168,7 +176,7 @@ namespace DBP_TeamProject.Forms
                     command.Parameters.AddWithValue("@업무시작시간", startTime);
                     command.Parameters.AddWithValue("@업무종료시간", endTime);
                     command.Parameters.AddWithValue("@비고", memo);
-                    command.Parameters.AddWithValue("@업무등록시간", DateTime.Now);
+                    command.Parameters.AddWithValue("@업무등록일자", DateTime.Now);
                     // 쿼리 실행
                     command.ExecuteNonQuery();
 
@@ -184,6 +192,43 @@ namespace DBP_TeamProject.Forms
             comboBox_smin.SelectedIndex = -1;
             comboBox_etime.SelectedIndex = -1;
             comboBox_emin.SelectedIndex = -1;
+        }
+
+        private bool IsWorkPeriodOverlap(string userId, TimeSpan newStartTime, TimeSpan newEndTime)
+        {
+            // MySQL 연결 문자열
+            string connectionString = "Server=115.85.181.212;Database=s5585452;User ID=s5585452;Password=s5585452; charset=utf8;";
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+
+                // 기존 업무 기간 및 업무등록자 조회 쿼리 작성
+                string query = "SELECT 업무시작시간, 업무종료시간 FROM s5585452.일일업무 WHERE 업무등록자 = @업무등록자";
+
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@업무등록자", userId);
+
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            // 기존 업무의 시작 시간과 종료 시간
+                            TimeSpan existingStartTime = ((TimeSpan)reader["업무시작시간"]);
+                            TimeSpan existingEndTime = ((TimeSpan)reader["업무종료시간"]);
+
+                            // 새로운 업무와 겹치는지 확인
+                            if (IsTimeOverlap(newStartTime, newEndTime, existingStartTime, existingEndTime))
+                            {
+                                return true; // 겹친다면 true 반환
+                            }
+                        }
+                    }
+                }
+            }
+
+            return false; // 겹치는 업무가 없다면 false 반환
         }
 
         private bool IsWorkPeriodOverlap(TimeSpan newStartTime, TimeSpan newEndTime)
@@ -352,6 +397,126 @@ namespace DBP_TeamProject.Forms
         private void comboBox_bigcategory_DropDown(object sender, EventArgs e)
         {
 
+        }
+
+        private void FormWork_Load(object sender, EventArgs e)
+        {
+            // 부서 테이블에서 중복 없이 부서이름들을 가져오기
+            List<string> departmentNames = GetDistinctDepartmentNames();
+
+            // 대분류 테이블에 순차적으로 삽입
+            foreach (string departmentName in departmentNames)
+            {
+                // 대분류가 이미 존재하는지 확인
+                if (!IsDepartmentExists("분류_대분류", "대분류명", departmentName))
+                {
+                    // 대분류ID를 현재 테이블에서 사용 중인 가장 큰 값에 1을 더하여 가져오기
+                    int nextBigCategoryId = GetNextCategoryId("분류_대분류", "대분류ID");
+
+                    // 대분류를 삽입
+                    InsertDepartment("분류_대분류", "대분류ID", "대분류명", nextBigCategoryId, departmentName);
+                }
+            }
+
+            // 대분류 콤보박스 다시 로드
+            comboBox_bigcategory.SelectedIndex = -1;
+            comboBox_bigcategory.Items.Clear();
+            LoadExistingData(comboBox_bigcategory, "대분류ID", "대분류명", "분류_대분류");
+
+            // 중분류 콤보박스도 업데이트
+            comboBox_midcategory.SelectedIndex = -1;
+            comboBox_midcategory.Items.Clear();
+            LoadExistingData(comboBox_midcategory, "중분류ID", "중분류명", "분류_중분류");
+
+
+        }
+
+
+        // 중복 없이 부서이름들을 가져오는 메서드
+        private List<string> GetDistinctDepartmentNames()
+        {
+            List<string> departmentNames = new List<string>();
+
+            string connectionString = "Server=115.85.181.212;Database=s5585452;User ID=s5585452;Password=s5585452; charset=utf8;";
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = "SELECT DISTINCT 부서이름 FROM 부서";
+
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string departmentName = reader["부서이름"].ToString();
+                            departmentNames.Add(departmentName);
+                        }
+                    }
+                }
+            }
+
+            return departmentNames;
+        }
+
+
+
+        // 테이블에서 사용 중인 가장 큰 ID에 1을 더하여 가져오는 메서드
+        private int GetNextCategoryId(string tableName, string idColumnName)
+        {
+            string connectionString = "Server=115.85.181.212;Database=s5585452;User ID=s5585452;Password=s5585452; charset=utf8;";
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = $"SELECT IFNULL(MAX({idColumnName}), 0) + 1 FROM s5585452.{tableName}";
+
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    return Convert.ToInt32(command.ExecuteScalar());
+                }
+            }
+        }
+        // 테이블에 데이터가 이미 존재하는지 확인하는 메서드
+        private bool IsDepartmentExists(string tableName, string columnName, string value)
+        {
+            string connectionString = "Server=115.85.181.212;Database=s5585452;User ID=s5585452;Password=s5585452; charset=utf8;";
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = $"SELECT COUNT(*) FROM s5585452.{tableName} WHERE {columnName} = @Value";
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Value", value);
+                    int count = Convert.ToInt32(command.ExecuteScalar());
+                    return count > 0;
+                }
+            }
+        }
+
+
+        // 테이블에 데이터를 삽입하는 메서드
+        private void InsertDepartment(string tableName, string idColumnName, string nameColumnName, int idValue, string nameValue)
+        {
+            string connectionString = "Server=115.85.181.212;Database=s5585452;User ID=s5585452;Password=s5585452; charset=utf8;";
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = $"INSERT INTO s5585452.{tableName} ({idColumnName}, {nameColumnName}) VALUES (@ID, @Name)";
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@ID", idValue);
+                    command.Parameters.AddWithValue("@Name", nameValue);
+                    command.ExecuteNonQuery();
+                }
+            }
         }
     }
 

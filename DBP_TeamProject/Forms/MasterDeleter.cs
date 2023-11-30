@@ -21,7 +21,6 @@ namespace DBP_TeamProject.Forms
             InitializeComponent();
 
             // 폼 로드 시 테이블 데이터를 ComboBox에 표시
-            LoadExistingData(comboBox_bigcategory, "대분류ID", "대분류명", "분류_대분류");
             LoadExistingData(comboBox_midcategory, "중분류ID", "중분류명", "분류_중분류");
             LoadExistingData(comboBox_smallcategory, "소분류ID", "소분류명", "분류_소분류");
         }
@@ -92,11 +91,7 @@ namespace DBP_TeamProject.Forms
             }
         }
 
-        private void button_deletebig_Click(object sender, EventArgs e)
-        {
-            DeleteData("분류_대분류", "대분류ID", comboBox_bigcategory);
-        }
-
+   
         private void button_deletemid_Click(object sender, EventArgs e)
         {
             DeleteData("분류_중분류", "중분류ID", comboBox_midcategory);

@@ -29,8 +29,11 @@ namespace DBP_TeamProject.Forms
             LoadExistingData(comboBox_bigcategory, "분류_대분류", "대분류ID", "대분류명");
             LoadExistingData(comboBox_midcategory, "분류_중분류", "중분류ID", "중분류명");
             LoadExistingData(comboBox_smallcategory, "분류_소분류", "소분류ID", "소분류명");
-            LoadComboBoxData(comboBox_date, "일일업무", "일일업무ID", "업무등록시간");
-            LoadComboBoxData(comboBox_user, "일일업무", "일일업무ID", "업무등록자");
+            // LoadComboBoxData(comboBox_date, "일일업무", "일일업무ID", "업무등록일자");
+            // LoadComboBoxData(comboBox_user, "일일업무", "일일업무ID", "업무등록자");
+            LoadDateData();
+
+            LoadUserData();
 
             dataGridView_search.CellContentClick += dataGridView_search_CellContentClick;
         }
@@ -67,8 +70,19 @@ namespace DBP_TeamProject.Forms
             LoadCategories(comboBox_bigcategory, "분류_대분류", "대분류ID", "대분류명");
             LoadCategories(comboBox_midcategory, "분류_중분류", "중분류ID", "중분류명");
             LoadCategories(comboBox_smallcategory, "분류_소분류", "소분류ID", "소분류명");
-            LoadComboBoxData(comboBox_date, "일일업무", "일일업무ID", "업무등록시간");
-            LoadComboBoxData(comboBox_user, "일일업무", "일일업무ID", "업무등록자");
+            //LoadComboBoxData(comboBox_date, "일일업무", "일일업무ID", "업무등록일자");
+            //LoadComboBoxData(comboBox_user, "일일업무", "일일업무ID", "업무등록자");
+        }
+
+        private void LoadDateData()
+        {
+            string query = "SELECT DISTINCT DATE_FORMAT(업무등록일자, '%Y-%m-%d') AS 날짜 FROM s5585452.일일업무";
+            LoadComboBoxData(comboBox_date, query, "날짜", "날짜");
+        }
+        private void LoadUserData()
+        {
+            string query = "SELECT DISTINCT 업무등록자 FROM s5585452.일일업무";
+            LoadComboBoxData(comboBox_user, query, "업무등록자", "업무등록자");
         }
 
         private void LoadExistingData(ComboBox comboBox, string tableName, string idColumnName, string displayColumnName)
@@ -103,31 +117,29 @@ namespace DBP_TeamProject.Forms
         }
 
 
-        private void LoadComboBoxData(ComboBox comboBox, string tableName, string idColumnName, string displayColumnName)
+        private void LoadComboBoxData(ComboBox comboBox, string query, string displayMember, string valueMember)
         {
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            try
             {
                 connection.Open();
-                string query = $"SELECT {idColumnName}, {displayColumnName} FROM s5585452.{tableName}";
-
                 using (MySqlCommand command = new MySqlCommand(query, connection))
+                using (MySqlDataReader reader = command.ExecuteReader())
                 {
-                    using (MySqlDataReader reader = command.ExecuteReader())
+                    while (reader.Read())
                     {
-                        while (reader.Read())
-                        {
-                            comboBox.Items.Add(new UserData
-                            {
-                                ID = Convert.ToInt32(reader[idColumnName]),
-                                User = Convert.ToString(reader[displayColumnName])
-                            });
-                        }
+                        comboBox.Items.Add(Convert.ToString(reader[displayMember]));
                     }
                 }
             }
-
+            finally
+            {
+                connection.Close();
+            }
             comboBox.SelectedIndex = -1;
         }
+
+
+
 
         private void button_search_Click(object sender, EventArgs e)
         {
@@ -141,9 +153,9 @@ namespace DBP_TeamProject.Forms
 
             // 선택된 값이 있는 경우에만 조건을 추가
             if (!string.IsNullOrEmpty(dateValue))
-                query += $" AND 업무등록시간 = '{dateValue}'";
+                query += $" AND 업무등록일자 = '{dateValue}'";
             if (!string.IsNullOrEmpty(keyValue))
-                query += $" AND (업무등록시간 LIKE '%{keyValue}%' OR 대분류명 LIKE '%{keyValue}%' OR 중분류명 LIKE '%{keyValue}%' OR 소분류명 LIKE '%{keyValue}%' OR 업무등록자 LIKE '%{keyValue}%' OR 비고 LIKE '%{keyValue}%')";
+                query += $" AND (업무등록일자 LIKE '%{keyValue}%' OR 대분류명 LIKE '%{keyValue}%' OR 중분류명 LIKE '%{keyValue}%' OR 소분류명 LIKE '%{keyValue}%' OR 업무등록자 LIKE '%{keyValue}%' OR 비고 LIKE '%{keyValue}%')";
             if (!string.IsNullOrEmpty(userValue))
                 query += $" AND 업무등록자 = '{userValue}'";
 

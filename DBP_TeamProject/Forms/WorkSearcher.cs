@@ -60,14 +60,13 @@ namespace DBP_TeamProject
 
         private void LoadDateData()
         {
-            string query = "SELECT 일일업무ID, 업무등록시간 FROM s5585452.일일업무";
-            LoadComboBoxData(comboBox_date, query, "업무등록시간", "일일업무ID");
+            string query = "SELECT DISTINCT DATE_FORMAT(업무등록일자, '%Y-%m-%d') AS 날짜 FROM s5585452.일일업무";
+            LoadComboBoxData(comboBox_date, query, "날짜", "날짜");
         }
-
         private void LoadUserData()
         {
-            string query = "SELECT 일일업무ID, 업무등록자 FROM s5585452.일일업무";
-            LoadComboBoxData(comboBox_user, query, "업무등록자", "일일업무ID");
+            string query = "SELECT DISTINCT 업무등록자 FROM s5585452.일일업무";
+            LoadComboBoxData(comboBox_user, query, "업무등록자", "업무등록자");
         }
 
 
@@ -79,8 +78,8 @@ namespace DBP_TeamProject
 
             string query = "SELECT * FROM s5585452.일일업무 WHERE 1=1";
 
-            AddCondition(ref query, "업무등록시간", dateValue);
-            AddCondition(ref query, "(업무등록시간 LIKE '%{0}%' OR 대분류명 LIKE '%{0}%' OR 중분류명 LIKE '%{0}%' OR 소분류명 LIKE '%{0}%' OR 업무등록자 LIKE '%{0}%' OR 비고 LIKE '%{0}%')", keyValue);
+            AddCondition(ref query, "업무등록일자", dateValue);
+            AddCondition(ref query, "(업무등록일자 LIKE '%{0}%' OR 대분류명 LIKE '%{0}%' OR 중분류명 LIKE '%{0}%' OR 소분류명 LIKE '%{0}%' OR 업무등록자 LIKE '%{0}%' OR 비고 LIKE '%{0}%')", keyValue);
             AddCondition(ref query, "업무등록자", userValue);
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
@@ -102,7 +101,7 @@ namespace DBP_TeamProject
 
         private string GetSelectedValue(ComboBox comboBox)
         {
-            return (comboBox.SelectedIndex != -1) ? ((KeyValuePair<int, string>)comboBox.SelectedItem).Value : string.Empty;
+            return (comboBox.SelectedIndex != -1) ? comboBox.SelectedItem.ToString() : string.Empty;
         }
 
         private void button_close_Click(object sender, EventArgs e)

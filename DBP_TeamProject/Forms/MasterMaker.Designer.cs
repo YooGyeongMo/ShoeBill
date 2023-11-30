@@ -28,10 +28,7 @@ namespace DBP_TeamProject.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            textBox_big = new TextBox();
-            label1 = new Label();
             label2 = new Label();
-            button_addbig = new Button();
             label3 = new Label();
             label4 = new Label();
             label6 = new Label();
@@ -43,48 +40,20 @@ namespace DBP_TeamProject.Forms
             textBox_mid = new TextBox();
             button_addmid = new Button();
             label_big = new Label();
-            groupBox1 = new GroupBox();
             groupBox2 = new GroupBox();
             groupBox3 = new GroupBox();
-            groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
             SuspendLayout();
             // 
-            // textBox_big
-            // 
-            textBox_big.Location = new Point(289, 37);
-            textBox_big.Name = "textBox_big";
-            textBox_big.Size = new Size(206, 31);
-            textBox_big.TabIndex = 0;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(9, 40);
-            label1.Name = "label1";
-            label1.Size = new Size(258, 25);
-            label1.TabIndex = 1;
-            label1.Text = "추가할 대분류를 입력해주세요";
-            // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(21, 233);
+            label2.Location = new Point(13, 121);
             label2.Name = "label2";
             label2.Size = new Size(258, 25);
             label2.TabIndex = 2;
             label2.Text = "추가할 중분류를 입력해주세요";
-            // 
-            // button_addbig
-            // 
-            button_addbig.Location = new Point(592, 20);
-            button_addbig.Name = "button_addbig";
-            button_addbig.Size = new Size(178, 64);
-            button_addbig.TabIndex = 3;
-            button_addbig.Text = "대분류 추가";
-            button_addbig.UseVisualStyleBackColor = true;
-            button_addbig.Click += button_addbig_Click;
             // 
             // label3
             // 
@@ -185,26 +154,15 @@ namespace DBP_TeamProject.Forms
             label_big.Text = "더미1";
             label_big.Visible = false;
             // 
-            // groupBox1
-            // 
-            groupBox1.Controls.Add(label1);
-            groupBox1.Controls.Add(textBox_big);
-            groupBox1.Controls.Add(button_addbig);
-            groupBox1.Location = new Point(12, 12);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(776, 90);
-            groupBox1.TabIndex = 17;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "대분류 추가";
-            // 
             // groupBox2
             // 
             groupBox2.Controls.Add(label_big);
+            groupBox2.Controls.Add(label2);
             groupBox2.Controls.Add(textBox_mid);
             groupBox2.Controls.Add(button_addmid);
             groupBox2.Controls.Add(label3);
             groupBox2.Controls.Add(comboBox_bigcategory);
-            groupBox2.Location = new Point(12, 109);
+            groupBox2.Location = new Point(12, 12);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(776, 160);
             groupBox2.TabIndex = 18;
@@ -219,7 +177,7 @@ namespace DBP_TeamProject.Forms
             groupBox3.Controls.Add(textBox_small);
             groupBox3.Controls.Add(label4);
             groupBox3.Controls.Add(comboBox_midcategory);
-            groupBox3.Location = new Point(19, 276);
+            groupBox3.Location = new Point(12, 178);
             groupBox3.Name = "groupBox3";
             groupBox3.Size = new Size(769, 160);
             groupBox3.TabIndex = 19;
@@ -232,27 +190,18 @@ namespace DBP_TeamProject.Forms
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
             Controls.Add(groupBox3);
-            Controls.Add(label2);
             Controls.Add(groupBox2);
-            Controls.Add(groupBox1);
             Name = "MasterMaker";
             Text = "MasterMaker";
-            groupBox1.ResumeLayout(false);
-            groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
-
-        private TextBox textBox_big;
-        private Label label1;
         private Label label2;
-        private Button button_addbig;
         private Label label3;
         private Label label4;
         private Label label6;
@@ -264,7 +213,6 @@ namespace DBP_TeamProject.Forms
         private TextBox textBox_mid;
         private Button button_addmid;
         private Label label_big;
-        private GroupBox groupBox1;
         private GroupBox groupBox2;
         private GroupBox groupBox3;
     }

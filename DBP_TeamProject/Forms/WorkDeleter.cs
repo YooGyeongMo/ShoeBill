@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using ComboBox = System.Windows.Forms.ComboBox;
 
 namespace DBP_TeamProject.Forms
 {
@@ -54,66 +54,35 @@ namespace DBP_TeamProject.Forms
                 return user;
             }
         }
-
+        private void LoadComboBoxData(ComboBox comboBox, string query, string displayMember, string valueMember)
+        {
+            try
+            {
+                connection.Open();
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                using (MySqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        comboBox.Items.Add(Convert.ToString(reader[displayMember]));
+                    }
+                }
+            }
+            finally
+            {
+                connection.Close();
+            }
+            comboBox.SelectedIndex = -1;
+        }
         private void LoadDateData()
         {
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
-            {
-                connection.Open();
-
-                string query = "SELECT 일일업무ID, 업무등록시간 FROM s5585452.일일업무";
-
-                using (MySqlCommand command = new MySqlCommand(query, connection))
-                {
-                    using (MySqlDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            DateData Dataitem = new DateData
-                            {
-                                ID = Convert.ToInt32(reader["일일업무ID"]),
-                                time = Convert.ToString(reader["업무등록시간"])
-                            };
-
-                            comboBox_date.Items.Add(Dataitem);
-                        }
-                    }
-                }
-            }
-
-            // 선택된 아이템이 없도록 설정
-            comboBox_date.SelectedIndex = -1;
+            string query = "SELECT DISTINCT DATE_FORMAT(업무등록일자, '%Y-%m-%d') AS 날짜 FROM s5585452.일일업무";
+            LoadComboBoxData(comboBox_date, query, "날짜", "날짜");
         }
-
-
         private void LoadUserData()
         {
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
-            {
-                connection.Open();
-
-                string query = "SELECT 일일업무ID, 업무등록자 FROM s5585452.일일업무";
-
-                using (MySqlCommand command = new MySqlCommand(query, connection))
-                {
-                    using (MySqlDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            UserData userItem = new UserData
-                            {
-                                ID = Convert.ToInt32(reader["일일업무ID"]),
-                                user = Convert.ToString(reader["업무등록자"])
-                            };
-
-                            comboBox_user.Items.Add(userItem);
-                        }
-                    }
-                }
-            }
-
-            // 선택된 아이템이 없도록 설정
-            comboBox_date.SelectedIndex = -1;
+            string query = "SELECT DISTINCT 업무등록자 FROM s5585452.일일업무";
+            LoadComboBoxData(comboBox_user, query, "업무등록자", "업무등록자");
         }
 
         private void button_search_Click(object sender, EventArgs e)
@@ -128,9 +97,9 @@ namespace DBP_TeamProject.Forms
 
             // 선택된 값이 있는 경우에만 조건을 추가
             if (!string.IsNullOrEmpty(dateValue))
-                query += $" AND 업무등록시간 = '{dateValue}'";
+                query += $" AND 업무등록일자 = '{dateValue}'";
             if (!string.IsNullOrEmpty(keyValue))
-                query += $" AND (업무등록시간 LIKE '%{keyValue}%' OR 대분류명 LIKE '%{keyValue}%' OR 중분류명 LIKE '%{keyValue}%' OR 소분류명 LIKE '%{keyValue}%' OR 업무등록자 LIKE '%{keyValue}%' OR 비고 LIKE '%{keyValue}%')";
+                query += $" AND (업무등록일자 LIKE '%{keyValue}%' OR 대분류명 LIKE '%{keyValue}%' OR 중분류명 LIKE '%{keyValue}%' OR 소분류명 LIKE '%{keyValue}%' OR 업무등록자 LIKE '%{keyValue}%' OR 비고 LIKE '%{keyValue}%')";
             if (!string.IsNullOrEmpty(userValue))
                 query += $" AND 업무등록자 = '{userValue}'";
 

@@ -1,4 +1,4 @@
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,14 +24,14 @@ namespace DBP_TeamProject.Forms
                 return Name;
             }
         }
-       
+
 
         public MasterUpdater()
         {
             InitializeComponent();
 
             // 폼 로드 시 테이블 데이터를 ComboBox에 표시
-            LoadExistingData(comboBox_bigcategory, "대분류ID", "대분류명", "분류_대분류");
+     
             LoadExistingData(comboBox_midcategory, "중분류ID", "중분류명", "분류_중분류");
             LoadExistingData(comboBox_smallcategory, "소분류ID", "소분류명", "분류_소분류");
         }
@@ -67,7 +67,7 @@ namespace DBP_TeamProject.Forms
             comboBox.SelectedIndex = -1;
         }
 
-   
+
 
         private void UpdateData(string tableName, string idColumnName, string valueColumnName, ComboBox comboBox, TextBox textBox)
         {
@@ -100,29 +100,14 @@ namespace DBP_TeamProject.Forms
             }
         }
 
-        private void button_updatebig_Click(object sender, EventArgs e)
-        {
-            if (comboBox_bigcategory.SelectedItem != null)
-            {
-                UpdateData("분류_대분류", "대분류ID", "대분류명", comboBox_bigcategory, textBox_bigcategory);
-                comboBox_bigcategory.SelectedIndex = -1;
-                comboBox_bigcategory.Items.Clear();
-                textBox_bigcategory.Text = " ";
-                LoadExistingData(comboBox_midcategory, "대분류ID", "대분류명", "분류_대분류");
-            }
-            else
-            {
-                MessageBox.Show("대분류를 선택하세요.", "알림", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
+     
 
         private void button_updatemid_Click(object sender, EventArgs e)
         {
             if (comboBox_midcategory.SelectedItem != null)
             {
                 UpdateData("분류_중분류", "중분류ID", "중분류명", comboBox_midcategory, textBox_midcategory);
-                comboBox_bigcategory.SelectedIndex = -1;
-                comboBox_bigcategory.Items.Clear();
+      
                 comboBox_midcategory.SelectedIndex = -1;
                 comboBox_midcategory.Items.Clear();
                 textBox_midcategory.Text = " ";
