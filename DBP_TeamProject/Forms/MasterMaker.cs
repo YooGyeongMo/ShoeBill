@@ -67,30 +67,35 @@ namespace DBP_TeamProject.Forms
 
 
 
-        
+
 
         private void button_addmid_Click(object sender, EventArgs e)
         {
             // 텍스트박스2에서 입력된 데이터 가져오기
             string inputData = textBox_mid.Text;
+           
 
             // 선택된 대분류의 ID 가져오기
             int selectedBigCategoryId = -1;
+
+
             if (comboBox_bigcategory.SelectedItem != null)
             {
                 DataItem selectedData = (DataItem)comboBox_bigcategory.SelectedItem;
                 selectedBigCategoryId = selectedData.ID;
 
-                // 선택된 대분류의 대분류명 가져오기
-                string selectedBigCategoryName = selectedData.Name;
             }
+            else
+            {
+                MessageBox.Show("대분류를 선택하세요.", "알림", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+
+
 
             // 중분류를 분류_중분류 테이블에 추가하는 코드 작성
             if (!string.IsNullOrEmpty(inputData) && selectedBigCategoryId != -1)
             {
-
-                // 선택된 대분류의 대분류명 가져오기
-                string selectedBigCategoryName = ((DataItem)comboBox_bigcategory.SelectedItem).Name;
 
                 // MySQL 연결 문자열
                 string connectionString = "Server=115.85.181.212;Database=s5585452;User ID=s5585452;Password=s5585452; charset=utf8;";
@@ -115,21 +120,23 @@ namespace DBP_TeamProject.Forms
                 comboBox_bigcategory.SelectedIndex = -1;
                 comboBox_bigcategory.Items.Clear();
                 LoadExistingData(comboBox_bigcategory, "대분류ID", "대분류명", "분류_대분류");
-       
+
                 comboBox_midcategory.SelectedIndex = -1;
                 comboBox_midcategory.Items.Clear();
                 LoadExistingData(comboBox_midcategory, "중분류ID", "중분류명", "분류_중분류");
-              
+
                 // 텍스트박스 초기화
                 textBox_mid.Text = "";
             }
+            
+
         }
 
         private void button_addsmall_Click(object sender, EventArgs e)
         {
 
             string inputData = textBox_small.Text;
-
+            
 
             int selectedmidCategoryId = -1;
             if (comboBox_midcategory.SelectedItem != null)
@@ -137,16 +144,16 @@ namespace DBP_TeamProject.Forms
                 DataItem selectedData = (DataItem)comboBox_midcategory.SelectedItem;
                 selectedmidCategoryId = selectedData.ID;
 
-                // 선택된 대분류의 대분류명 가져오기
-                string selectedMidCategoryName = selectedData.Name;
+
             }
-           
+            else
+            {
+                MessageBox.Show("중분류를 선택하세요.", "알림", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
 
             if (!string.IsNullOrEmpty(inputData) && selectedmidCategoryId != -1)
             {
-
-                string selectedMidCategoryName = ((DataItem)comboBox_midcategory.SelectedItem).Name;
-
 
                 string connectionString = "Server=115.85.181.212;Database=s5585452;User ID=s5585452;Password=s5585452; charset=utf8;";
 
@@ -154,12 +161,8 @@ namespace DBP_TeamProject.Forms
                 {
                     connection.Open();
 
-              
-
                     string query = $"INSERT INTO s5585452.분류_소분류 (소분류명, 소분류ID) " +
                             $"VALUES ('{inputData}', {selectedmidCategoryId})";
-
-
                     using (MySqlCommand command = new MySqlCommand(query, connection))
                     {
                         command.ExecuteNonQuery();

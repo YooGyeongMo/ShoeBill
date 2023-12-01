@@ -231,41 +231,6 @@ namespace DBP_TeamProject.Forms
             return false; // 겹치는 업무가 없다면 false 반환
         }
 
-        private bool IsWorkPeriodOverlap(TimeSpan newStartTime, TimeSpan newEndTime)
-        {
-            // MySQL 연결 문자열
-            string connectionString = "Server=115.85.181.212;Database=s5585452;User ID=s5585452;Password=s5585452; charset=utf8;"; // 실제 MySQL 서버 정보로 변경
-
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
-            {
-                connection.Open();
-
-                // 기존 업무 기간 조회 쿼리 작성
-                string query = "SELECT 업무시작시간, 업무종료시간 FROM s5585452.일일업무";
-
-                using (MySqlCommand command = new MySqlCommand(query, connection))
-                {
-                    using (MySqlDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            // 기존 업무의 시작 시간과 종료 시간
-                            TimeSpan existingStartTime = ((TimeSpan)reader["업무시작시간"]);
-                            TimeSpan existingEndTime = ((TimeSpan)reader["업무종료시간"]);
-
-                            // 새로운 업무와 겹치는지 확인
-                            if (IsTimeOverlap(newStartTime, newEndTime, existingStartTime, existingEndTime))
-                            {
-                                return true; // 겹친다면 true 반환
-                            }
-                        }
-                    }
-                }
-            }
-
-            return false; // 겹치는 업무가 없다면 false 반환
-        }
-
         // 두 기간이 겹치는지 확인하는 메서드
         private bool IsTimeOverlap(TimeSpan startTime1, TimeSpan endTime1, TimeSpan startTime2, TimeSpan endTime2)
         {
@@ -418,17 +383,15 @@ namespace DBP_TeamProject.Forms
                 }
             }
 
-            // 대분류 콤보박스 다시 로드
+
+            // 콤보박스 다시 로드
             comboBox_bigcategory.SelectedIndex = -1;
             comboBox_bigcategory.Items.Clear();
             LoadExistingData(comboBox_bigcategory, "대분류ID", "대분류명", "분류_대분류");
 
-            // 중분류 콤보박스도 업데이트
+
             comboBox_midcategory.SelectedIndex = -1;
             comboBox_midcategory.Items.Clear();
-            LoadExistingData(comboBox_midcategory, "중분류ID", "중분류명", "분류_중분류");
-
-
         }
 
 

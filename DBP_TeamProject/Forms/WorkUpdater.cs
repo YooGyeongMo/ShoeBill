@@ -12,6 +12,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ComboBox = System.Windows.Forms.ComboBox;
 using System.Windows.Forms;
+using K4os.Compression.LZ4.Internal;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace DBP_TeamProject.Forms
 {
@@ -177,20 +179,35 @@ namespace DBP_TeamProject.Forms
 
 
 
-
+    
         private void button_update_Click(object sender, EventArgs e)
         {
-            Console.WriteLine($"Selected Rows Count: {dataGridView_search.SelectedRows.Count}");
-
             // UI 요소에서 수정된 데이터를 가져오기
             string updatedBigCategory = comboBox_bigcategory.Text;
             string updatedMidCategory = comboBox_midcategory.Text;
             string updatedSmallCategory = comboBox_smallcategory.Text;
             string updatedMemo = textBox_memo.Text;
-            int updatedStartTimeHour = Convert.ToInt32(comboBox_stime.Text);
-            int updatedStartTimeMin = Convert.ToInt32(comboBox_smin.Text);
-            int updatedEndTimeHour = Convert.ToInt32(comboBox_etime.Text);
-            int updatedEndTimeMin = Convert.ToInt32(comboBox_emin.Text);
+
+            // 시간 관련 UI 요소에서 값 가져오기
+            if (!int.TryParse(comboBox_stime.Text, out int updatedStartTimeHour) ||
+                !int.TryParse(comboBox_smin.Text, out int updatedStartTimeMin) ||
+                !int.TryParse(comboBox_etime.Text, out int updatedEndTimeHour) ||
+                !int.TryParse(comboBox_emin.Text, out int updatedEndTimeMin))
+            {
+                MessageBox.Show("시간을 올바르게 입력하세요.", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // UI 요소가 비어있는지 확인
+            if (string.IsNullOrWhiteSpace(updatedBigCategory) ||
+                string.IsNullOrWhiteSpace(updatedMidCategory) ||
+                string.IsNullOrWhiteSpace(updatedSmallCategory) ||
+                string.IsNullOrWhiteSpace(updatedMemo))
+            {
+                MessageBox.Show("모든 항목을 입력해야 합니다.", "경고", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
 
             // 수정된 데이터를 데이터베이스에 업데이트하는 쿼리 작성
             string updateQuery = "UPDATE s5585452.일일업무 " +
@@ -372,69 +389,79 @@ namespace DBP_TeamProject.Forms
 
 
         }
+        private void dataGridView_search_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            
+        }
 
         private void button_get_Click(object sender, EventArgs e)
         {
-            
-            int selectedIndex = dataGridView_search.CurrentCell.RowIndex;
-
-            // 선택된 행의 데이터를 가져옵니다.
-            DataRowView selectedRow = (DataRowView)dataGridView_search.Rows[selectedIndex].DataBoundItem;
-
-            // 선택된 행의 일일업무ID를 가져옵니다.
-            int selectedWorkID = Convert.ToInt32(selectedRow["일일업무ID"]);
-
-            textBox_workID.Text = selectedRow["일일업무ID"].ToString(); 
-            
-
-            // 텍스트박스에 입력된 일일업무ID 가져오기
-            if (int.TryParse(textBox_workID.Text, out int selectedID))
+            if (dataGridView_search.CurrentRow != null)
             {
-                // 데이터베이스 연결 및 쿼리 실행
-                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                int selectedIndex = dataGridView_search.CurrentCell.RowIndex;
+
+                // 선택된 행의 데이터를 가져옵니다.
+                DataRowView selectedRow = (DataRowView)dataGridView_search.Rows[selectedIndex].DataBoundItem;
+
+                // 선택된 행의 일일업무ID를 가져옵니다.
+                int selectedWorkID = Convert.ToInt32(selectedRow["일일업무ID"]);
+
+                textBox_workID.Text = selectedRow["일일업무ID"].ToString();
+
+                // 텍스트박스에 입력된 일일업무ID 가져오기
+                if (int.TryParse(textBox_workID.Text, out int selectedID))
                 {
-                    connection.Open();
-
-                    string query = $"SELECT * FROM s5585452.일일업무 WHERE 일일업무ID = {selectedID}";
-
-                    using (MySqlDataAdapter adapter = new MySqlDataAdapter(query, connection))
+                    // 데이터베이스 연결 및 쿼리 실행
+                    using (MySqlConnection connection = new MySqlConnection(connectionString))
                     {
-                        DataTable dataTable = new DataTable();
-                        adapter.Fill(dataTable);
+                        connection.Open();
 
-                        // 결과가 있는 경우 UI 요소에 표시
-                        if (dataTable.Rows.Count > 0)
+                        string query = $"SELECT * FROM s5585452.일일업무 WHERE 일일업무ID = {selectedID}";
+
+                        using (MySqlDataAdapter adapter = new MySqlDataAdapter(query, connection))
                         {
-                            DataRow row = dataTable.Rows[0];
+                            DataTable dataTable = new DataTable();
+                            adapter.Fill(dataTable);
 
-                            // UI 요소에 표시
-                            comboBox_bigcategory.Text = row["대분류명"].ToString();
-                            comboBox_midcategory.Text = row["중분류명"].ToString();
-                            comboBox_smallcategory.Text = row["소분류명"].ToString();
-                            textBox_memo.Text = row["비고"].ToString();
+                            // 결과가 있는 경우 UI 요소에 표시
+                            if (dataTable.Rows.Count > 0)
+                            {
+                                DataRow row = dataTable.Rows[0];
 
-                            // 시작시간 및 종료시간 가져오기
-                            TimeSpan startTime = (TimeSpan)row["업무시작시간"];
-                            TimeSpan endTime = (TimeSpan)row["업무종료시간"];
+                                // UI 요소에 표시
+                                comboBox_bigcategory.Text = row["대분류명"].ToString();
+                                comboBox_midcategory.Text = row["중분류명"].ToString();
+                                comboBox_smallcategory.Text = row["소분류명"].ToString();
+                                textBox_memo.Text = row["비고"].ToString();
 
-                            // 시작시간을 시간과 분으로 분리하여 ComboBox에 설정
-                            comboBox_stime.Text = startTime.Hours.ToString();
-                            comboBox_smin.Text = startTime.Minutes.ToString();
+                                // 시작시간 및 종료시간 가져오기
+                                TimeSpan startTime = (TimeSpan)row["업무시작시간"];
+                                TimeSpan endTime = (TimeSpan)row["업무종료시간"];
 
-                            // 종료시간을 시간과 분으로 분리하여 ComboBox에 설정
-                            comboBox_etime.Text = endTime.Hours.ToString();
-                            comboBox_emin.Text = endTime.Minutes.ToString();
-                        }
-                        else
-                        {
-                            MessageBox.Show("해당 ID에 대한 데이터가 없습니다.", "알림", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                // 시작시간을 시간과 분으로 분리하여 ComboBox에 설정
+                                comboBox_stime.Text = startTime.Hours.ToString();
+                                comboBox_smin.Text = startTime.Minutes.ToString();
+
+                                // 종료시간을 시간과 분으로 분리하여 ComboBox에 설정
+                                comboBox_etime.Text = endTime.Hours.ToString();
+                                comboBox_emin.Text = endTime.Minutes.ToString();
+                            }
+                            else
+                            {
+                                MessageBox.Show("해당 ID에 대한 데이터가 없습니다.", "알림", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
                         }
                     }
                 }
+                else
+                {
+                    MessageBox.Show("올바른 숫자를 입력하세요.", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
             }
             else
             {
-                MessageBox.Show("올바른 숫자를 입력하세요.", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("선택된 행이 없습니다.", "알림", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -448,7 +475,9 @@ namespace DBP_TeamProject.Forms
             dataGridView_search.DataSource = null;
         }
 
-        private void dataGridView_search_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+       
+
+        private void comboBox_date_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

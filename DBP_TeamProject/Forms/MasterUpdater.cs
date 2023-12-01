@@ -31,7 +31,7 @@ namespace DBP_TeamProject.Forms
             InitializeComponent();
 
             // 폼 로드 시 테이블 데이터를 ComboBox에 표시
-     
+
             LoadExistingData(comboBox_midcategory, "중분류ID", "중분류명", "분류_중분류");
             LoadExistingData(comboBox_smallcategory, "소분류ID", "소분류명", "분류_소분류");
         }
@@ -100,18 +100,34 @@ namespace DBP_TeamProject.Forms
             }
         }
 
-     
+
 
         private void button_updatemid_Click(object sender, EventArgs e)
         {
+            string inputData = textBox_midcategory.Text;
+
             if (comboBox_midcategory.SelectedItem != null)
             {
-                UpdateData("분류_중분류", "중분류ID", "중분류명", comboBox_midcategory, textBox_midcategory);
-      
-                comboBox_midcategory.SelectedIndex = -1;
-                comboBox_midcategory.Items.Clear();
-                textBox_midcategory.Text = " ";
-                LoadExistingData(comboBox_midcategory, "중분류ID", "중분류명", "분류_중분류");
+
+               
+
+                if (inputData ==null)
+                {
+
+                    UpdateData("분류_중분류", "중분류ID", "중분류명", comboBox_midcategory, textBox_midcategory);
+
+                    comboBox_midcategory.SelectedIndex = -1;
+                    comboBox_midcategory.Items.Clear();
+                    textBox_midcategory.Text = " ";
+                    LoadExistingData(comboBox_midcategory, "중분류ID", "중분류명", "분류_중분류");
+
+                }
+                else
+
+                {
+                    MessageBox.Show("수정할 항목을 입력하세요.", "알림", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
             }
             else
             {
@@ -121,16 +137,28 @@ namespace DBP_TeamProject.Forms
 
         private void button_updatesmall_Click(object sender, EventArgs e)
         {
+            string inputData = textBox_smallcategory.Text;
+
+
             if (comboBox_smallcategory.SelectedItem != null)
             {
-                UpdateData("분류_소분류", "소분류ID", "소분류명", comboBox_smallcategory, textBox_smallcategory);
-                comboBox_midcategory.SelectedIndex = -1;
-                comboBox_midcategory.Items.Clear();
-                comboBox_smallcategory.SelectedIndex = -1;
-                comboBox_smallcategory.Items.Clear();
-                textBox_smallcategory.Text = " ";
-                LoadExistingData(comboBox_midcategory, "소분류ID", "소분류명", "분류_소분류");
+                if (inputData == null)
+                {
+
+                    UpdateData("분류_소분류", "소분류ID", "소분류명", comboBox_smallcategory, textBox_smallcategory);
+                    comboBox_midcategory.SelectedIndex = -1;
+                    comboBox_midcategory.Items.Clear();
+                    comboBox_smallcategory.SelectedIndex = -1;
+                    comboBox_smallcategory.Items.Clear();
+                    textBox_smallcategory.Text = " ";
+                    LoadExistingData(comboBox_midcategory, "소분류ID", "소분류명", "분류_소분류");
+                }
+                else
+                {
+                    MessageBox.Show("수정할 항목을 입력하세요.", "알림", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
+
             else
             {
                 MessageBox.Show("소분류를 선택하세요.", "알림", MessageBoxButtons.OK, MessageBoxIcon.Information);

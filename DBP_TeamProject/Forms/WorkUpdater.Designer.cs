@@ -60,7 +60,9 @@ namespace DBP_TeamProject.Forms
             label14 = new Label();
             button_get = new Button();
             label15 = new Label();
+            groupBox1 = new GroupBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView_search).BeginInit();
+            groupBox1.SuspendLayout();
             SuspendLayout();
             // 
             // textBox_key
@@ -143,11 +145,12 @@ namespace DBP_TeamProject.Forms
             comboBox_date.Name = "comboBox_date";
             comboBox_date.Size = new Size(133, 33);
             comboBox_date.TabIndex = 10;
+            comboBox_date.SelectedIndexChanged += comboBox_date_SelectedIndexChanged;
             // 
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new Point(751, 379);
+            label10.Location = new Point(736, 171);
             label10.Name = "label10";
             label10.Size = new Size(30, 25);
             label10.TabIndex = 43;
@@ -156,7 +159,7 @@ namespace DBP_TeamProject.Forms
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(751, 328);
+            label9.Location = new Point(736, 120);
             label9.Name = "label9";
             label9.Size = new Size(30, 25);
             label9.TabIndex = 42;
@@ -165,7 +168,7 @@ namespace DBP_TeamProject.Forms
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(627, 379);
+            label8.Location = new Point(612, 171);
             label8.Name = "label8";
             label8.Size = new Size(30, 25);
             label8.TabIndex = 41;
@@ -174,7 +177,7 @@ namespace DBP_TeamProject.Forms
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(627, 328);
+            label7.Location = new Point(612, 120);
             label7.Name = "label7";
             label7.Size = new Size(30, 25);
             label7.TabIndex = 40;
@@ -184,7 +187,7 @@ namespace DBP_TeamProject.Forms
             // 
             comboBox_emin.FormattingEnabled = true;
             comboBox_emin.Items.AddRange(new object[] { "00", "10", "20", "30", "40", "50" });
-            comboBox_emin.Location = new Point(667, 373);
+            comboBox_emin.Location = new Point(652, 165);
             comboBox_emin.Name = "comboBox_emin";
             comboBox_emin.Size = new Size(78, 33);
             comboBox_emin.TabIndex = 39;
@@ -193,7 +196,7 @@ namespace DBP_TeamProject.Forms
             // 
             comboBox_smin.FormattingEnabled = true;
             comboBox_smin.Items.AddRange(new object[] { "00", "10", "20", "30", "40", "50" });
-            comboBox_smin.Location = new Point(667, 325);
+            comboBox_smin.Location = new Point(652, 117);
             comboBox_smin.Name = "comboBox_smin";
             comboBox_smin.Size = new Size(78, 33);
             comboBox_smin.TabIndex = 38;
@@ -202,7 +205,7 @@ namespace DBP_TeamProject.Forms
             // 
             comboBox_etime.FormattingEnabled = true;
             comboBox_etime.Items.AddRange(new object[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" });
-            comboBox_etime.Location = new Point(543, 373);
+            comboBox_etime.Location = new Point(528, 165);
             comboBox_etime.Name = "comboBox_etime";
             comboBox_etime.Size = new Size(78, 33);
             comboBox_etime.TabIndex = 37;
@@ -211,14 +214,14 @@ namespace DBP_TeamProject.Forms
             // 
             comboBox_stime.FormattingEnabled = true;
             comboBox_stime.Items.AddRange(new object[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" });
-            comboBox_stime.Location = new Point(543, 325);
+            comboBox_stime.Location = new Point(528, 117);
             comboBox_stime.Name = "comboBox_stime";
             comboBox_stime.Size = new Size(78, 33);
             comboBox_stime.TabIndex = 36;
             // 
             // textBox_memo
             // 
-            textBox_memo.Location = new Point(543, 281);
+            textBox_memo.Location = new Point(528, 73);
             textBox_memo.Name = "textBox_memo";
             textBox_memo.Size = new Size(202, 31);
             textBox_memo.TabIndex = 35;
@@ -226,7 +229,7 @@ namespace DBP_TeamProject.Forms
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(414, 376);
+            label6.Location = new Point(399, 168);
             label6.Name = "label6";
             label6.Size = new Size(120, 25);
             label6.TabIndex = 34;
@@ -235,7 +238,7 @@ namespace DBP_TeamProject.Forms
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(414, 328);
+            label5.Location = new Point(399, 120);
             label5.Name = "label5";
             label5.Size = new Size(120, 25);
             label5.TabIndex = 33;
@@ -244,7 +247,7 @@ namespace DBP_TeamProject.Forms
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(414, 281);
+            label4.Location = new Point(399, 73);
             label4.Name = "label4";
             label4.Size = new Size(48, 25);
             label4.TabIndex = 32;
@@ -252,7 +255,7 @@ namespace DBP_TeamProject.Forms
             // 
             // button_update
             // 
-            button_update.Location = new Point(22, 422);
+            button_update.Location = new Point(17, 443);
             button_update.Name = "button_update";
             button_update.Size = new Size(789, 53);
             button_update.TabIndex = 31;
@@ -263,7 +266,7 @@ namespace DBP_TeamProject.Forms
             // comboBox_smallcategory
             // 
             comboBox_smallcategory.FormattingEnabled = true;
-            comboBox_smallcategory.Location = new Point(123, 373);
+            comboBox_smallcategory.Location = new Point(108, 165);
             comboBox_smallcategory.Name = "comboBox_smallcategory";
             comboBox_smallcategory.Size = new Size(151, 33);
             comboBox_smallcategory.TabIndex = 30;
@@ -271,7 +274,7 @@ namespace DBP_TeamProject.Forms
             // comboBox_midcategory
             // 
             comboBox_midcategory.FormattingEnabled = true;
-            comboBox_midcategory.Location = new Point(123, 325);
+            comboBox_midcategory.Location = new Point(108, 117);
             comboBox_midcategory.Name = "comboBox_midcategory";
             comboBox_midcategory.Size = new Size(151, 33);
             comboBox_midcategory.TabIndex = 29;
@@ -280,7 +283,7 @@ namespace DBP_TeamProject.Forms
             // comboBox_bigcategory
             // 
             comboBox_bigcategory.FormattingEnabled = true;
-            comboBox_bigcategory.Location = new Point(123, 275);
+            comboBox_bigcategory.Location = new Point(108, 67);
             comboBox_bigcategory.Name = "comboBox_bigcategory";
             comboBox_bigcategory.Size = new Size(151, 33);
             comboBox_bigcategory.TabIndex = 28;
@@ -289,7 +292,7 @@ namespace DBP_TeamProject.Forms
             // label11
             // 
             label11.AutoSize = true;
-            label11.Location = new Point(34, 373);
+            label11.Location = new Point(19, 165);
             label11.Name = "label11";
             label11.Size = new Size(66, 25);
             label11.TabIndex = 27;
@@ -298,7 +301,7 @@ namespace DBP_TeamProject.Forms
             // label12
             // 
             label12.AutoSize = true;
-            label12.Location = new Point(34, 325);
+            label12.Location = new Point(19, 117);
             label12.Name = "label12";
             label12.Size = new Size(66, 25);
             label12.TabIndex = 26;
@@ -307,7 +310,7 @@ namespace DBP_TeamProject.Forms
             // label13
             // 
             label13.AutoSize = true;
-            label13.Location = new Point(34, 278);
+            label13.Location = new Point(19, 70);
             label13.Name = "label13";
             label13.Size = new Size(66, 25);
             label13.TabIndex = 25;
@@ -315,7 +318,7 @@ namespace DBP_TeamProject.Forms
             // 
             // textBox_workID
             // 
-            textBox_workID.Location = new Point(661, 235);
+            textBox_workID.Location = new Point(646, 27);
             textBox_workID.Name = "textBox_workID";
             textBox_workID.Size = new Size(84, 31);
             textBox_workID.TabIndex = 44;
@@ -323,7 +326,7 @@ namespace DBP_TeamProject.Forms
             // label14
             // 
             label14.AutoSize = true;
-            label14.Location = new Point(22, 238);
+            label14.Location = new Point(7, 30);
             label14.Name = "label14";
             label14.Size = new Size(444, 25);
             label14.TabIndex = 45;
@@ -331,7 +334,7 @@ namespace DBP_TeamProject.Forms
             // 
             // button_get
             // 
-            button_get.Location = new Point(472, 234);
+            button_get.Location = new Point(457, 26);
             button_get.Name = "button_get";
             button_get.Size = new Size(114, 33);
             button_get.TabIndex = 46;
@@ -342,40 +345,50 @@ namespace DBP_TeamProject.Forms
             // label15
             // 
             label15.AutoSize = true;
-            label15.Location = new Point(625, 238);
+            label15.Location = new Point(610, 30);
             label15.Name = "label15";
             label15.Size = new Size(30, 25);
             label15.TabIndex = 47;
             label15.Text = "ID";
             // 
+            // groupBox1
+            // 
+            groupBox1.Controls.Add(label15);
+            groupBox1.Controls.Add(button_get);
+            groupBox1.Controls.Add(label14);
+            groupBox1.Controls.Add(textBox_workID);
+            groupBox1.Controls.Add(label10);
+            groupBox1.Controls.Add(label9);
+            groupBox1.Controls.Add(label8);
+            groupBox1.Controls.Add(label7);
+            groupBox1.Controls.Add(comboBox_emin);
+            groupBox1.Controls.Add(comboBox_smin);
+            groupBox1.Controls.Add(comboBox_etime);
+            groupBox1.Controls.Add(comboBox_stime);
+            groupBox1.Controls.Add(textBox_memo);
+            groupBox1.Controls.Add(label6);
+            groupBox1.Controls.Add(label5);
+            groupBox1.Controls.Add(label4);
+            groupBox1.Controls.Add(comboBox_smallcategory);
+            groupBox1.Controls.Add(comboBox_midcategory);
+            groupBox1.Controls.Add(comboBox_bigcategory);
+            groupBox1.Controls.Add(label11);
+            groupBox1.Controls.Add(label12);
+            groupBox1.Controls.Add(label13);
+            groupBox1.Location = new Point(17, 231);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(792, 206);
+            groupBox1.TabIndex = 48;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "설정";
+            // 
             // WorkUpdater
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(823, 479);
-            Controls.Add(label15);
-            Controls.Add(button_get);
-            Controls.Add(label14);
-            Controls.Add(textBox_workID);
-            Controls.Add(label10);
-            Controls.Add(label9);
-            Controls.Add(label8);
-            Controls.Add(label7);
-            Controls.Add(comboBox_emin);
-            Controls.Add(comboBox_smin);
-            Controls.Add(comboBox_etime);
-            Controls.Add(comboBox_stime);
-            Controls.Add(textBox_memo);
-            Controls.Add(label6);
-            Controls.Add(label5);
-            Controls.Add(label4);
+            ClientSize = new Size(823, 508);
+            Controls.Add(groupBox1);
             Controls.Add(button_update);
-            Controls.Add(comboBox_smallcategory);
-            Controls.Add(comboBox_midcategory);
-            Controls.Add(comboBox_bigcategory);
-            Controls.Add(label11);
-            Controls.Add(label12);
-            Controls.Add(label13);
             Controls.Add(textBox_key);
             Controls.Add(button_close);
             Controls.Add(button_search);
@@ -389,6 +402,8 @@ namespace DBP_TeamProject.Forms
             Text = "WorkUpdater";
             Load += WorkUpdater_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView_search).EndInit();
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -427,5 +442,6 @@ namespace DBP_TeamProject.Forms
         private Label label14;
         private Button button_get;
         private Label label15;
+        private GroupBox groupBox1;
     }
 }
