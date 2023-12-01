@@ -100,8 +100,8 @@ namespace DBP_TeamProject.Forms
                     connection.Open();
 
                     // INSERT 쿼리 작성
-                    string query = $"INSERT INTO s5585452.분류_중분류 (중분류명, 대분류ID, 대분류명) " +
-                                   $"VALUES ('{inputData}', {selectedBigCategoryId}, '{selectedBigCategoryName}')";
+                    string query = $"INSERT INTO s5585452.분류_중분류 (중분류명, 대분류ID) " +
+                                   $"VALUES ('{inputData}', {selectedBigCategoryId})";
 
                     using (MySqlCommand command = new MySqlCommand(query, connection))
                     {
@@ -156,8 +156,8 @@ namespace DBP_TeamProject.Forms
 
               
 
-                    string query = $"INSERT INTO s5585452.분류_소분류 (소분류명, 소분류ID, 소분류명) " +
-                            $"VALUES ('{inputData}', {selectedmidCategoryId}, '{selectedMidCategoryName}')";
+                    string query = $"INSERT INTO s5585452.분류_소분류 (소분류명, 소분류ID) " +
+                            $"VALUES ('{inputData}', {selectedmidCategoryId})";
 
 
                     using (MySqlCommand command = new MySqlCommand(query, connection))
