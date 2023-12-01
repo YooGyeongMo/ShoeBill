@@ -25,6 +25,11 @@ namespace DBP_TeamProject.Forms
 
         private void depatment_name_insert_btn_Click(object sender, EventArgs e)
         {
+            if (department_name_input_textbox.Text == "")
+            {
+                MessageBox.Show("이름을 입력해주세요.");
+                return;
+            }
             string departmentName = department_name_input_textbox.Text;
 
             dbManager.InitDBManager();
@@ -78,6 +83,16 @@ namespace DBP_TeamProject.Forms
         //부서명을 콤보박스에서 현재 존재하는 것을 선택한 후 수정쿼리 보내기 위한 버튼
         private void depatment_name_update_btn_Click(object sender, EventArgs e)
         {
+            if (for_update_department_name_input_textbox.Text == "")
+            {
+                MessageBox.Show("이름을 입력해주세요.");
+                return;
+            }
+            if (recent_department_list_combobox.SelectedIndex == -1)
+            {
+                MessageBox.Show("부서를 선택해주세요.");
+                return;
+            }
             string newDepartmentName = for_update_department_name_input_textbox.Text;
             string currentDepartmentName = recent_department_list_combobox.SelectedItem.ToString();
 
@@ -158,6 +173,11 @@ namespace DBP_TeamProject.Forms
         //부서명 삭제
         private void delete_depatment_name_btn_Click(object sender, EventArgs e)
         {
+            if (delete_depatment_name_input_textbox.Text == "")
+            {
+                MessageBox.Show("부서를 입력해주세요.");
+                return;
+            }
             string departmentNameToDelete = delete_depatment_name_input_textbox.Text;
 
             dbManager.InitDBManager();
@@ -245,6 +265,16 @@ namespace DBP_TeamProject.Forms
 
         private void for_department_leader_insert_and_update_btn_Click(object sender, EventArgs e)
         {
+            if (recent_department_name_list_for_leader_searching_combobox.SelectedIndex == -1)
+            {
+                MessageBox.Show("부서를 선택해주세요.");
+                return;
+            }
+            if (for_depatment_leader_input_employeeName_textBox.Text == "")
+            {
+                MessageBox.Show("이름을 입력해주세요.");
+                return;
+            }
             string selectedDepartment = recent_department_name_list_for_leader_searching_combobox.SelectedItem.ToString();
             string newLeaderName = for_depatment_leader_input_employeeName_textBox.Text;
 
@@ -306,6 +336,16 @@ namespace DBP_TeamProject.Forms
 
         private void for_department_leader_delete_btn_Click(object sender, EventArgs e)
         {
+            if (recent_department_name_list_for_leader_searching_combobox.SelectedIndex == -1)
+            {
+                MessageBox.Show("부서를 선택해주세요.");
+                return;
+            }
+            if (for_depatment_leader_input_employeeName_textBox.Text == "")
+            {
+                MessageBox.Show("이름을 입력해주세요.");
+                return;
+            }
             string selectedDepartment = recent_department_name_list_for_leader_searching_combobox.SelectedItem.ToString();
             string enteredLeaderName = for_depatment_leader_input_employeeName_textBox.Text;
 

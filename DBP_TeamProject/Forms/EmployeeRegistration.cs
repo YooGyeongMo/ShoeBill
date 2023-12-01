@@ -69,6 +69,7 @@ namespace DBP_TeamProject.Forms
                 }
                 else // 중복되지 않다면 
                 {
+                    errorMsgLabel.Text = "";
                     InsertDB(); // DB에 저장
                 }
                 return;
@@ -126,8 +127,6 @@ namespace DBP_TeamProject.Forms
                 string road = address.Road;
                 string zip = address.Zip;
 
-                addressTextBox.Enabled = true;
-                zipCodeTextBox.Enabled = true;
                 // 값 처리
                 SetAddressText(road);
                 SetZipCodeText(zip);

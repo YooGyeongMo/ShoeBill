@@ -87,7 +87,11 @@ namespace DBP_TeamProject.Forms
         }
         private void specific_depart_name_searching_Click(object sender, EventArgs e)
         {
-
+            if (after_input_or_update_depart_name_showing_comboxBox_for_searching.SelectedIndex == -1)
+            {
+                MessageBox.Show("부서를 선택해주세요.");
+                return;
+            }
             string selectedDepartmentName = after_input_or_update_depart_name_showing_comboxBox_for_searching.SelectedItem.ToString();
 
             dbManager.InitDBManager();
@@ -123,7 +127,11 @@ namespace DBP_TeamProject.Forms
 
         private void recent_exist_department_employee_name_searching_btn_Click(object sender, EventArgs e)
         {
-            // 콤보박스에서 선택된 부서이름을 가져옵니다.
+            if (after_input_or_update_depart_name_showing_comboxBox_for_searching.SelectedIndex == -1)
+            {
+                MessageBox.Show("부서를 선택해주세요.");
+                return;
+            }
             string selectedDepartmentName = after_input_or_update_depart_name_showing_comboxBox_for_searching.SelectedItem.ToString();
 
             dbManager.InitDBManager();
