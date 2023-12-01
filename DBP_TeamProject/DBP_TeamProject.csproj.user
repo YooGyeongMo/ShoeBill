@@ -46,9 +46,6 @@
     <Compile Update="Forms\MasterUpdater.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Forms\MasterUpdater.Desinger.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="Forms\SalaryManagement\SalaryList.cs">
       <SubType>UserControl</SubType>
     </Compile>
