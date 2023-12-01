@@ -18,9 +18,6 @@ namespace DBP_TeamProject
         private string id;
         private string pwd;
         private string level;
-
-       
-
         public Login()
         {
             InitializeComponent();
@@ -107,7 +104,7 @@ namespace DBP_TeamProject
             if (id.Length != 0 && pwd.Length != 0)
             {
                 CheckPassword();
-                Get_level();
+                // Get_level();
             }
         }
         private void UserNameTextBox_Clicked(object sender, EventArgs e)

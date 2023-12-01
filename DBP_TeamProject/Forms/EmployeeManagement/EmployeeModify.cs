@@ -134,6 +134,8 @@ namespace DBP_TeamProject.Forms.EmployeeManagement
                             exec();
                         DBManager.GetInstance().InitDBManager().ExecuteNonQueury(query);
                         DBManager.GetInstance().CloseConnection();
+
+                        MessageBox.Show("성공적으로 삭제되었습니다.");
                     }
                 }
                 else
