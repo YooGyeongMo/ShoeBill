@@ -109,6 +109,7 @@ namespace DBP_TeamProject.Forms
             // 
             // textBox_smallcategory
             // 
+            textBox_smallcategory.AcceptsReturn = true;
             textBox_smallcategory.Location = new Point(254, 87);
             textBox_smallcategory.Name = "textBox_smallcategory";
             textBox_smallcategory.Size = new Size(151, 31);
@@ -166,7 +167,7 @@ namespace DBP_TeamProject.Forms
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(800, 287);
             Controls.Add(groupBox3);
             Controls.Add(groupBox2);
             Name = "MasterUpdater";
