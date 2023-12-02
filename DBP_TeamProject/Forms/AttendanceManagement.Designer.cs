@@ -49,12 +49,6 @@
             dateTimePicker100 = new DateTimePicker();
             eXGoHome_btn = new Button();
             eXGoToWork_btn = new Button();
-            errorMsgLabel = new Label();
-            checkBox2 = new CheckBox();
-            checkBox3 = new CheckBox();
-            checkBox1 = new CheckBox();
-            button1 = new Button();
-            groupBox2 = new GroupBox();
             AttendancePanel.SuspendLayout();
             AttendanceOutputBox.SuspendLayout();
             groupBox3.SuspendLayout();
@@ -62,7 +56,6 @@
             ((System.ComponentModel.ISupportInitialize)AttendanceTime_GV).BeginInit();
             EmployeeInputBox.SuspendLayout();
             groupBox1.SuspendLayout();
-            groupBox2.SuspendLayout();
             SuspendLayout();
             // 
             // AttendancePanel
@@ -287,74 +280,12 @@
             eXGoToWork_btn.UseVisualStyleBackColor = true;
             eXGoToWork_btn.Click += eXGoToWork_btn_Click;
             // 
-            // errorMsgLabel
-            // 
-            errorMsgLabel.AutoSize = true;
-            errorMsgLabel.Location = new Point(383, 496);
-            errorMsgLabel.Name = "errorMsgLabel";
-            errorMsgLabel.Size = new Size(0, 15);
-            errorMsgLabel.TabIndex = 6;
-            // 
-            // checkBox2
-            // 
-            checkBox2.AutoSize = true;
-            checkBox2.Location = new Point(17, 53);
-            checkBox2.Name = "checkBox2";
-            checkBox2.Size = new Size(78, 19);
-            checkBox2.TabIndex = 9;
-            checkBox2.Text = "야간 근로";
-            checkBox2.UseVisualStyleBackColor = true;
-            // 
-            // checkBox3
-            // 
-            checkBox3.AutoSize = true;
-            checkBox3.Location = new Point(17, 78);
-            checkBox3.Name = "checkBox3";
-            checkBox3.Size = new Size(78, 19);
-            checkBox3.TabIndex = 10;
-            checkBox3.Text = "휴일 근로";
-            checkBox3.UseVisualStyleBackColor = true;
-            // 
-            // checkBox1
-            // 
-            checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(17, 28);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(78, 19);
-            checkBox1.TabIndex = 8;
-            checkBox1.Text = "연장 근로";
-            checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            button1.Location = new Point(159, 71);
-            button1.Name = "button1";
-            button1.Size = new Size(78, 31);
-            button1.TabIndex = 6;
-            button1.Text = "등록";
-            button1.UseVisualStyleBackColor = true;
-            // 
-            // groupBox2
-            // 
-            groupBox2.Controls.Add(button1);
-            groupBox2.Controls.Add(checkBox1);
-            groupBox2.Controls.Add(checkBox3);
-            groupBox2.Controls.Add(checkBox2);
-            groupBox2.Location = new Point(383, 455);
-            groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(251, 113);
-            groupBox2.TabIndex = 11;
-            groupBox2.TabStop = false;
-            groupBox2.Text = "추가 근로 입력";
-            // 
             // AttendanceManagement
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(groupBox1);
             Controls.Add(AttendancePanel);
-            Controls.Add(groupBox2);
-            Controls.Add(errorMsgLabel);
             Name = "AttendanceManagement";
             Size = new Size(831, 640);
             AttendancePanel.ResumeLayout(false);
@@ -365,10 +296,7 @@
             EmployeeInputBox.ResumeLayout(false);
             EmployeeInputBox.PerformLayout();
             groupBox1.ResumeLayout(false);
-            groupBox2.ResumeLayout(false);
-            groupBox2.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -376,7 +304,6 @@
         private Panel AttendancePanel;
         private Button GoToWork_btn;
         private GroupBox AttendanceOutputBox;
-        private Label errorMsgLabel;
         private GroupBox EmployeeInputBox;
         private GroupBox AttendanceTime_GRP;
         private Button GoHome_btn;
@@ -395,11 +322,6 @@
         private GroupBox groupBox1;
         private Button weekendAdditionalWorkLoadbutton;
         private Button nightAdditionalWorkLoadbutton;
-        private CheckBox checkBox2;
-        private CheckBox checkBox3;
-        private CheckBox checkBox1;
-        private Button button1;
-        private GroupBox groupBox2;
         private GroupBox groupBox3;
         private DateTimePicker dateTimePicker1;
     }

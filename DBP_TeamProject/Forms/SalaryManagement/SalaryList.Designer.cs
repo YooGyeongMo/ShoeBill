@@ -70,7 +70,7 @@
             loadDataGroupBox.Size = new Size(757, 353);
             loadDataGroupBox.TabIndex = 2;
             loadDataGroupBox.TabStop = false;
-            loadDataGroupBox.Text = "모든 사원 1개월 급여 내역";
+            loadDataGroupBox.Text = "1개월 급여 내역";
             // 
             // dateTimePicker1
             // 

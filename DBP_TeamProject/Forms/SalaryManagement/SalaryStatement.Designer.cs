@@ -44,14 +44,16 @@
             HolidayTimeLoadButton = new Button();
             groupBox3 = new GroupBox();
             dateTimePicker1 = new DateTimePicker();
+            workTimeRegistPanel = new Panel();
             ((System.ComponentModel.ISupportInitialize)AttendanceTime_GV).BeginInit();
             additWorkGroupBox.SuspendLayout();
             groupBox3.SuspendLayout();
+            workTimeRegistPanel.SuspendLayout();
             SuspendLayout();
             // 
             // salarySaveButton
             // 
-            salarySaveButton.Location = new Point(565, 287);
+            salarySaveButton.Location = new Point(550, 283);
             salarySaveButton.Name = "salarySaveButton";
             salarySaveButton.Size = new Size(142, 59);
             salarySaveButton.TabIndex = 2;
@@ -61,7 +63,7 @@
             // 
             // NightTimeLoadButton
             // 
-            NightTimeLoadButton.Location = new Point(273, 325);
+            NightTimeLoadButton.Location = new Point(258, 321);
             NightTimeLoadButton.Name = "NightTimeLoadButton";
             NightTimeLoadButton.Size = new Size(100, 43);
             NightTimeLoadButton.TabIndex = 3;
@@ -72,7 +74,7 @@
             // AttendanceTime_GV
             // 
             AttendanceTime_GV.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            AttendanceTime_GV.Location = new Point(37, 117);
+            AttendanceTime_GV.Location = new Point(22, 113);
             AttendanceTime_GV.Name = "AttendanceTime_GV";
             AttendanceTime_GV.RowHeadersWidth = 51;
             AttendanceTime_GV.RowTemplate.Height = 25;
@@ -92,7 +94,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(37, 37);
+            label1.Location = new Point(22, 33);
             label1.Name = "label1";
             label1.Size = new Size(59, 15);
             label1.TabIndex = 8;
@@ -100,7 +102,7 @@
             // 
             // idTextBox
             // 
-            idTextBox.Location = new Point(100, 33);
+            idTextBox.Location = new Point(85, 29);
             idTextBox.Name = "idTextBox";
             idTextBox.Size = new Size(100, 23);
             idTextBox.TabIndex = 9;
@@ -165,7 +167,7 @@
             additWorkGroupBox.Controls.Add(label3);
             additWorkGroupBox.Controls.Add(overTimeWork);
             additWorkGroupBox.Controls.Add(label4);
-            additWorkGroupBox.Location = new Point(510, 78);
+            additWorkGroupBox.Location = new Point(495, 74);
             additWorkGroupBox.Margin = new Padding(2);
             additWorkGroupBox.Name = "additWorkGroupBox";
             additWorkGroupBox.Padding = new Padding(2);
@@ -176,7 +178,7 @@
             // 
             // HolidayTimeLoadButton
             // 
-            HolidayTimeLoadButton.Location = new Point(379, 325);
+            HolidayTimeLoadButton.Location = new Point(364, 321);
             HolidayTimeLoadButton.Name = "HolidayTimeLoadButton";
             HolidayTimeLoadButton.Size = new Size(100, 43);
             HolidayTimeLoadButton.TabIndex = 17;
@@ -187,7 +189,7 @@
             // groupBox3
             // 
             groupBox3.Controls.Add(dateTimePicker1);
-            groupBox3.Location = new Point(228, 23);
+            groupBox3.Location = new Point(213, 19);
             groupBox3.Name = "groupBox3";
             groupBox3.Size = new Size(251, 78);
             groupBox3.TabIndex = 18;
@@ -202,26 +204,35 @@
             dateTimePicker1.Size = new Size(200, 23);
             dateTimePicker1.TabIndex = 8;
             // 
+            // workTimeRegistPanel
+            // 
+            workTimeRegistPanel.Controls.Add(label1);
+            workTimeRegistPanel.Controls.Add(groupBox3);
+            workTimeRegistPanel.Controls.Add(idTextBox);
+            workTimeRegistPanel.Controls.Add(salarySaveButton);
+            workTimeRegistPanel.Controls.Add(AttendanceTime_GV);
+            workTimeRegistPanel.Controls.Add(HolidayTimeLoadButton);
+            workTimeRegistPanel.Controls.Add(additWorkGroupBox);
+            workTimeRegistPanel.Controls.Add(NightTimeLoadButton);
+            workTimeRegistPanel.Location = new Point(0, 0);
+            workTimeRegistPanel.Name = "workTimeRegistPanel";
+            workTimeRegistPanel.Size = new Size(775, 392);
+            workTimeRegistPanel.TabIndex = 20;
+            // 
             // SalaryStatement
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(groupBox3);
-            Controls.Add(HolidayTimeLoadButton);
-            Controls.Add(additWorkGroupBox);
-            Controls.Add(idTextBox);
-            Controls.Add(label1);
-            Controls.Add(AttendanceTime_GV);
-            Controls.Add(NightTimeLoadButton);
-            Controls.Add(salarySaveButton);
+            Controls.Add(workTimeRegistPanel);
             Name = "SalaryStatement";
-            Size = new Size(895, 509);
+            Size = new Size(848, 482);
             ((System.ComponentModel.ISupportInitialize)AttendanceTime_GV).EndInit();
             additWorkGroupBox.ResumeLayout(false);
             additWorkGroupBox.PerformLayout();
             groupBox3.ResumeLayout(false);
+            workTimeRegistPanel.ResumeLayout(false);
+            workTimeRegistPanel.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -241,5 +252,6 @@
         private Button HolidayTimeLoadButton;
         private GroupBox groupBox3;
         private DateTimePicker dateTimePicker1;
+        private Panel workTimeRegistPanel;
     }
 }

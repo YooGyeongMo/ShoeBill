@@ -20,6 +20,11 @@ namespace DBP_TeamProject.Forms
         {
             InitializeComponent();
             dbManager = DBManager.GetInstance();
+
+            if (LoginedUser.getInstance().Level != "관리자")
+            {
+                departmentPanel.Enabled = false;
+            }
         }
 
 

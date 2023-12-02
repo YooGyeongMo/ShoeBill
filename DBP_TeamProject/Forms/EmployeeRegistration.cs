@@ -27,6 +27,11 @@ namespace DBP_TeamProject.Forms
         public EmployeeRegistration()
         {
             InitializeComponent();
+
+            if (LoginedUser.getInstance().Level != "관리자") // 관리자 이외 접근 불가
+            {
+                employeeAddPanel.Enabled = false;
+            }
         }
         public void GetTextBoxInfo()
         {

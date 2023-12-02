@@ -46,6 +46,8 @@ namespace DBP_TeamProject.Forms
 
                 // 결과를 DataGridView에 바인딩
                 depature_result_show_GV.DataSource = dataTable;
+                depature_result_show_GV.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
             }
             catch (Exception ex)
             {
@@ -113,6 +115,8 @@ namespace DBP_TeamProject.Forms
 
                 // 조회한 결과를 DataGridView에 바인딩
                 depature_result_show_GV.DataSource = dataTable;
+                depature_result_show_GV.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
             }
             catch (Exception ex)
             {
@@ -145,6 +149,7 @@ namespace DBP_TeamProject.Forms
 
                 // 조회한 결과를 DataGridView에 바인딩
                 depature_result_show_GV.DataSource = dataTable;
+                depature_result_show_GV.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             }
             catch (Exception ex)
             {

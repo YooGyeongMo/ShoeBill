@@ -20,6 +20,11 @@ namespace DBP_TeamProject.Forms.EmployeeManagement
         {
             InitializeComponent();
             deleteButton.ForeColor = System.Drawing.Color.Red;
+
+            if (LoginedUser.getInstance().Level != "관리자")
+            {
+                employeeManagePanel.Enabled = false;
+            }
         }
         private bool IsAnyTextBoxesEmpty(GroupBox groupBox)
         {

@@ -34,7 +34,6 @@ namespace DBP_TeamProject.Forms
             label3 = new Label();
             label2 = new Label();
             label1 = new Label();
-            comboBox_user = new ComboBox();
             comboBox_date = new ComboBox();
             label10 = new Label();
             label9 = new Label();
@@ -60,6 +59,7 @@ namespace DBP_TeamProject.Forms
             label_bigcategory = new Label();
             label_workID = new Label();
             panel1 = new Panel();
+            comboBox_user = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView_search).BeginInit();
             groupBox1.SuspendLayout();
             panel1.SuspendLayout();
@@ -99,7 +99,7 @@ namespace DBP_TeamProject.Forms
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(210, 39);
+            label3.Location = new Point(209, 39);
             label3.Margin = new Padding(2, 0, 2, 0);
             label3.Name = "label3";
             label3.Size = new Size(43, 15);
@@ -109,7 +109,7 @@ namespace DBP_TeamProject.Forms
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(365, 39);
+            label2.Location = new Point(366, 40);
             label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
             label2.Size = new Size(43, 15);
@@ -119,22 +119,12 @@ namespace DBP_TeamProject.Forms
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(60, 39);
+            label1.Location = new Point(61, 39);
             label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
             label1.Size = new Size(31, 15);
             label1.TabIndex = 12;
             label1.Text = "날짜";
-            // 
-            // comboBox_user
-            // 
-            comboBox_user.FormattingEnabled = true;
-            comboBox_user.Location = new Point(257, 35);
-            comboBox_user.Margin = new Padding(2);
-            comboBox_user.Name = "comboBox_user";
-            comboBox_user.Size = new Size(94, 23);
-            comboBox_user.TabIndex = 11;
-            comboBox_user.DropDown += comboBox_user_DropDown;
             // 
             // comboBox_date
             // 
@@ -395,12 +385,12 @@ namespace DBP_TeamProject.Forms
             // 
             // panel1
             // 
+            panel1.Controls.Add(comboBox_user);
             panel1.Controls.Add(label1);
             panel1.Controls.Add(label14);
             panel1.Controls.Add(groupBox1);
             panel1.Controls.Add(comboBox_date);
             panel1.Controls.Add(button_update);
-            panel1.Controls.Add(comboBox_user);
             panel1.Controls.Add(textBox_key);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(label3);
@@ -410,6 +400,15 @@ namespace DBP_TeamProject.Forms
             panel1.Name = "panel1";
             panel1.Size = new Size(697, 549);
             panel1.TabIndex = 49;
+            // 
+            // comboBox_user
+            // 
+            comboBox_user.FormattingEnabled = true;
+            comboBox_user.Location = new Point(255, 35);
+            comboBox_user.Margin = new Padding(2);
+            comboBox_user.Name = "comboBox_user";
+            comboBox_user.Size = new Size(94, 23);
+            comboBox_user.TabIndex = 49;
             // 
             // WorkUpdater
             // 
@@ -436,7 +435,6 @@ namespace DBP_TeamProject.Forms
         private Label label3;
         private Label label2;
         private Label label1;
-        private ComboBox comboBox_user;
         private ComboBox comboBox_date;
         private Label label10;
         private Label label9;
@@ -462,5 +460,6 @@ namespace DBP_TeamProject.Forms
         private Panel panel1;
         private Label label_bigcategory;
         private Label label_workID;
+        private ComboBox comboBox_user;
     }
 }

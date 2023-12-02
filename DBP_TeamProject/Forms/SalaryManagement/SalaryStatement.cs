@@ -30,6 +30,11 @@ namespace DBP_TeamProject.Forms.SalaryManagement
         {
             InitializeComponent();
             InitializeDateTimePicker();
+
+            if (LoginedUser.getInstance().Level != "관리자") // 관리자 이외 접근 불가
+            {
+                workTimeRegistPanel.Enabled = false;
+            }
         }
         public void InitializeDateTimePicker()
         {

@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            departmentPanel = new Panel();
+            employeeManagePanel = new Panel();
             modGroupBox = new GroupBox();
             deleteButton = new Button();
             errMsg = new Label();
@@ -47,18 +47,18 @@
             label1 = new Label();
             loadButton = new Button();
             memberdataGridView = new DataGridView();
-            departmentPanel.SuspendLayout();
+            employeeManagePanel.SuspendLayout();
             modGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)memberdataGridView).BeginInit();
             SuspendLayout();
             // 
-            // departmentPanel
+            // employeeManagePanel
             // 
-            departmentPanel.Controls.Add(modGroupBox);
-            departmentPanel.Location = new Point(22, 21);
-            departmentPanel.Name = "departmentPanel";
-            departmentPanel.Size = new Size(747, 463);
-            departmentPanel.TabIndex = 13;
+            employeeManagePanel.Controls.Add(modGroupBox);
+            employeeManagePanel.Location = new Point(22, 21);
+            employeeManagePanel.Name = "employeeManagePanel";
+            employeeManagePanel.Size = new Size(747, 463);
+            employeeManagePanel.TabIndex = 13;
             // 
             // modGroupBox
             // 
@@ -247,10 +247,10 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(departmentPanel);
+            Controls.Add(employeeManagePanel);
             Name = "EmployeeModDel";
             Size = new Size(791, 504);
-            departmentPanel.ResumeLayout(false);
+            employeeManagePanel.ResumeLayout(false);
             modGroupBox.ResumeLayout(false);
             modGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)memberdataGridView).EndInit();
@@ -259,7 +259,7 @@
 
         #endregion
 
-        private Panel departmentPanel;
+        private Panel employeeManagePanel;
         private GroupBox modGroupBox;
         private Label errorMsgLabel;
         private TextBox idTextBox;

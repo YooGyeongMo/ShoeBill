@@ -217,11 +217,11 @@ namespace DBP_TeamProject.Forms
             string smallcategoryName = comboBox_smallcategory.SelectedItem.ToString(); // 소분류
 
             int selectedMidCategoryID = GetMidID(midcategoryName);
-            if (IsDuplicateSmallCategoryTable(selectedMidCategoryID, inputData)) 
+            if (IsDuplicateSmallCategoryTable(selectedMidCategoryID, inputData))
             {
                 MessageBox.Show("해당 소분류가 이미 존재합니다.");
                 return;
-            } 
+            }
             try
             {
                 string query = Query.GetInstance().

@@ -196,7 +196,7 @@ namespace DBP_TeamProject.Forms
         {
             string updateQuery = Query.GetInstance()
                           .update("출근부")
-                          .set($"퇴근날짜 = NOW(), 퇴근시간 = (DATE_ADD(NOW(), INTERVAL 8 HOUR)), 퇴근여부='Y'")
+                          .set($"퇴근날짜 = NOW(), 퇴근시간 = NOW(), 퇴근여부='Y'")
                           .where($"사원ID = '{id_input}' AND 출근날짜 = CURDATE() AND 퇴근여부='N'")
                           .exec();
 

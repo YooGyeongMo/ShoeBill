@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            departmentPanel = new Panel();
+            employeeAddPanel = new Panel();
             saveEmployeeButton = new Button();
             employeeInputGroupBox = new GroupBox();
             errorMsgLabel = new Label();
@@ -52,21 +52,21 @@
             label43 = new Label();
             idTextBox = new TextBox();
             label44 = new Label();
-            departmentPanel.SuspendLayout();
+            employeeAddPanel.SuspendLayout();
             employeeInputGroupBox.SuspendLayout();
             addressGroupBox.SuspendLayout();
             employeeGroupBox.SuspendLayout();
             loginGroupBox.SuspendLayout();
             SuspendLayout();
             // 
-            // departmentPanel
+            // employeeAddPanel
             // 
-            departmentPanel.Controls.Add(saveEmployeeButton);
-            departmentPanel.Controls.Add(employeeInputGroupBox);
-            departmentPanel.Location = new Point(22, 13);
-            departmentPanel.Name = "departmentPanel";
-            departmentPanel.Size = new Size(747, 463);
-            departmentPanel.TabIndex = 11;
+            employeeAddPanel.Controls.Add(saveEmployeeButton);
+            employeeAddPanel.Controls.Add(employeeInputGroupBox);
+            employeeAddPanel.Location = new Point(22, 13);
+            employeeAddPanel.Name = "employeeAddPanel";
+            employeeAddPanel.Size = new Size(747, 463);
+            employeeAddPanel.TabIndex = 11;
             // 
             // saveEmployeeButton
             // 
@@ -295,10 +295,10 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(departmentPanel);
+            Controls.Add(employeeAddPanel);
             Name = "EmployeeRegistration";
             Size = new Size(789, 493);
-            departmentPanel.ResumeLayout(false);
+            employeeAddPanel.ResumeLayout(false);
             employeeInputGroupBox.ResumeLayout(false);
             employeeInputGroupBox.PerformLayout();
             addressGroupBox.ResumeLayout(false);
@@ -312,7 +312,7 @@
 
         #endregion
 
-        private Panel departmentPanel;
+        private Panel employeeAddPanel;
         private Button saveEmployeeButton;
         private GroupBox employeeInputGroupBox;
         private GroupBox employeeGroupBox;

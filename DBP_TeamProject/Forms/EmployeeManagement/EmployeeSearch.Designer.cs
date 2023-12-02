@@ -47,7 +47,7 @@
             // departmentPanel
             // 
             departmentPanel.Controls.Add(searchGroupBox);
-            departmentPanel.Location = new Point(22, 19);
+            departmentPanel.Location = new Point(20, 19);
             departmentPanel.Name = "departmentPanel";
             departmentPanel.Size = new Size(747, 463);
             departmentPanel.TabIndex = 12;

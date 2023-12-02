@@ -43,16 +43,6 @@ namespace DBP_TeamProject.Forms
                                 exec();
             Category.GetInstance().LoadComboBoxData(comboBox_date, query, "날짜");
         }
-        // [#0] 등록자 정보
-        private void comboBox_user_DropDown(object sender, EventArgs e)
-        {
-            comboBox_user.Items.Clear(); // 콤보박스 내용 초기화
-            string query = Query.GetInstance().
-                                select("DISTINCT 업무등록자").
-                                from("일일업무").
-                                exec();
-            Category.GetInstance().LoadComboBoxData(comboBox_user, query, "업무등록자");
-        }
         // [#0] 검색버튼 클릭
         private void button_search_Click(object sender, EventArgs e)
         {
@@ -231,7 +221,11 @@ namespace DBP_TeamProject.Forms
                 MessageBox.Show("수정할 데이터가 있는 행을 선택하세요");
                 return;
             }
-
+            if (id != LoginedUser.getInstance().UserId)
+            {
+                MessageBox.Show("본인 업무만 수정할 수 있습니다.");
+                return;
+            }
             string big = label_bigcategory.Text;
             string mid = comboBox_midcategory.Text;
             string small = comboBox_smallcategory.Text;

@@ -45,7 +45,7 @@
             groupBox3.Controls.Add(specific_depart_name_searching);
             groupBox3.Controls.Add(searching_depart_all_result_btn);
             groupBox3.Controls.Add(depature_result_show_GV);
-            groupBox3.Location = new Point(89, 24);
+            groupBox3.Location = new Point(78, 24);
             groupBox3.Margin = new Padding(2);
             groupBox3.Name = "groupBox3";
             groupBox3.Padding = new Padding(2);

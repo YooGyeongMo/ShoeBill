@@ -80,31 +80,57 @@ namespace DBP_TeamProject.Forms
 
         private void 일일업무수정ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
+            if (LoginedUser.getInstance().Level != "관리자") // 관리자 이외 접근 불가
+            {
+                MessageBox.Show("관리자만 접근할 수 있습니다.");
+                return;
+            }
             WorkUpdater WorkupdaterForm = new WorkUpdater();
             WorkupdaterForm.Show();
         }
 
         private void 일일업무삭제ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
+            if (LoginedUser.getInstance().Level != "관리자") // 관리자 이외 접근 불가
+            {
+                MessageBox.Show("관리자만 접근할 수 있습니다.");
+                return;
+            }
             WorkDeleter WorkdeleterForm = new WorkDeleter();
             WorkdeleterForm.Show();
         }
 
+
         private void 업무마스터등록toolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            if (LoginedUser.getInstance().Level != "관리자") // 관리자 이외 접근 불가
+            {
+                MessageBox.Show("관리자만 접근할 수 있습니다.");
+                return; 
+            }
             MasterMaker MastermakerForm = new MasterMaker();
             MastermakerForm.Show();
+
         }
 
         private void 업무마스터수정toolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (LoginedUser.getInstance().Level != "관리자") // 관리자 이외 접근 불가
+            {
+                MessageBox.Show("관리자만 접근할 수 있습니다.");
+                return;
+            }
             MasterUpdater MasterupdaterForm = new MasterUpdater();
             MasterupdaterForm.Show();
         }
 
         private void 업무마스터삭제toolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (LoginedUser.getInstance().Level != "관리자") // 관리자 이외 접근 불가
+            {
+                MessageBox.Show("관리자만 접근할 수 있습니다.");
+                return;
+            }
             MasterDeleter MasterdeleterForm = new MasterDeleter();
             MasterdeleterForm.Show();
         }

@@ -51,11 +51,13 @@
             for_depatment_leader_input_employeeName_textBox = new TextBox();
             for_department_leader_insert_and_update_btn = new Button();
             label2 = new Label();
+            departmentPanel = new Panel();
             groupBox1.SuspendLayout();
             groupBox5.SuspendLayout();
             groupBox2.SuspendLayout();
             부서등록.SuspendLayout();
             groupBox4.SuspendLayout();
+            departmentPanel.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox1
@@ -63,7 +65,7 @@
             groupBox1.Controls.Add(groupBox5);
             groupBox1.Controls.Add(groupBox2);
             groupBox1.Controls.Add(부서등록);
-            groupBox1.Location = new Point(44, 44);
+            groupBox1.Location = new Point(31, 30);
             groupBox1.Margin = new Padding(2, 1, 2, 1);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new Padding(2, 1, 2, 1);
@@ -232,7 +234,7 @@
             groupBox4.Controls.Add(for_depatment_leader_input_employeeName_textBox);
             groupBox4.Controls.Add(for_department_leader_insert_and_update_btn);
             groupBox4.Controls.Add(label2);
-            groupBox4.Location = new Point(506, 84);
+            groupBox4.Location = new Point(493, 70);
             groupBox4.Margin = new Padding(2, 1, 2, 1);
             groupBox4.Name = "groupBox4";
             groupBox4.Padding = new Padding(2, 1, 2, 1);
@@ -312,15 +314,23 @@
             label2.TabIndex = 1;
             label2.Text = "부서명";
             // 
+            // departmentPanel
+            // 
+            departmentPanel.Controls.Add(groupBox1);
+            departmentPanel.Controls.Add(groupBox4);
+            departmentPanel.Location = new Point(13, 23);
+            departmentPanel.Name = "departmentPanel";
+            departmentPanel.Size = new Size(757, 309);
+            departmentPanel.TabIndex = 7;
+            // 
             // DepartmentManagement
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(groupBox4);
-            Controls.Add(groupBox1);
+            Controls.Add(departmentPanel);
             Margin = new Padding(2, 1, 2, 1);
             Name = "DepartmentManagement";
-            Size = new Size(827, 500);
+            Size = new Size(913, 425);
             Load += DepartmentManagement_Load;
             groupBox1.ResumeLayout(false);
             groupBox5.ResumeLayout(false);
@@ -331,6 +341,7 @@
             부서등록.PerformLayout();
             groupBox4.ResumeLayout(false);
             groupBox4.PerformLayout();
+            departmentPanel.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -359,6 +370,7 @@
         private Label label7;
         private Button for_department_leader_searching_result_to_combobox_btn;
         private ComboBox recent_department_name_list_for_leader_searching_combobox;
+        private Panel departmentPanel;
     }
 }
 
