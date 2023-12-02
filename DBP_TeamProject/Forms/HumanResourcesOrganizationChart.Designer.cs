@@ -44,7 +44,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(HumanResourcesTreeView);
             Name = "HumanResourcesOrganizationChart";
-            Size = new Size(839, 361);
+            Size = new Size(536, 361);
             ResumeLayout(false);
         }
 

@@ -141,7 +141,7 @@ namespace DBP_TeamProject.Forms
             zipCodeTextBox.Text = txt;
         }
         // 부서 이름 콤보박스 드롭 다운 이벤트 
-        private void rateComboBox_DropDown(object sender, EventArgs e)
+        private void departmentComboBox_DropDown(object sender, EventArgs e)
         {
             List<string> departmentNames = new List<string>();
 
@@ -150,7 +150,7 @@ namespace DBP_TeamProject.Forms
                             select("부서이름").
                             from("부서").
                             exec();
-            departmentNames = DBManager.GetInstance().InitDBManager().GetList(query,"부서이름");
+            departmentNames = DBManager.GetInstance().InitDBManager().GetList(query, "부서이름");
             DBManager.GetInstance().CloseConnection();
 
             departmentComboBox.Items.AddRange(departmentNames.ToArray());

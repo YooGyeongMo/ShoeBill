@@ -78,11 +78,10 @@ namespace DBP_TeamProject.Forms.EmployeeManagement
             {
                 errMsg.Text = "";
                 string deapartment = departmentComboBox.SelectedItem.ToString();
-                string rate = rateComboBox.SelectedItem.ToString();
 
                 string query = Query.GetInstance().
                     update("사원").
-                    set($"부서이름 = '{deapartment}', 직급 = '{rate}'").
+                    set($"부서이름 = '{deapartment}'").
                     where($"이름='{name}'").
                     exec();
 
@@ -155,7 +154,7 @@ namespace DBP_TeamProject.Forms.EmployeeManagement
                             select("부서이름").
                             from("부서").
                             exec();
-            departmentNames = DBManager.GetInstance().InitDBManager().GetList(query,"부서이름");
+            departmentNames = DBManager.GetInstance().InitDBManager().GetList(query, "부서이름");
             DBManager.GetInstance().CloseConnection();
 
             departmentComboBox.Items.AddRange(departmentNames.ToArray());

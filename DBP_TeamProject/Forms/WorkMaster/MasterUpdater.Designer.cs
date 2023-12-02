@@ -33,16 +33,18 @@ namespace DBP_TeamProject.Forms
         private void InitializeComponent()
         {
             comboBox_smallcategory = new ComboBox();
-            comboBox_midcategory = new ComboBox();
             label11 = new Label();
             label12 = new Label();
             label2 = new Label();
             label3 = new Label();
             textBox_midcategory = new TextBox();
-            textBox_smallcategory = new TextBox();
+            textBox_small = new TextBox();
             button_updatemid = new Button();
             button_updatesmall = new Button();
             groupBox2 = new GroupBox();
+            label1 = new Label();
+            comboBox_bigcategory = new ComboBox();
+            comboBox_midcategory = new ComboBox();
             groupBox3 = new GroupBox();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
@@ -51,75 +53,76 @@ namespace DBP_TeamProject.Forms
             // comboBox_smallcategory
             // 
             comboBox_smallcategory.FormattingEnabled = true;
-            comboBox_smallcategory.Location = new Point(254, 19);
+            comboBox_smallcategory.Location = new Point(209, 36);
+            comboBox_smallcategory.Margin = new Padding(2);
             comboBox_smallcategory.Name = "comboBox_smallcategory";
-            comboBox_smallcategory.Size = new Size(151, 33);
+            comboBox_smallcategory.Size = new Size(145, 23);
             comboBox_smallcategory.TabIndex = 52;
-            // 
-            // comboBox_midcategory
-            // 
-            comboBox_midcategory.FormattingEnabled = true;
-            comboBox_midcategory.Location = new Point(252, 18);
-            comboBox_midcategory.Name = "comboBox_midcategory";
-            comboBox_midcategory.Size = new Size(151, 33);
-            comboBox_midcategory.TabIndex = 51;
+            comboBox_smallcategory.DropDown += comboBox_smallcategory_DropDown;
             // 
             // label11
             // 
             label11.AutoSize = true;
-            label11.Location = new Point(6, 27);
+            label11.Location = new Point(35, 40);
+            label11.Margin = new Padding(2, 0, 2, 0);
             label11.Name = "label11";
-            label11.Size = new Size(240, 25);
+            label11.Size = new Size(159, 15);
             label11.TabIndex = 49;
             label11.Text = "수정할 소분류를 선택하세요";
             // 
             // label12
             // 
             label12.AutoSize = true;
-            label12.Location = new Point(6, 27);
+            label12.Location = new Point(34, 84);
+            label12.Margin = new Padding(2, 0, 2, 0);
             label12.Name = "label12";
-            label12.Size = new Size(240, 25);
+            label12.Size = new Size(159, 15);
             label12.TabIndex = 48;
             label12.Text = "수정할 중분류를 선택하세요";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(6, 87);
+            label2.Location = new Point(34, 124);
+            label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
-            label2.Size = new Size(240, 25);
+            label2.Size = new Size(159, 15);
             label2.TabIndex = 59;
             label2.Text = "수정할 중분류를 입력하세요";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(8, 93);
+            label3.Location = new Point(35, 80);
+            label3.Margin = new Padding(2, 0, 2, 0);
             label3.Name = "label3";
-            label3.Size = new Size(240, 25);
+            label3.Size = new Size(159, 15);
             label3.TabIndex = 60;
             label3.Text = "수정할 소분류를 입력하세요";
             // 
             // textBox_midcategory
             // 
-            textBox_midcategory.Location = new Point(252, 87);
+            textBox_midcategory.Location = new Point(209, 121);
+            textBox_midcategory.Margin = new Padding(2);
             textBox_midcategory.Name = "textBox_midcategory";
-            textBox_midcategory.Size = new Size(151, 31);
+            textBox_midcategory.Size = new Size(145, 23);
             textBox_midcategory.TabIndex = 61;
             // 
-            // textBox_smallcategory
+            // textBox_small
             // 
-            textBox_smallcategory.AcceptsReturn = true;
-            textBox_smallcategory.Location = new Point(254, 87);
-            textBox_smallcategory.Name = "textBox_smallcategory";
-            textBox_smallcategory.Size = new Size(151, 31);
-            textBox_smallcategory.TabIndex = 62;
+            textBox_small.AcceptsReturn = true;
+            textBox_small.Location = new Point(209, 75);
+            textBox_small.Margin = new Padding(2);
+            textBox_small.Name = "textBox_small";
+            textBox_small.Size = new Size(145, 23);
+            textBox_small.TabIndex = 62;
             // 
             // button_updatemid
             // 
-            button_updatemid.Location = new Point(530, 18);
+            button_updatemid.Location = new Point(436, 111);
+            button_updatemid.Margin = new Padding(2);
             button_updatemid.Name = "button_updatemid";
-            button_updatemid.Size = new Size(238, 94);
+            button_updatemid.Size = new Size(129, 40);
             button_updatemid.TabIndex = 63;
             button_updatemid.Text = "중분류 수정";
             button_updatemid.UseVisualStyleBackColor = true;
@@ -127,9 +130,10 @@ namespace DBP_TeamProject.Forms
             // 
             // button_updatesmall
             // 
-            button_updatesmall.Location = new Point(532, 26);
+            button_updatesmall.Location = new Point(436, 65);
+            button_updatesmall.Margin = new Padding(2);
             button_updatesmall.Name = "button_updatesmall";
-            button_updatesmall.Size = new Size(238, 98);
+            button_updatesmall.Size = new Size(129, 40);
             button_updatesmall.TabIndex = 64;
             button_updatesmall.Text = "소분류 수정";
             button_updatesmall.UseVisualStyleBackColor = true;
@@ -137,39 +141,78 @@ namespace DBP_TeamProject.Forms
             // 
             // groupBox2
             // 
+            groupBox2.Controls.Add(label1);
+            groupBox2.Controls.Add(comboBox_bigcategory);
             groupBox2.Controls.Add(button_updatemid);
             groupBox2.Controls.Add(textBox_midcategory);
             groupBox2.Controls.Add(label2);
             groupBox2.Controls.Add(comboBox_midcategory);
             groupBox2.Controls.Add(label12);
-            groupBox2.Location = new Point(12, 12);
+            groupBox2.Location = new Point(28, 33);
+            groupBox2.Margin = new Padding(2);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(774, 130);
+            groupBox2.Padding = new Padding(2);
+            groupBox2.Size = new Size(584, 176);
             groupBox2.TabIndex = 66;
             groupBox2.TabStop = false;
             groupBox2.Text = "중분류 수정";
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(34, 43);
+            label1.Margin = new Padding(2, 0, 2, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(159, 15);
+            label1.TabIndex = 65;
+            label1.Text = "먼저 대분류를 선택해주세요";
+            // 
+            // comboBox_bigcategory
+            // 
+            comboBox_bigcategory.FormattingEnabled = true;
+            comboBox_bigcategory.Location = new Point(209, 39);
+            comboBox_bigcategory.Margin = new Padding(2);
+            comboBox_bigcategory.Name = "comboBox_bigcategory";
+            comboBox_bigcategory.Size = new Size(145, 23);
+            comboBox_bigcategory.TabIndex = 64;
+            comboBox_bigcategory.DropDown += comboBox_bigcategory_DropDown;
+            comboBox_bigcategory.SelectedIndexChanged += comboBox_bigcategory_SelectedIndexChanged;
+            // 
+            // comboBox_midcategory
+            // 
+            comboBox_midcategory.FormattingEnabled = true;
+            comboBox_midcategory.Location = new Point(209, 81);
+            comboBox_midcategory.Margin = new Padding(2);
+            comboBox_midcategory.Name = "comboBox_midcategory";
+            comboBox_midcategory.Size = new Size(145, 23);
+            comboBox_midcategory.TabIndex = 51;
+            comboBox_midcategory.DropDown += comboBox_midcategory_DropDown;
+            comboBox_midcategory.SelectedIndexChanged += comboBox_midcategory_SelectedIndexChanged;
+            // 
             // groupBox3
             // 
             groupBox3.Controls.Add(button_updatesmall);
-            groupBox3.Controls.Add(textBox_smallcategory);
+            groupBox3.Controls.Add(textBox_small);
             groupBox3.Controls.Add(label3);
             groupBox3.Controls.Add(comboBox_smallcategory);
             groupBox3.Controls.Add(label11);
-            groupBox3.Location = new Point(10, 148);
+            groupBox3.Location = new Point(28, 232);
+            groupBox3.Margin = new Padding(2);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(776, 130);
+            groupBox3.Padding = new Padding(2);
+            groupBox3.Size = new Size(584, 128);
             groupBox3.TabIndex = 67;
             groupBox3.TabStop = false;
             groupBox3.Text = "소분류 수정";
             // 
             // MasterUpdater
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 287);
+            ClientSize = new Size(649, 397);
             Controls.Add(groupBox3);
             Controls.Add(groupBox2);
+            Margin = new Padding(2);
             Name = "MasterUpdater";
             Text = "MasterUpdater";
             groupBox2.ResumeLayout(false);
@@ -181,16 +224,18 @@ namespace DBP_TeamProject.Forms
 
         #endregion
         private ComboBox comboBox_smallcategory;
-        private ComboBox comboBox_midcategory;
         private Label label11;
         private Label label12;
         private Label label2;
         private Label label3;
         private TextBox textBox_midcategory;
-        private TextBox textBox_smallcategory;
+        private TextBox textBox_small;
         private Button button_updatemid;
         private Button button_updatesmall;
         private GroupBox groupBox2;
         private GroupBox groupBox3;
+        private ComboBox comboBox_midcategory;
+        private Label label1;
+        private ComboBox comboBox_bigcategory;
     }
 }

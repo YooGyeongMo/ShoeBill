@@ -18,6 +18,7 @@ namespace DBP_TeamProject
         private string id;
         private string pwd;
         private string level;
+        private string department;
         public Login()
         {
             InitializeComponent();
@@ -38,7 +39,19 @@ namespace DBP_TeamProject
             DBManager.GetInstance().CloseConnection();
 
             LoginedUser.getInstance().Level = dbLevel;
+        }
+        // 부서 받아오는것.
+        public void GetDepartment()
+        {
+            string query = Query.GetInstance().
+                select("부서이름").
+                from("사원").
+                where($"사원ID='{id}'").
+                exec();
+            department = DBManager.GetInstance().InitDBManager().GetInfo(query);
+            DBManager.GetInstance().CloseConnection();
 
+            LoginedUser.getInstance().Department = department;
         }
         public void CheckPassword()
         {
@@ -58,11 +71,13 @@ namespace DBP_TeamProject
                 if (pwd.Equals(dbPassword))
                 {
                     Get_level();
-                    LoginedUser.getInstance().UserId = this.id; 
+                    GetDepartment();
+                    LoginedUser.getInstance().UserId = this.id;
 
                     MainForm main = new MainForm();
                     this.Hide(); // 현재 폼을 감춤
                     main.ShowDialog();
+
                 }
                 else
                 {

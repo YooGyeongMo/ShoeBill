@@ -1,5 +1,7 @@
-﻿using MySql.Data.MySqlClient;
+﻿using DBP_TeamProject.Forms.WorkMaster;
+using MySql.Data.MySqlClient;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 
 namespace DBP_TeamProject.Forms
 {
@@ -105,10 +108,45 @@ namespace DBP_TeamProject.Forms
             MasterDeleter MasterdeleterForm = new MasterDeleter();
             MasterdeleterForm.Show();
         }
+        private bool IsAnyTextBoxesEmpty(GroupBox groupBox)
+        {
+            // 그룹박스 안에 있는 모든 텍스트 박스
+            var textBoxes = groupBox.Controls.OfType<TextBox>();
+
+            // 텍스트 박스가 하나라도 비어있으면
+            return textBoxes.Any(textBox => string.IsNullOrEmpty(textBox.Text));
+        }
+        private bool IsAnyComboBoxesEmpty(GroupBox groupBox)
+        {
+            // 그룹박스 안에 있는 모든 콤보박스
+            var comboBoxes = groupBox.Controls.OfType<ComboBox>();
+
+            // 콤보박스가 하나라도 선택된 항목이 없으면
+            return comboBoxes.Any(comboBox => comboBox.SelectedIndex == -1);
+        }
 
         private void button_work_Click(object sender, EventArgs e)
         {
+            if (IsAnyComboBoxesEmpty(workRegistrationGroupBox))
+            {
+                MessageBox.Show("입력사항을 모두 선택해주세요");
+                return;
+            }
+            if (IsAnyTextBoxesEmpty(workRegistrationGroupBox))
+            {
+                MessageBox.Show("비고란을 입력해주세요.");
+                return;
+            }
+
             string bigCategory = comboBox_bigcategory.Text;
+            if (!bigCategory.Equals(LoginedUser.getInstance().Department)) // 본인 부서이면
+            {
+                MessageBox.Show(bigCategory);
+                MessageBox.Show(LoginedUser.getInstance().Department);
+                MessageBox.Show("본인 부서만 업무 등록할 수 있습니다.");
+                return;
+            }
+
             string midCategory = comboBox_midcategory.Text;
             string smallCategory = comboBox_smallcategory.Text;
             string memo = textBox_memo.Text;
@@ -147,6 +185,7 @@ namespace DBP_TeamProject.Forms
             // 새로운 업무의 시작 시간과 종료 시간
             TimeSpan newStartTime = startTime;
             TimeSpan newEndTime = endTime;
+
             // 기존 업무와 겹치는지 확인
             if (IsWorkPeriodOverlap(userId, newStartTime, newEndTime))
             {
@@ -204,12 +243,16 @@ namespace DBP_TeamProject.Forms
                 connection.Open();
 
                 // 기존 업무 기간 및 업무등록자 조회 쿼리 작성
-                string query = "SELECT 업무시작시간, 업무종료시간 FROM s5585452.일일업무 WHERE 업무등록자 = @업무등록자";
+                string query = Query.GetInstance().
+                            select("업무시작시간, 업무종료시간").
+                            from("일일업무").
+                            where($"업무등록자 = '{userId}' AND 업무등록일자=CURDATE()").
+                            exec();
+
+
 
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@업무등록자", userId);
-
                     using (MySqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
@@ -217,6 +260,9 @@ namespace DBP_TeamProject.Forms
                             // 기존 업무의 시작 시간과 종료 시간
                             TimeSpan existingStartTime = ((TimeSpan)reader["업무시작시간"]);
                             TimeSpan existingEndTime = ((TimeSpan)reader["업무종료시간"]);
+
+                            MessageBox.Show(existingStartTime.ToString());
+                            MessageBox.Show(existingEndTime.ToString());
 
                             // 새로운 업무와 겹치는지 확인
                             if (IsTimeOverlap(newStartTime, newEndTime, existingStartTime, existingEndTime))
@@ -237,9 +283,7 @@ namespace DBP_TeamProject.Forms
             return startTime1 < endTime2 && startTime2 < endTime1;
         }
 
-
-
-
+        // [#1] 대분류
         private void comboBox_bigcategory_SelectedIndexChanged(object sender, EventArgs e)
         {
             comboBox_midcategory.SelectedIndex = -1;
@@ -251,15 +295,78 @@ namespace DBP_TeamProject.Forms
                 return;
             }
 
+            string bigCategory = comboBox_bigcategory.SelectedItem.ToString();
+            int selectedBigCategoryID = GetBigID(bigCategory);
+
             // 선택된 대분류의 ID를 가져옴
-            int selectedBigCategoryID = ((DataItem)comboBox_bigcategory.SelectedItem).ID;
+            //int selectedBigCategoryID = ((DataItem)comboBox_bigcategory.SelectedItem).ID;
 
-            // 중분류를 로드  
-            comboBox_midcategory.Items.Clear();
             LoadMidCategories(selectedBigCategoryID);
+        }
+        private void comboBox_midcategory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            comboBox_smallcategory.SelectedIndex = -1;
 
+            // 선택된 대분류가 없으면 종료
+            if (comboBox_midcategory.SelectedItem == null)
+            {
+                return;
+            }
+            string midCategory = comboBox_midcategory.SelectedItem.ToString();
+            int selectedMidCategoryID = GetMidID(midCategory);
+
+            // 소분류를 로드  
+            comboBox_smallcategory.Items.Clear();
+            LoadSmallCategories(selectedMidCategoryID);
         }
 
+        public int GetBigID(string bigCategory)
+        {
+            int result = 0;
+            try
+            {
+                string query = Query.GetInstance()
+                        .select("대분류ID")
+                        .from("분류_대분류")
+                        .where($"대분류명='{bigCategory}'")
+                        .exec();
+
+                result = Int32.Parse(DBManager.GetInstance().InitDBManager().GetInfo(query));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("예외 발생: " + ex.ToString());
+            }
+            finally
+            {
+                DBManager.GetInstance().CloseConnection();
+            }
+            return result;
+        }
+
+        public int GetMidID(string midCategory)
+        {
+            int result = 0;
+            try
+            {
+                string query = Query.GetInstance()
+                        .select("중분류ID")
+                        .from("분류_중분류")
+                        .where($"중분류명='{midCategory}'")
+                        .exec();
+
+                result = Int32.Parse(DBManager.GetInstance().InitDBManager().GetInfo(query));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("예외 발생: " + ex.ToString());
+            }
+            finally
+            {
+                DBManager.GetInstance().CloseConnection();
+            }
+            return result;
+        }
         private void LoadMidCategories(int bigCategoryId)
         {
             // MySQL 연결 문자열
@@ -301,23 +408,7 @@ namespace DBP_TeamProject.Forms
             //   comboBox_midcategory.SelectedIndex = -1;
         }
 
-        private void comboBox_midcategory_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            comboBox_smallcategory.SelectedIndex = -1;
 
-            // 선택된 대분류가 없으면 종료
-            if (comboBox_midcategory.SelectedItem == null)
-            {
-                return;
-            }
-
-            // 선택된 중분류의 ID를 가져옴
-            int selectedMidCategoryID = ((DataItem)comboBox_midcategory.SelectedItem).ID;
-
-            // 소분류를 로드  
-            comboBox_smallcategory.Items.Clear();
-            LoadSmallCategories(selectedMidCategoryID);
-        }
 
         private void LoadSmallCategories(int midCategoryId)
         {
@@ -359,10 +450,6 @@ namespace DBP_TeamProject.Forms
 
         }
 
-        private void comboBox_bigcategory_DropDown(object sender, EventArgs e)
-        {
-
-        }
 
         private void FormWork_Load(object sender, EventArgs e)
         {
@@ -481,9 +568,61 @@ namespace DBP_TeamProject.Forms
                 }
             }
         }
+        // [#1-0] 대분류 콤보박스 드롭다운
+        private void comboBox_bigcategory_DropDown(object sender, EventArgs e)
+        {
+            comboBox_bigcategory.Items.Clear(); // 콤보박스 내용 초기화
+            string query = Query.GetInstance().
+                            select("부서이름").
+                            from("부서").
+                            exec();
+            Category.GetInstance().LoadComboBoxData(comboBox_bigcategory, query, "부서이름");
+        }
+   
+        // [#1-1] 중분류 콤보박스 드롭다운
+        private void comboBox_midcategory_DropDown(object sender, EventArgs e)
+        {
+            if (comboBox_bigcategory.SelectedIndex == -1)
+            {
+                MessageBox.Show("대분류를 선택해주세요.");
+                return;
+            }
+            string bigcategoryName = comboBox_bigcategory.SelectedItem.ToString();
+
+            comboBox_midcategory.Items.Clear(); // 콤보박스 내용 초기화
+            string query = Query.GetInstance().
+                            select("중분류명").
+                            from("분류_중분류").
+                            where($"대분류ID IN (SELECT 대분류ID FROM 분류_대분류 WHERE 대분류명 = '{bigcategoryName}')").
+                            exec();
+            Category.GetInstance().LoadComboBoxData(comboBox_midcategory, query, "중분류명");
+        }
+        // [#1-2] 소분류 콤보박스 드롭다운
+        private void comboBox_smallcategory_DropDown(object sender, EventArgs e)
+        {
+            if (comboBox_bigcategory.SelectedIndex == -1)
+            {
+                MessageBox.Show("대분류를 선택해주세요.");
+                return;
+            }
+            if (comboBox_midcategory.SelectedIndex == -1)
+            {
+                MessageBox.Show("중분류를 선택해주세요.");
+                return;
+            }
+            string bigcategoryName = comboBox_bigcategory.Text;
+            int selectedBigCategoryID = GetBigID(bigcategoryName);
+
+            string midcategoryName = comboBox_midcategory.SelectedItem.ToString();
+
+            comboBox_smallcategory.Items.Clear();
+            string query = Query.GetInstance().
+                            select("소분류명").
+                            from("분류_소분류").
+                            where($"중분류ID IN (SELECT 중분류ID FROM 분류_중분류 WHERE 대분류ID={selectedBigCategoryID} AND 중분류명='{midcategoryName}')").
+                            exec();
+            Category.GetInstance().LoadComboBoxData(comboBox_smallcategory, query, "소분류명");
+        }
     }
-
-
-
 }
 

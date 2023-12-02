@@ -29,7 +29,6 @@ namespace DBP_TeamProject.Forms
         private void InitializeComponent()
         {
             textBox_key = new TextBox();
-            button_close = new Button();
             button_search = new Button();
             dataGridView_search = new DataGridView();
             label3 = new Label();
@@ -52,41 +51,34 @@ namespace DBP_TeamProject.Forms
             button_update = new Button();
             comboBox_smallcategory = new ComboBox();
             comboBox_midcategory = new ComboBox();
-            comboBox_bigcategory = new ComboBox();
             label11 = new Label();
             label12 = new Label();
             label13 = new Label();
-            textBox_workID = new TextBox();
             label14 = new Label();
-            button_get = new Button();
             label15 = new Label();
             groupBox1 = new GroupBox();
+            label_bigcategory = new Label();
+            label_workID = new Label();
+            panel1 = new Panel();
             ((System.ComponentModel.ISupportInitialize)dataGridView_search).BeginInit();
             groupBox1.SuspendLayout();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // textBox_key
             // 
-            textBox_key.Location = new Point(273, 12);
+            textBox_key.Location = new Point(412, 35);
+            textBox_key.Margin = new Padding(2);
             textBox_key.Name = "textBox_key";
-            textBox_key.Size = new Size(135, 31);
+            textBox_key.Size = new Size(96, 23);
             textBox_key.TabIndex = 18;
-            // 
-            // button_close
-            // 
-            button_close.Location = new Point(725, 12);
-            button_close.Name = "button_close";
-            button_close.Size = new Size(84, 33);
-            button_close.TabIndex = 17;
-            button_close.Text = "종료";
-            button_close.UseVisualStyleBackColor = true;
-            button_close.Click += button_close_Click;
             // 
             // button_search
             // 
-            button_search.Location = new Point(646, 12);
+            button_search.Location = new Point(561, 35);
+            button_search.Margin = new Padding(2);
             button_search.Name = "button_search";
-            button_search.Size = new Size(73, 33);
+            button_search.Size = new Size(78, 30);
             button_search.TabIndex = 16;
             button_search.Text = "검색";
             button_search.UseVisualStyleBackColor = true;
@@ -95,91 +87,102 @@ namespace DBP_TeamProject.Forms
             // dataGridView_search
             // 
             dataGridView_search.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView_search.Location = new Point(18, 62);
+            dataGridView_search.Location = new Point(60, 74);
+            dataGridView_search.Margin = new Padding(2);
             dataGridView_search.Name = "dataGridView_search";
             dataGridView_search.RowHeadersWidth = 62;
             dataGridView_search.RowTemplate.Height = 33;
-            dataGridView_search.Size = new Size(791, 163);
+            dataGridView_search.Size = new Size(579, 183);
             dataGridView_search.TabIndex = 15;
-            dataGridView_search.CellContentClick += dataGridView_search_CellContentClick_1;
+            dataGridView_search.CellClick += dataGridView_search_CellClick;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(414, 15);
+            label3.Location = new Point(210, 39);
+            label3.Margin = new Padding(2, 0, 2, 0);
             label3.Name = "label3";
-            label3.Size = new Size(66, 25);
+            label3.Size = new Size(43, 15);
             label3.TabIndex = 14;
             label3.Text = "등록자";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(203, 15);
+            label2.Location = new Point(365, 39);
+            label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
-            label2.Size = new Size(66, 25);
+            label2.Size = new Size(43, 15);
             label2.TabIndex = 13;
             label2.Text = "키워드";
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(10, 15);
+            label1.Location = new Point(60, 39);
+            label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(48, 25);
+            label1.Size = new Size(31, 15);
             label1.TabIndex = 12;
             label1.Text = "날짜";
             // 
             // comboBox_user
             // 
             comboBox_user.FormattingEnabled = true;
-            comboBox_user.Location = new Point(486, 12);
+            comboBox_user.Location = new Point(257, 35);
+            comboBox_user.Margin = new Padding(2);
             comboBox_user.Name = "comboBox_user";
-            comboBox_user.Size = new Size(154, 33);
+            comboBox_user.Size = new Size(94, 23);
             comboBox_user.TabIndex = 11;
+            comboBox_user.DropDown += comboBox_user_DropDown;
             // 
             // comboBox_date
             // 
             comboBox_date.FormattingEnabled = true;
-            comboBox_date.Location = new Point(64, 12);
+            comboBox_date.Location = new Point(95, 35);
+            comboBox_date.Margin = new Padding(2);
             comboBox_date.Name = "comboBox_date";
-            comboBox_date.Size = new Size(133, 33);
+            comboBox_date.Size = new Size(94, 23);
             comboBox_date.TabIndex = 10;
-            comboBox_date.SelectedIndexChanged += comboBox_date_SelectedIndexChanged;
+            comboBox_date.DropDown += comboBox_date_DropDown;
             // 
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new Point(736, 171);
+            label10.Location = new Point(520, 101);
+            label10.Margin = new Padding(2, 0, 2, 0);
             label10.Name = "label10";
-            label10.Size = new Size(30, 25);
+            label10.Size = new Size(19, 15);
             label10.TabIndex = 43;
             label10.Text = "분";
             // 
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(736, 120);
+            label9.Location = new Point(520, 71);
+            label9.Margin = new Padding(2, 0, 2, 0);
             label9.Name = "label9";
-            label9.Size = new Size(30, 25);
+            label9.Size = new Size(19, 15);
             label9.TabIndex = 42;
             label9.Text = "분";
             // 
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(612, 171);
+            label8.Location = new Point(435, 101);
+            label8.Margin = new Padding(2, 0, 2, 0);
             label8.Name = "label8";
-            label8.Size = new Size(30, 25);
+            label8.Size = new Size(19, 15);
             label8.TabIndex = 41;
             label8.Text = "시";
             // 
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(612, 120);
+            label7.Location = new Point(434, 72);
+            label7.Margin = new Padding(2, 0, 2, 0);
             label7.Name = "label7";
-            label7.Size = new Size(30, 25);
+            label7.Size = new Size(19, 15);
             label7.TabIndex = 40;
             label7.Text = "시";
             // 
@@ -187,77 +190,86 @@ namespace DBP_TeamProject.Forms
             // 
             comboBox_emin.FormattingEnabled = true;
             comboBox_emin.Items.AddRange(new object[] { "00", "10", "20", "30", "40", "50" });
-            comboBox_emin.Location = new Point(652, 165);
+            comboBox_emin.Location = new Point(462, 96);
+            comboBox_emin.Margin = new Padding(2);
             comboBox_emin.Name = "comboBox_emin";
-            comboBox_emin.Size = new Size(78, 33);
+            comboBox_emin.Size = new Size(56, 23);
             comboBox_emin.TabIndex = 39;
             // 
             // comboBox_smin
             // 
             comboBox_smin.FormattingEnabled = true;
             comboBox_smin.Items.AddRange(new object[] { "00", "10", "20", "30", "40", "50" });
-            comboBox_smin.Location = new Point(652, 117);
+            comboBox_smin.Location = new Point(462, 67);
+            comboBox_smin.Margin = new Padding(2);
             comboBox_smin.Name = "comboBox_smin";
-            comboBox_smin.Size = new Size(78, 33);
+            comboBox_smin.Size = new Size(56, 23);
             comboBox_smin.TabIndex = 38;
             // 
             // comboBox_etime
             // 
             comboBox_etime.FormattingEnabled = true;
             comboBox_etime.Items.AddRange(new object[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" });
-            comboBox_etime.Location = new Point(528, 165);
+            comboBox_etime.Location = new Point(376, 96);
+            comboBox_etime.Margin = new Padding(2);
             comboBox_etime.Name = "comboBox_etime";
-            comboBox_etime.Size = new Size(78, 33);
+            comboBox_etime.Size = new Size(56, 23);
             comboBox_etime.TabIndex = 37;
             // 
             // comboBox_stime
             // 
             comboBox_stime.FormattingEnabled = true;
             comboBox_stime.Items.AddRange(new object[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" });
-            comboBox_stime.Location = new Point(528, 117);
+            comboBox_stime.Location = new Point(376, 67);
+            comboBox_stime.Margin = new Padding(2);
             comboBox_stime.Name = "comboBox_stime";
-            comboBox_stime.Size = new Size(78, 33);
+            comboBox_stime.Size = new Size(56, 23);
             comboBox_stime.TabIndex = 36;
             // 
             // textBox_memo
             // 
-            textBox_memo.Location = new Point(528, 73);
+            textBox_memo.Location = new Point(376, 37);
+            textBox_memo.Margin = new Padding(2);
             textBox_memo.Name = "textBox_memo";
-            textBox_memo.Size = new Size(202, 31);
+            textBox_memo.Size = new Size(165, 23);
             textBox_memo.TabIndex = 35;
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(399, 168);
+            label6.Location = new Point(279, 100);
+            label6.Margin = new Padding(2, 0, 2, 0);
             label6.Name = "label6";
-            label6.Size = new Size(120, 25);
+            label6.Size = new Size(79, 15);
             label6.TabIndex = 34;
             label6.Text = "업무종료시간";
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(399, 120);
+            label5.Location = new Point(279, 70);
+            label5.Margin = new Padding(2, 0, 2, 0);
             label5.Name = "label5";
-            label5.Size = new Size(120, 25);
+            label5.Size = new Size(79, 15);
             label5.TabIndex = 33;
             label5.Text = "업무시작시간";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(399, 73);
+            label4.Location = new Point(327, 41);
+            label4.Margin = new Padding(2, 0, 2, 0);
             label4.Name = "label4";
-            label4.Size = new Size(48, 25);
+            label4.Size = new Size(31, 15);
             label4.TabIndex = 32;
             label4.Text = "비고";
             // 
             // button_update
             // 
-            button_update.Location = new Point(17, 443);
+            button_update.Location = new Point(60, 469);
+            button_update.Margin = new Padding(2);
             button_update.Name = "button_update";
-            button_update.Size = new Size(789, 53);
+            button_update.Size = new Size(579, 48);
             button_update.TabIndex = 31;
             button_update.Text = "일일업무수정";
             button_update.UseVisualStyleBackColor = true;
@@ -266,97 +278,79 @@ namespace DBP_TeamProject.Forms
             // comboBox_smallcategory
             // 
             comboBox_smallcategory.FormattingEnabled = true;
-            comboBox_smallcategory.Location = new Point(108, 165);
+            comboBox_smallcategory.Location = new Point(122, 111);
+            comboBox_smallcategory.Margin = new Padding(2);
             comboBox_smallcategory.Name = "comboBox_smallcategory";
-            comboBox_smallcategory.Size = new Size(151, 33);
+            comboBox_smallcategory.Size = new Size(121, 23);
             comboBox_smallcategory.TabIndex = 30;
+            comboBox_smallcategory.DropDown += comboBox_smallcategory_DropDown;
             // 
             // comboBox_midcategory
             // 
             comboBox_midcategory.FormattingEnabled = true;
-            comboBox_midcategory.Location = new Point(108, 117);
+            comboBox_midcategory.Location = new Point(122, 81);
+            comboBox_midcategory.Margin = new Padding(2);
             comboBox_midcategory.Name = "comboBox_midcategory";
-            comboBox_midcategory.Size = new Size(151, 33);
+            comboBox_midcategory.Size = new Size(121, 23);
             comboBox_midcategory.TabIndex = 29;
-            comboBox_midcategory.SelectedIndexChanged += comboBox_midcategory_SelectedIndexChanged;
-            // 
-            // comboBox_bigcategory
-            // 
-            comboBox_bigcategory.FormattingEnabled = true;
-            comboBox_bigcategory.Location = new Point(108, 67);
-            comboBox_bigcategory.Name = "comboBox_bigcategory";
-            comboBox_bigcategory.Size = new Size(151, 33);
-            comboBox_bigcategory.TabIndex = 28;
-            comboBox_bigcategory.SelectedIndexChanged += comboBox_bigcategory_SelectedIndexChanged;
+            comboBox_midcategory.DropDown += comboBox_midcategory_DropDown;
             // 
             // label11
             // 
             label11.AutoSize = true;
-            label11.Location = new Point(19, 165);
+            label11.Location = new Point(59, 114);
+            label11.Margin = new Padding(2, 0, 2, 0);
             label11.Name = "label11";
-            label11.Size = new Size(66, 25);
+            label11.Size = new Size(43, 15);
             label11.TabIndex = 27;
             label11.Text = "소분류";
             // 
             // label12
             // 
             label12.AutoSize = true;
-            label12.Location = new Point(19, 117);
+            label12.Location = new Point(59, 85);
+            label12.Margin = new Padding(2, 0, 2, 0);
             label12.Name = "label12";
-            label12.Size = new Size(66, 25);
+            label12.Size = new Size(43, 15);
             label12.TabIndex = 26;
             label12.Text = "중분류";
             // 
             // label13
             // 
             label13.AutoSize = true;
-            label13.Location = new Point(19, 70);
+            label13.Location = new Point(59, 55);
+            label13.Margin = new Padding(2, 0, 2, 0);
             label13.Name = "label13";
-            label13.Size = new Size(66, 25);
+            label13.Size = new Size(43, 15);
             label13.TabIndex = 25;
             label13.Text = "대분류";
-            // 
-            // textBox_workID
-            // 
-            textBox_workID.Location = new Point(646, 27);
-            textBox_workID.Name = "textBox_workID";
-            textBox_workID.Size = new Size(84, 31);
-            textBox_workID.TabIndex = 44;
             // 
             // label14
             // 
             label14.AutoSize = true;
-            label14.Location = new Point(7, 30);
+            label14.ForeColor = SystemColors.Highlight;
+            label14.Location = new Point(424, 269);
+            label14.Margin = new Padding(2, 0, 2, 0);
             label14.Name = "label14";
-            label14.Size = new Size(444, 25);
+            label14.Size = new Size(215, 15);
             label14.TabIndex = 45;
-            label14.Text = "수정할 데이터가 있는 행을 선택하고 버튼을 누르세요";
-            // 
-            // button_get
-            // 
-            button_get.Location = new Point(457, 26);
-            button_get.Name = "button_get";
-            button_get.Size = new Size(114, 33);
-            button_get.TabIndex = 46;
-            button_get.Text = "불러오기";
-            button_get.UseVisualStyleBackColor = true;
-            button_get.Click += button_get_Click;
+            label14.Text = "수정할 데이터가 있는 행을 선택하세요";
             // 
             // label15
             // 
             label15.AutoSize = true;
-            label15.Location = new Point(610, 30);
+            label15.Location = new Point(83, 25);
+            label15.Margin = new Padding(2, 0, 2, 0);
             label15.Name = "label15";
-            label15.Size = new Size(30, 25);
+            label15.Size = new Size(19, 15);
             label15.TabIndex = 47;
             label15.Text = "ID";
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(label_bigcategory);
+            groupBox1.Controls.Add(label_workID);
             groupBox1.Controls.Add(label15);
-            groupBox1.Controls.Add(button_get);
-            groupBox1.Controls.Add(label14);
-            groupBox1.Controls.Add(textBox_workID);
             groupBox1.Controls.Add(label10);
             groupBox1.Controls.Add(label9);
             groupBox1.Controls.Add(label8);
@@ -371,47 +365,72 @@ namespace DBP_TeamProject.Forms
             groupBox1.Controls.Add(label4);
             groupBox1.Controls.Add(comboBox_smallcategory);
             groupBox1.Controls.Add(comboBox_midcategory);
-            groupBox1.Controls.Add(comboBox_bigcategory);
             groupBox1.Controls.Add(label11);
             groupBox1.Controls.Add(label12);
             groupBox1.Controls.Add(label13);
-            groupBox1.Location = new Point(17, 231);
+            groupBox1.Location = new Point(60, 304);
+            groupBox1.Margin = new Padding(2);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(792, 206);
+            groupBox1.Padding = new Padding(2);
+            groupBox1.Size = new Size(579, 146);
             groupBox1.TabIndex = 48;
             groupBox1.TabStop = false;
             groupBox1.Text = "설정";
             // 
+            // label_bigcategory
+            // 
+            label_bigcategory.AutoSize = true;
+            label_bigcategory.Location = new Point(122, 55);
+            label_bigcategory.Name = "label_bigcategory";
+            label_bigcategory.Size = new Size(0, 15);
+            label_bigcategory.TabIndex = 51;
+            // 
+            // label_workID
+            // 
+            label_workID.AutoSize = true;
+            label_workID.Location = new Point(122, 25);
+            label_workID.Name = "label_workID";
+            label_workID.Size = new Size(0, 15);
+            label_workID.TabIndex = 50;
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(label1);
+            panel1.Controls.Add(label14);
+            panel1.Controls.Add(groupBox1);
+            panel1.Controls.Add(comboBox_date);
+            panel1.Controls.Add(button_update);
+            panel1.Controls.Add(comboBox_user);
+            panel1.Controls.Add(textBox_key);
+            panel1.Controls.Add(label2);
+            panel1.Controls.Add(label3);
+            panel1.Controls.Add(button_search);
+            panel1.Controls.Add(dataGridView_search);
+            panel1.Location = new Point(56, 12);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(697, 549);
+            panel1.TabIndex = 49;
+            // 
             // WorkUpdater
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(823, 508);
-            Controls.Add(groupBox1);
-            Controls.Add(button_update);
-            Controls.Add(textBox_key);
-            Controls.Add(button_close);
-            Controls.Add(button_search);
-            Controls.Add(dataGridView_search);
-            Controls.Add(label3);
-            Controls.Add(label2);
-            Controls.Add(label1);
-            Controls.Add(comboBox_user);
-            Controls.Add(comboBox_date);
+            ClientSize = new Size(807, 593);
+            Controls.Add(panel1);
+            Margin = new Padding(2);
             Name = "WorkUpdater";
             Text = "WorkUpdater";
-            Load += WorkUpdater_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView_search).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
         private TextBox textBox_key;
-        private Button button_close;
         private Button button_search;
         private DataGridView dataGridView_search;
         private Label label3;
@@ -434,14 +453,14 @@ namespace DBP_TeamProject.Forms
         private Button button_update;
         private ComboBox comboBox_smallcategory;
         private ComboBox comboBox_midcategory;
-        private ComboBox comboBox_bigcategory;
         private Label label11;
         private Label label12;
         private Label label13;
-        private TextBox textBox_workID;
         private Label label14;
-        private Button button_get;
         private Label label15;
         private GroupBox groupBox1;
+        private Panel panel1;
+        private Label label_bigcategory;
+        private Label label_workID;
     }
 }

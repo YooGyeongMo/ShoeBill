@@ -19,10 +19,10 @@
     <Compile Update="Forms\AttendanceManagement.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Forms\DepartmentManagement.cs">
+    <Compile Update="Forms\Department\DepartmentManagement.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Forms\DepartmentSearching.cs">
+    <Compile Update="Forms\Department\DepartmentSearching.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Forms\EmployeeManagement\EmployeeSearch.cs">
@@ -37,13 +37,13 @@
     <Compile Update="Forms\HumanResourcesOrganizationChart.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Forms\MasterDeleter.cs">
+    <Compile Update="Forms\WorkMaster\MasterDeleter.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Forms\MasterMaker.cs">
+    <Compile Update="Forms\WorkMaster\MasterMaker.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Forms\MasterUpdater.cs">
+    <Compile Update="Forms\WorkMaster\MasterUpdater.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Forms\SalaryManagement\SalaryList.cs">
@@ -52,13 +52,13 @@
     <Compile Update="Forms\SalaryManagement\SalaryStatement.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Forms\WorkDeleter.cs">
+    <Compile Update="Forms\Work\WorkDeleter.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Forms\WorkSearcher.cs">
+    <Compile Update="Forms\Work\WorkSearcher.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Forms\WorkUpdater.cs">
+    <Compile Update="Forms\Work\WorkUpdater.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="MainForm.cs">

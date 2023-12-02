@@ -140,6 +140,7 @@
             // 
             // departmentComboBox
             // 
+            departmentComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             departmentComboBox.FormattingEnabled = true;
             departmentComboBox.Items.AddRange(new object[] { "인사 부서 ", "개발 부서", "기획 부서" });
             departmentComboBox.Location = new Point(76, 38);

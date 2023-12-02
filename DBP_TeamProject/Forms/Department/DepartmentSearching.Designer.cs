@@ -45,21 +45,21 @@
             groupBox3.Controls.Add(specific_depart_name_searching);
             groupBox3.Controls.Add(searching_depart_all_result_btn);
             groupBox3.Controls.Add(depature_result_show_GV);
-            groupBox3.Location = new Point(132, 66);
+            groupBox3.Location = new Point(89, 24);
             groupBox3.Margin = new Padding(2);
             groupBox3.Name = "groupBox3";
             groupBox3.Padding = new Padding(2);
-            groupBox3.Size = new Size(767, 374);
+            groupBox3.Size = new Size(633, 348);
             groupBox3.TabIndex = 6;
             groupBox3.TabStop = false;
             groupBox3.Text = "부서현황";
             // 
             // recent_exist_department_employee_name_searching_btn
             // 
-            recent_exist_department_employee_name_searching_btn.Location = new Point(575, 24);
+            recent_exist_department_employee_name_searching_btn.Location = new Point(462, 28);
             recent_exist_department_employee_name_searching_btn.Margin = new Padding(2);
             recent_exist_department_employee_name_searching_btn.Name = "recent_exist_department_employee_name_searching_btn";
-            recent_exist_department_employee_name_searching_btn.Size = new Size(169, 29);
+            recent_exist_department_employee_name_searching_btn.Size = new Size(141, 39);
             recent_exist_department_employee_name_searching_btn.TabIndex = 8;
             recent_exist_department_employee_name_searching_btn.Text = "부서별 사원이름 조회";
             recent_exist_department_employee_name_searching_btn.UseVisualStyleBackColor = true;
@@ -67,19 +67,20 @@
             // 
             // after_input_or_update_depart_name_showing_comboxBox_for_searching
             // 
+            after_input_or_update_depart_name_showing_comboxBox_for_searching.DropDownStyle = ComboBoxStyle.DropDownList;
             after_input_or_update_depart_name_showing_comboxBox_for_searching.FormattingEnabled = true;
-            after_input_or_update_depart_name_showing_comboxBox_for_searching.Location = new Point(405, 38);
+            after_input_or_update_depart_name_showing_comboxBox_for_searching.Location = new Point(316, 37);
             after_input_or_update_depart_name_showing_comboxBox_for_searching.Margin = new Padding(2);
             after_input_or_update_depart_name_showing_comboxBox_for_searching.Name = "after_input_or_update_depart_name_showing_comboxBox_for_searching";
-            after_input_or_update_depart_name_showing_comboxBox_for_searching.Size = new Size(157, 28);
+            after_input_or_update_depart_name_showing_comboxBox_for_searching.Size = new Size(123, 23);
             after_input_or_update_depart_name_showing_comboxBox_for_searching.TabIndex = 7;
             // 
             // specific_depart_name_searching
             // 
-            specific_depart_name_searching.Location = new Point(575, 63);
+            specific_depart_name_searching.Location = new Point(462, 74);
             specific_depart_name_searching.Margin = new Padding(2);
             specific_depart_name_searching.Name = "specific_depart_name_searching";
-            specific_depart_name_searching.Size = new Size(169, 29);
+            specific_depart_name_searching.Size = new Size(141, 39);
             specific_depart_name_searching.TabIndex = 6;
             specific_depart_name_searching.Text = "특정 부서 부서장 조회";
             specific_depart_name_searching.UseVisualStyleBackColor = true;
@@ -87,10 +88,10 @@
             // 
             // searching_depart_all_result_btn
             // 
-            searching_depart_all_result_btn.Location = new Point(16, 38);
+            searching_depart_all_result_btn.Location = new Point(27, 28);
             searching_depart_all_result_btn.Margin = new Padding(2);
             searching_depart_all_result_btn.Name = "searching_depart_all_result_btn";
-            searching_depart_all_result_btn.Size = new Size(211, 29);
+            searching_depart_all_result_btn.Size = new Size(162, 41);
             searching_depart_all_result_btn.TabIndex = 5;
             searching_depart_all_result_btn.Text = "부서별 부서장 전체 조회";
             searching_depart_all_result_btn.UseVisualStyleBackColor = true;
@@ -99,22 +100,21 @@
             // depature_result_show_GV
             // 
             depature_result_show_GV.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            depature_result_show_GV.Location = new Point(16, 110);
+            depature_result_show_GV.Location = new Point(27, 131);
             depature_result_show_GV.Margin = new Padding(2);
             depature_result_show_GV.Name = "depature_result_show_GV";
             depature_result_show_GV.RowHeadersWidth = 82;
             depature_result_show_GV.RowTemplate.Height = 41;
-            depature_result_show_GV.Size = new Size(728, 241);
+            depature_result_show_GV.Size = new Size(576, 186);
             depature_result_show_GV.TabIndex = 4;
             // 
             // DepartmentSearching
             // 
-            AutoScaleDimensions = new SizeF(9F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(groupBox3);
-            Margin = new Padding(4);
             Name = "DepartmentSearching";
-            Size = new Size(1063, 667);
+            Size = new Size(801, 445);
             Load += DepartmentSearching_Load;
             groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)depature_result_show_GV).EndInit();

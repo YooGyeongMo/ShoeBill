@@ -118,8 +118,16 @@ namespace DBP_TeamProject
             Reset();*/
             this.Close();
 
-            Login loginForm = new Login(); // �α��� �� ����
-            loginForm.Show();
+            // 기존에 생성된 로그인 폼을 사용
+            if (Application.OpenForms["Login"] == null)
+            {
+                Login loginForm = new Login();
+                loginForm.Show();
+            }
+            else
+            {
+                Application.OpenForms["Login"].Show();
+            }
         }
         private void Reset()
         {

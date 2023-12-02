@@ -62,7 +62,7 @@
             panelMenu.Dock = DockStyle.Left;
             panelMenu.ForeColor = Color.White;
             panelMenu.Location = new Point(0, 0);
-            panelMenu.Margin = new Padding(2, 2, 2, 2);
+            panelMenu.Margin = new Padding(2);
             panelMenu.Name = "panelMenu";
             panelMenu.Size = new Size(155, 461);
             panelMenu.TabIndex = 0;
@@ -77,7 +77,7 @@
             Btnchat.Image = Properties.Resources.채팅;
             Btnchat.ImageAlign = ContentAlignment.MiddleLeft;
             Btnchat.Location = new Point(0, 192);
-            Btnchat.Margin = new Padding(2, 2, 2, 2);
+            Btnchat.Margin = new Padding(2);
             Btnchat.Name = "Btnchat";
             Btnchat.Padding = new Padding(8, 0, 0, 0);
             Btnchat.Size = new Size(155, 36);
@@ -98,7 +98,7 @@
             Btbmessage.Image = Properties.Resources.쪽지;
             Btbmessage.ImageAlign = ContentAlignment.MiddleLeft;
             Btbmessage.Location = new Point(0, 156);
-            Btbmessage.Margin = new Padding(2, 2, 2, 2);
+            Btbmessage.Margin = new Padding(2);
             Btbmessage.Name = "Btbmessage";
             Btbmessage.Padding = new Padding(8, 0, 0, 0);
             Btbmessage.Size = new Size(155, 36);
@@ -119,7 +119,7 @@
             Btnapproval.Image = Properties.Resources.결제;
             Btnapproval.ImageAlign = ContentAlignment.MiddleLeft;
             Btnapproval.Location = new Point(0, 120);
-            Btnapproval.Margin = new Padding(2, 2, 2, 2);
+            Btnapproval.Margin = new Padding(2);
             Btnapproval.Name = "Btnapproval";
             Btnapproval.Padding = new Padding(8, 0, 0, 0);
             Btnapproval.Size = new Size(155, 36);
@@ -140,7 +140,7 @@
             Btnwork.Image = Properties.Resources.업무;
             Btnwork.ImageAlign = ContentAlignment.MiddleLeft;
             Btnwork.Location = new Point(0, 84);
-            Btnwork.Margin = new Padding(2, 2, 2, 2);
+            Btnwork.Margin = new Padding(2);
             Btnwork.Name = "Btnwork";
             Btnwork.Padding = new Padding(8, 0, 0, 0);
             Btnwork.Size = new Size(155, 36);
@@ -161,7 +161,7 @@
             Btnemployee.Image = Properties.Resources.인사;
             Btnemployee.ImageAlign = ContentAlignment.MiddleLeft;
             Btnemployee.Location = new Point(0, 48);
-            Btnemployee.Margin = new Padding(2, 2, 2, 2);
+            Btnemployee.Margin = new Padding(2);
             Btnemployee.Name = "Btnemployee";
             Btnemployee.Padding = new Padding(8, 0, 0, 0);
             Btnemployee.Size = new Size(155, 36);
@@ -178,7 +178,7 @@
             panelLogo.Controls.Add(label1);
             panelLogo.Dock = DockStyle.Top;
             panelLogo.Location = new Point(0, 0);
-            panelLogo.Margin = new Padding(2, 2, 2, 2);
+            panelLogo.Margin = new Padding(2);
             panelLogo.Name = "panelLogo";
             panelLogo.Size = new Size(155, 48);
             panelLogo.TabIndex = 0;
@@ -205,7 +205,7 @@
             panelTitleBar.Controls.Add(lblTitle);
             panelTitleBar.Dock = DockStyle.Top;
             panelTitleBar.Location = new Point(155, 0);
-            panelTitleBar.Margin = new Padding(2, 2, 2, 2);
+            panelTitleBar.Margin = new Padding(2);
             panelTitleBar.Name = "panelTitleBar";
             panelTitleBar.Size = new Size(789, 48);
             panelTitleBar.TabIndex = 1;
@@ -219,9 +219,9 @@
             BtnCloseChlidFrom.Font = new Font("맑은 고딕", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             BtnCloseChlidFrom.ForeColor = Color.White;
             BtnCloseChlidFrom.Location = new Point(0, 0);
-            BtnCloseChlidFrom.Margin = new Padding(2, 2, 2, 2);
+            BtnCloseChlidFrom.Margin = new Padding(2);
             BtnCloseChlidFrom.Name = "BtnCloseChlidFrom";
-            BtnCloseChlidFrom.Size = new Size(69, 48);
+            BtnCloseChlidFrom.Size = new Size(79, 48);
             BtnCloseChlidFrom.TabIndex = 1;
             BtnCloseChlidFrom.Text = "로그아웃";
             BtnCloseChlidFrom.UseVisualStyleBackColor = true;
@@ -235,7 +235,7 @@
             btnMinimize.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Bold, GraphicsUnit.Point);
             btnMinimize.ForeColor = Color.White;
             btnMinimize.Location = new Point(731, 0);
-            btnMinimize.Margin = new Padding(2, 2, 2, 2);
+            btnMinimize.Margin = new Padding(2);
             btnMinimize.Name = "btnMinimize";
             btnMinimize.Size = new Size(28, 24);
             btnMinimize.TabIndex = 4;
@@ -252,7 +252,7 @@
             btnClose.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point);
             btnClose.ForeColor = Color.White;
             btnClose.Location = new Point(761, 0);
-            btnClose.Margin = new Padding(2, 2, 2, 2);
+            btnClose.Margin = new Padding(2);
             btnClose.Name = "btnClose";
             btnClose.Size = new Size(28, 24);
             btnClose.TabIndex = 2;
@@ -278,7 +278,7 @@
             panelDesktopPanel.Controls.Add(pictureBox);
             panelDesktopPanel.Dock = DockStyle.Fill;
             panelDesktopPanel.Location = new Point(155, 48);
-            panelDesktopPanel.Margin = new Padding(2, 2, 2, 2);
+            panelDesktopPanel.Margin = new Padding(2);
             panelDesktopPanel.Name = "panelDesktopPanel";
             panelDesktopPanel.Size = new Size(789, 413);
             panelDesktopPanel.TabIndex = 2;
@@ -288,7 +288,7 @@
             pictureBox.Dock = DockStyle.Fill;
             pictureBox.Image = Properties.Resources.ShoBill;
             pictureBox.Location = new Point(0, 0);
-            pictureBox.Margin = new Padding(2, 2, 2, 2);
+            pictureBox.Margin = new Padding(2);
             pictureBox.Name = "pictureBox";
             pictureBox.Size = new Size(789, 413);
             pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -304,7 +304,7 @@
             Controls.Add(panelTitleBar);
             Controls.Add(panelMenu);
             FormBorderStyle = FormBorderStyle.FixedSingle;
-            Margin = new Padding(2, 2, 2, 2);
+            Margin = new Padding(2);
             Name = "MainForm";
             Text = "회사관리 프로그램";
             Load += MainForm_Load;
