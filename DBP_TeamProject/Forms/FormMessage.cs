@@ -42,7 +42,6 @@ namespace DBP_TeamProject.Forms
             if (HasNewMessages() && !isNotificationShown)
             {
                 isNotificationShown = true;
-                ShowNotification("새로운 메시지가 도착했습니다.");
             }
         }
 
@@ -221,7 +220,7 @@ namespace DBP_TeamProject.Forms
             DBManager dbManager = DBManager.GetInstance();
             try
             {
-                string query = $"SELECT m.title, e.이름 as sender_name, m.state " +
+                string query = $"SELECT m.id, m.title, e.이름 as sender_name, m.state, m.checkstate " +
                                $"FROM message m " +
                                $"JOIN 사원 e ON m.sender_id = e.사원ID " +
                                $"WHERE recipient_id = {userId}";
@@ -235,6 +234,7 @@ namespace DBP_TeamProject.Forms
                     string senderName = row["sender_name"].ToString();
 
                     string status = "알 수 없음";
+                    int checkstate = Convert.ToInt32(row["checkstate"]);
                     if (row["state"] != DBNull.Value)
                     {
                         int state = Convert.ToInt32(row["state"]);
@@ -243,9 +243,9 @@ namespace DBP_TeamProject.Forms
 
                     listBox1.Items.Add($"제목: {messageTitle}, 발신자: {senderName}, 상태: {status}");
 
-                    if (status == "안 읽음")
+                    if (checkstate == 1)
                     {
-                        ShowNotification($"새로운 메시지: {messageTitle}");
+                        ShowNotification($"새로운 메시지: {messageTitle}", row);
                     }
                 }
             }
@@ -279,7 +279,7 @@ namespace DBP_TeamProject.Forms
             string query = $"SELECT m.title, e.이름 as sender_name, m.state " +
                            $"FROM message m " +
                            $"JOIN 사원 e ON m.sender_id = e.사원ID " +
-                           $"WHERE m.title LIKE '%{searchText}%' OR m.content LIKE '%{searchText}%' OR e.이름 LIKE '%{searchText}%'";
+                           $"WHERE (m.title LIKE '%{searchText}%' OR m.content LIKE '%{searchText}%' OR e.이름 LIKE '%{searchText}%') AND recipient_id = {loginedUser.UserId}";
 
             DataTable dataTable = dbManager.FindDataTable(query);
             listBox1.Items.Clear();
@@ -298,15 +298,20 @@ namespace DBP_TeamProject.Forms
 
                 listBox1.Items.Add($"제목: {messageTitle}, 발신자: {senderName}, 상태: {status}");
             }
+            messageCheckTimer.Stop();
+            Task.Delay(3000).ContinueWith((task) => messageCheckTimer.Start(), TaskScheduler.FromCurrentSynchronizationContext());
         }
 
         private async void timer1_Tick(object sender, EventArgs e)
         {
 
         }
-        private async void ShowNotification(string message)
+        private async void ShowNotification(string message, DataRow messageRow)
         {
-            if (!isNotificationShown) // 팝업이 떠있지 않을 때만 실행
+            int messageId = Convert.ToInt32(messageRow["id"]);
+            int status = Convert.ToInt32(messageRow["checkstate"]);
+
+            if (status == 1 && !isNotificationShown) // 확인되지 않은 상태일 때만 메시지를 표시합니다.
             {
                 isNotificationShown = true; // 팝업이 떠있음을 설정
 
@@ -320,9 +325,35 @@ namespace DBP_TeamProject.Forms
                     isNotificationShown = false;
 
                     // 새로운 알림을 표시하기 위해 메시지 목록을 갱신
+                    UpdateMessageStatusInDB(messageId, 0); // 상태를 확인된 상태(0)로 업데이트
                     ShowReceivedMessagesForUser(loginedUser.UserId);
                 }
             }
         }
+        private void UpdateMessageStatusInDB(int messageId, int newStatus)
+        {
+            DBManager dbManager = DBManager.GetInstance();
+            dbManager.InitDBManager();
+            try
+            {
+                string updateQuery = $"UPDATE message SET checkstate = {newStatus} WHERE id = {messageId}";
+                int rowsAffected = dbManager.ExecuteNonQueury(updateQuery);
+
+                if (rowsAffected > 0)
+                {
+                    // 업데이트 성공
+                }
+                else
+                {
+                    MessageBox.Show("메시지 상태 업데이트에 실패했습니다.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"메시지 상태 업데이트 중 오류 발생: {ex.Message}");
+            }
+            dbManager.CloseConnection();
+        }
+
     }
 }
