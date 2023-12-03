@@ -106,7 +106,7 @@ namespace DBP_TeamProject.Forms
             if (LoginedUser.getInstance().Level != "관리자") // 관리자 이외 접근 불가
             {
                 MessageBox.Show("관리자만 접근할 수 있습니다.");
-                return; 
+                return;
             }
             MasterMaker MastermakerForm = new MasterMaker();
             MastermakerForm.Show();
@@ -477,35 +477,6 @@ namespace DBP_TeamProject.Forms
         }
 
 
-        private void FormWork_Load(object sender, EventArgs e)
-        {
-            // 부서 테이블에서 중복 없이 부서이름들을 가져오기
-            List<string> departmentNames = GetDistinctDepartmentNames();
-
-            // 대분류 테이블에 순차적으로 삽입
-            foreach (string departmentName in departmentNames)
-            {
-                // 대분류가 이미 존재하는지 확인
-                if (!IsDepartmentExists("분류_대분류", "대분류명", departmentName))
-                {
-                    // 대분류ID를 현재 테이블에서 사용 중인 가장 큰 값에 1을 더하여 가져오기
-                    int nextBigCategoryId = GetNextCategoryId("분류_대분류", "대분류ID");
-
-                    // 대분류를 삽입
-                    InsertDepartment("분류_대분류", "대분류ID", "대분류명", nextBigCategoryId, departmentName);
-                }
-            }
-
-
-            // 콤보박스 다시 로드
-            comboBox_bigcategory.SelectedIndex = -1;
-            comboBox_bigcategory.Items.Clear();
-            LoadExistingData(comboBox_bigcategory, "대분류ID", "대분류명", "분류_대분류");
-
-
-            comboBox_midcategory.SelectedIndex = -1;
-            comboBox_midcategory.Items.Clear();
-        }
 
 
         // 중복 없이 부서이름들을 가져오는 메서드
@@ -604,7 +575,7 @@ namespace DBP_TeamProject.Forms
                             exec();
             Category.GetInstance().LoadComboBoxData(comboBox_bigcategory, query, "부서이름");
         }
-   
+
         // [#1-1] 중분류 콤보박스 드롭다운
         private void comboBox_midcategory_DropDown(object sender, EventArgs e)
         {
@@ -648,6 +619,73 @@ namespace DBP_TeamProject.Forms
                             where($"중분류ID IN (SELECT 중분류ID FROM 분류_중분류 WHERE 대분류ID={selectedBigCategoryID} AND 중분류명='{midcategoryName}')").
                             exec();
             Category.GetInstance().LoadComboBoxData(comboBox_smallcategory, query, "소분류명");
+        }
+
+        private void FormWork_Load(object sender, EventArgs e)
+        {
+            // 로그인한 사용자의 부서 이름 가져오기
+            string userDepartment = LoginedUser.getInstance().Department;
+
+            // 부서 테이블에서 중복 없이 부서이름들을 가져오기
+            List<string> departmentNames = GetDistinctDepartmentNamesFromEmployee();
+
+            // 대분류 테이블에 순차적으로 삽입
+            foreach (string departmentName in departmentNames)
+            {
+                // 대분류가 이미 존재하는지 확인
+                if (!IsDepartmentExists("분류_대분류", "대분류명", departmentName))
+                {
+                    // 대분류ID를 현재 테이블에서 사용 중인 가장 큰 값에 1을 더하여 가져오기
+                    int nextBigCategoryId = GetNextCategoryId("분류_대분류", "대분류ID");
+
+                    // 대분류를 삽입
+                    InsertDepartment("분류_대분류", "대분류ID", "대분류명", nextBigCategoryId, departmentName);
+                }
+            }
+
+            // 콤보박스 다시 로드
+            comboBox_bigcategory.SelectedIndex = -1;
+            comboBox_bigcategory.Items.Clear();
+            LoadExistingData(comboBox_bigcategory, "대분류ID", "대분류명", "분류_대분류");
+
+            // 폼이 로드될 때 로그인한 유저의 부서 이름으로 대분류 콤보박스를 초기화하고 선택되도록 함
+            if (comboBox_bigcategory.Items.OfType<DataItem>().Any(item => item.Name.Equals(userDepartment, StringComparison.OrdinalIgnoreCase)))
+            {
+                comboBox_bigcategory.SelectedItem = comboBox_bigcategory.Items.OfType<DataItem>().First(item => item.Name.Equals(userDepartment, StringComparison.OrdinalIgnoreCase));
+                comboBox_bigcategory.Enabled = false; // 사용자가 변경하지 못하도록 비활성화
+            }
+            else
+            {
+                MessageBox.Show("로그인한 유저의 부서가 대분류 목록에 없습니다.");
+            }
+        }
+
+        private List<string> GetDistinctDepartmentNamesFromEmployee()
+        {
+            List<string> departmentNames = new List<string>();
+
+            string connectionString = "Server=115.85.181.212;Database=s5585452;User ID=s5585452;Password=s5585452; charset=utf8;";
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = "SELECT DISTINCT 부서이름 FROM 사원";
+
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string departmentName = reader["부서이름"].ToString();
+                            departmentNames.Add(departmentName);
+                        }
+                    }
+                }
+            }
+
+            return departmentNames;
         }
     }
 }

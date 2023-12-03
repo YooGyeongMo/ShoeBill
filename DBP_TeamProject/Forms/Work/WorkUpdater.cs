@@ -103,8 +103,11 @@ namespace DBP_TeamProject.Forms
         // [#1] 데이터 그리드 뷰 셀 클릭 이벤트
         private void dataGridView_search_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+
+
             if (dataGridView_search.SelectedCells.Count > 0 && e.RowIndex != dataGridView_search.Rows.Count - 1)
             {
+
                 int rowIndex = dataGridView_search.SelectedCells[0].RowIndex;
 
                 DataGridViewRow selectedRow = dataGridView_search.Rows[rowIndex]; // 선택된 행의 값을 가져오기.
@@ -117,6 +120,21 @@ namespace DBP_TeamProject.Forms
                 comboBox_smallcategory.Text = selectedRow.Cells["소분류명"].Value.ToString();
                 textBox_memo.Text = selectedRow.Cells["비고"].Value.ToString();
 
+                // 시작시간 및 종료시간 가져오기
+                workStartTime = (TimeSpan)selectedRow.Cells["업무시작시간"].Value;
+                TimeSpan startTime = workStartTime;
+                TimeSpan endTime = (TimeSpan)selectedRow.Cells["업무종료시간"].Value;
+   
+
+
+                // 시작시간을 시간과 분으로 ComboBox에 설정
+                comboBox_stime.Text = startTime.Hours.ToString("00"); // 2자리 수로 표시
+                comboBox_smin.Text = startTime.Minutes.ToString("00");
+
+                // 종료시간을 시간과 분으로 ComboBox에 설정
+                comboBox_etime.Text = endTime.Hours.ToString("00"); // 2자리 수로 표시
+                comboBox_emin.Text = endTime.Minutes.ToString("00");
+
                 if (!string.IsNullOrEmpty(selectedRow.Cells["업무등록일자"].Value.ToString()))
                 {
                     return;
@@ -125,18 +143,7 @@ namespace DBP_TeamProject.Forms
                 DateTime parsedDate = DateTime.Parse(workDate);
                 dateOnly = parsedDate.ToString("yyyy-MM-dd");
 
-                // 시작시간 및 종료시간 가져오기
-                workStartTime = (TimeSpan)selectedRow.Cells["업무시작시간"].Value;
-                TimeSpan startTime = workStartTime;
-                TimeSpan endTime = (TimeSpan)selectedRow.Cells["업무종료시간"].Value;
-
-                // 시작시간을 시간과 분으로 분리하여 ComboBox에 설정
-                comboBox_stime.Text = startTime.Hours.ToString();
-                comboBox_smin.Text = startTime.Minutes.ToString();
-
-                // 종료시간을 시간과 분으로 분리하여 ComboBox에 설정
-                comboBox_etime.Text = endTime.Hours.ToString();
-                comboBox_emin.Text = endTime.Minutes.ToString();
+                
             }
             else
             {
