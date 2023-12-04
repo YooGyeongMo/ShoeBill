@@ -15,6 +15,8 @@ namespace DBP_TeamProject.Forms
     {
         private DBManager dbManager;
         private string query;
+        string departmentName;
+        string departmentNameToDelete;
 
         public DepartmentManagement()
         {
@@ -61,6 +63,25 @@ namespace DBP_TeamProject.Forms
                 dbManager.ExecuteNonQueury(insertQuery);
                 MessageBox.Show("부서가 성공적으로 추가되었습니다.", "성공", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+                //분류 테이블 대분류명 중복체크
+                string insertCategoryDulQuery = Query.GetInstance()
+                                .select("COUNT(*)")
+                                .from("분류_대분류")
+                                .where($"대분류명 = '{departmentName}'")
+                                .exec();
+
+                if (dbManager.IsDuplicated(insertCategoryDulQuery))
+                {
+                    MessageBox.Show("분류_대분류 테이블에 부서 이름이 이미 존재합니다.", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                string insertCartegoryQuery = Query.GetInstance()
+                                 .insert("분류_대분류 (대분류명)")
+                                 .values($"('{departmentName}')")
+                                 .exec();
+                dbManager.ExecuteNonQueury(insertCartegoryQuery);
+
                 UpdateUI();
             }
             catch (Exception ex)
@@ -73,6 +94,7 @@ namespace DBP_TeamProject.Forms
             }
         }
 
+        //부서명을 콤보박스에서 현재 존재하는 것을 선택한 후 수정쿼리 보내기 위한 버튼
         private void UpdateUI()
         {
             UpdateDepartmentComboBox();
@@ -132,6 +154,31 @@ namespace DBP_TeamProject.Forms
                 dbManager.ExecuteNonQueury(updateDepartmentQuery);
 
                 MessageBox.Show($"부서 이름이 '{currentDepartmentName}'에서 '{newDepartmentName}'(으)로 성공적으로 업데이트되었습니다.", "성공", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                //DB분류테이블에 중복체크 후
+                string checkNewDepartmentNameExistInCategoryQuery = Query.GetInstance()
+                            .select("COUNT(*)")
+                            .from("분류_대분류")
+                            .where($"대분류명 = '{newDepartmentName}'")
+                            .exec();
+
+                MySqlCommand cmd1 = new MySqlCommand(checkNewDepartmentNameExistInCategoryQuery, dbManager.Connection);
+                int count1 = Convert.ToInt32(cmd1.ExecuteScalar());
+                if (count > 0)
+                {
+                    UpdateUI();
+                    return;
+                }
+
+                // 분류_대분류 테이블에 update
+                string updateDepartmentCategoryQuery = Query.GetInstance()
+                            .update("분류_대분류")
+                            .set($"대분류명 = '{newDepartmentName}'")
+                            .where($"대분류명 = '{currentDepartmentName}'")
+                            .exec();
+
+                dbManager.ExecuteNonQueury(updateDepartmentCategoryQuery);
+
                 UpdateDepartmentComboBox();
             }
             catch (Exception ex)
@@ -183,7 +230,7 @@ namespace DBP_TeamProject.Forms
                 MessageBox.Show("부서를 입력해주세요.");
                 return;
             }
-            string departmentNameToDelete = delete_depatment_name_input_textbox.Text;
+            departmentNameToDelete = delete_depatment_name_input_textbox.Text;
 
             dbManager.InitDBManager();
 
@@ -221,7 +268,7 @@ namespace DBP_TeamProject.Forms
                         dbManager.ExecuteNonQueury(deleteDepartmentQuery);
                         MessageBox.Show("부서명을 성공적으로 삭제했습니다.", "성공", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         UpdateUI();
-
+                        DeleteBigCate(); // 대분류명 삭제
                     }
                 }
                 else
@@ -238,7 +285,27 @@ namespace DBP_TeamProject.Forms
                 dbManager.CloseConnection();
             }
         }
-
+        // 대분류명 삭제
+        public void DeleteBigCate()
+        {
+            try
+            {
+                string query = Query.GetInstance().
+                                deleteFrom("분류_대분류").
+                                where($"대분류명 = '{departmentNameToDelete}'").
+                                exec();
+                DBManager.GetInstance().InitDBManager().ExecuteNonQueury(query);
+                MessageBox.Show("대분류가 삭제되었습니다.", "성공", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("예외 발생: " + ex.ToString());
+            }
+            finally
+            {
+                DBManager.GetInstance().CloseConnection();
+            }
+        }
         //부서장을 수정하기 위해서 전체조회
 
         private void for_department_leader_searching_result_to_combobox_btn_Click(object sender, EventArgs e)

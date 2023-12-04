@@ -43,6 +43,17 @@ namespace DBP_TeamProject.Forms
                                 exec();
             Category.GetInstance().LoadComboBoxData(comboBox_date, query, "날짜");
         }
+        // [#0] 등록자 정보
+
+        private void comboBox_user_DropDown(object sender, EventArgs e)
+        {
+            comboBox_user.Items.Clear(); // 콤보박스 내용 초기화
+            string query = Query.GetInstance().
+                                select("DISTINCT 업무등록자").
+                                from("일일업무").
+                                exec();
+            Category.GetInstance().LoadComboBoxData(comboBox_user, query, "업무등록자");
+        }
         // [#0] 검색버튼 클릭
         private void button_search_Click(object sender, EventArgs e)
         {
@@ -124,7 +135,7 @@ namespace DBP_TeamProject.Forms
                 workStartTime = (TimeSpan)selectedRow.Cells["업무시작시간"].Value;
                 TimeSpan startTime = workStartTime;
                 TimeSpan endTime = (TimeSpan)selectedRow.Cells["업무종료시간"].Value;
-   
+
 
 
                 // 시작시간을 시간과 분으로 ComboBox에 설정
@@ -143,7 +154,7 @@ namespace DBP_TeamProject.Forms
                 DateTime parsedDate = DateTime.Parse(workDate);
                 dateOnly = parsedDate.ToString("yyyy-MM-dd");
 
-                
+
             }
             else
             {
@@ -332,5 +343,6 @@ namespace DBP_TeamProject.Forms
         {
             return startTime1 < endTime2 && startTime2 < endTime1;
         }
+
     }
 }
