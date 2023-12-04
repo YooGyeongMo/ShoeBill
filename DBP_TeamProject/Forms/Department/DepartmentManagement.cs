@@ -270,16 +270,6 @@ namespace DBP_TeamProject.Forms
 
         private void for_department_leader_insert_and_update_btn_Click(object sender, EventArgs e)
         {
-            if (recent_department_name_list_for_leader_searching_combobox.SelectedIndex == -1)
-            {
-                MessageBox.Show("부서를 선택해주세요.");
-                return;
-            }
-            if (for_depatment_leader_input_employeeName_textBox.Text == "")
-            {
-                MessageBox.Show("이름을 입력해주세요.");
-                return;
-            }
             string selectedDepartment = recent_department_name_list_for_leader_searching_combobox.SelectedItem.ToString();
             string newLeaderName = for_depatment_leader_input_employeeName_textBox.Text;
 
@@ -287,47 +277,87 @@ namespace DBP_TeamProject.Forms
 
             try
             {
-
-                // 현재 부서장 조회
-                string checkLeaderQuery = Query.GetInstance()
+                // 1. 현재 부서장 확인
+                string currentLeaderQuery = Query.GetInstance()
                     .select("부서장이름")
                     .from("부서")
                     .where($"부서이름 = '{selectedDepartment}'")
                     .exec();
 
-                MySqlCommand cmd = new MySqlCommand(checkLeaderQuery, dbManager.Connection);
-                var currentLeaderName = cmd.ExecuteScalar();
+                MySqlCommand currentLeaderCmd = new MySqlCommand(currentLeaderQuery, dbManager.Connection);
+                var currentLeader = currentLeaderCmd.ExecuteScalar();
 
-                string message;
-                string updateQuery;
-
-                if (currentLeaderName == null || currentLeaderName == DBNull.Value)
+                if (currentLeader != DBNull.Value && currentLeader.ToString() != newLeaderName)
                 {
-                    updateQuery = Query.GetInstance()
-                      .update("부서")
-                      .set($"부서장이름 = '{newLeaderName}'")
-                      .where($"부서이름 = '{selectedDepartment}'")
-                      .exec();
+                    MessageBox.Show($"{selectedDepartment} 부서에 이미 부서장이 있습니다. 다른 부서장을 선택하세요.", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                else if (currentLeader != DBNull.Value && currentLeader.ToString() == newLeaderName)
+                {
+                    MessageBox.Show($"{selectedDepartment} 부서에 본인이 부서장입니다. 다른 부서를 선택하세요.", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
 
-                    message = "부서장이 업데이트되었습니다.";
+                // 2. 임명될 사원의 현재 상태 확인
+                string checkEmployeeQuery = Query.GetInstance()
+                    .select("부서이름, 직급")
+                    .from("사원")
+                    .where($"이름 = '{newLeaderName}'")
+                    .exec();
 
+                MySqlCommand employeeCmd = new MySqlCommand(checkEmployeeQuery, dbManager.Connection);
+                MySqlDataReader reader = employeeCmd.ExecuteReader();
+                string currentDepartment = null;
+                string currentRole = null;
+
+                if (reader.Read())
+                {
+                    currentDepartment = reader["부서이름"].ToString();
+                    currentRole = reader["직급"].ToString();
+                }
+
+                reader.Close();
+
+                if (currentRole == "부서장" && currentDepartment != selectedDepartment)
+                {
+                    MessageBox.Show("이미 다른 부서의 부서장입니다. 다른 사원을 선택하세요.", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // 선택된 부서가 사원이 속한 부서와 일치하지 않는 경우
+                if (selectedDepartment != currentDepartment)
+                {
+                    MessageBox.Show("현재 선택한 부서와 사원이 속한 부서가 일치하지 않습니다. 부서이동 후 부서장 임명을 진행하세요.", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+
+                // 임명될 사원이 '일반 사원'이고, 선택된 부서에 현재 부서장이 없는 경우에만 부서장 임명
+                if (currentRole == "일반 사원" && currentLeader == DBNull.Value)
+                {
+                    // 부서 테이블에서 부서장 업데이트
+                    string updateDepartmentQuery = Query.GetInstance()
+                        .update("부서")
+                        .set($"부서장이름 = '{newLeaderName}'")
+                        .where($"부서이름 = '{selectedDepartment}'")
+                        .exec();
+                    dbManager.ExecuteNonQueury(updateDepartmentQuery);
+
+                    // 사원 테이블에서 해당 사원의 직급과 부서명 업데이트
+                    string updateEmployeeQuery = Query.GetInstance()
+                        .update("사원")
+                        .set($"직급 = '부서장', 부서이름 = '{selectedDepartment}'")
+                        .where($"이름 = '{newLeaderName}'")
+                        .exec();
+                    dbManager.ExecuteNonQueury(updateEmployeeQuery);
+
+                    MessageBox.Show($"{selectedDepartment} 부서에 새로운 부서장이 임명되었습니다.", "성공", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    UpdateUI();
                 }
                 else
                 {
-                    // 부서장이 이미 있을 경우 부서장 정보 업데이트
-                    updateQuery = Query.GetInstance()
-                         .update("부서")
-                         .set($"부서장이름 = '{newLeaderName}'")
-                         .where($"부서이름 = '{selectedDepartment}'")
-                         .exec();
-
-                    message = "부서장이 업데이트되었습니다.";
-
+                    MessageBox.Show("부서장을 임명할 수 없습니다.", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-
-                dbManager.ExecuteNonQueury(updateQuery);
-                MessageBox.Show(message, "성공", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                UpdateUI();
             }
             catch (Exception ex)
             {
@@ -335,22 +365,14 @@ namespace DBP_TeamProject.Forms
             }
             finally
             {
+                UpdateUI();
                 dbManager.CloseConnection();
             }
+
         }
 
         private void for_department_leader_delete_btn_Click(object sender, EventArgs e)
         {
-            if (recent_department_name_list_for_leader_searching_combobox.SelectedIndex == -1)
-            {
-                MessageBox.Show("부서를 선택해주세요.");
-                return;
-            }
-            if (for_depatment_leader_input_employeeName_textBox.Text == "")
-            {
-                MessageBox.Show("이름을 입력해주세요.");
-                return;
-            }
             string selectedDepartment = recent_department_name_list_for_leader_searching_combobox.SelectedItem.ToString();
             string enteredLeaderName = for_depatment_leader_input_employeeName_textBox.Text;
 
@@ -358,6 +380,7 @@ namespace DBP_TeamProject.Forms
 
             try
             {
+
                 // DB에서 해당 부서의 부서장 이름을 조회
                 string leaderNameQuery = Query.GetInstance()
                             .select("부서장이름")
@@ -378,6 +401,16 @@ namespace DBP_TeamProject.Forms
                                 .exec();
 
                     dbManager.ExecuteNonQueury(deleteLeaderQuery);
+
+                    // 사원 테이블에서 해당 사원의 직급을 '일반사원'으로 업데이트
+                    string updateEmployeeRoleQuery = Query.GetInstance()
+                                .update("사원")
+                                .set("직급 = '일반 사원'")
+                                .where($"이름 = '{enteredLeaderName}'")
+                                .exec();
+
+                    dbManager.ExecuteNonQueury(updateEmployeeRoleQuery);
+
                     MessageBox.Show($"{enteredLeaderName} 부서장 직급 해제하였습니다.", "성공", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     UpdateUI();
                 }
@@ -395,6 +428,7 @@ namespace DBP_TeamProject.Forms
             {
                 dbManager.CloseConnection();
             }
+
         }
 
         private void DepartmentManagement_Load(object sender, EventArgs e)

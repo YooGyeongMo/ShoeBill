@@ -76,12 +76,17 @@ namespace DBP_TeamProject.Forms.EmployeeManagement
         {
             if (IsAnyComboBoxesEmpty(modGroupBox))
             {
-                errMsg.Text = "수정할 부서와 직급을 선택해주세요";
+                errMsg.Text = "수정할 부서를 선택해주세요";
                 errMsg.ForeColor = System.Drawing.Color.Red;
             }
             else // 콤보박스가 비어있지 않다면
             {
                 errMsg.Text = "";
+                if (GetRate(name) == "부서장") // 
+                {
+                    MessageBox.Show("부서장은 직급 해제 후에 부서를 이동해주세요.");
+                    return;
+                }
                 string deapartment = departmentComboBox.SelectedItem.ToString();
 
                 string query = Query.GetInstance().
@@ -96,7 +101,20 @@ namespace DBP_TeamProject.Forms.EmployeeManagement
                 MessageBox.Show("정보 수정에 성공했습니다");
             }
         }
+        public string GetRate(string name)
+        {
+            string rate;
+            string query = Query.GetInstance().
+                    select("직급").
+                    from("사원").
+                    where($"이름='{name}'").
+                    exec();
 
+            rate = DBManager.GetInstance().InitDBManager().getLevel(query);
+            DBManager.GetInstance().CloseConnection();
+
+            return rate;
+        }
         private void memberdataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)

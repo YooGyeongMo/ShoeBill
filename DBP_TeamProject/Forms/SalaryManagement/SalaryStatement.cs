@@ -227,6 +227,37 @@ namespace DBP_TeamProject.Forms.SalaryManagement
             return result;
         }
         // [#2-2] 야간 근로
+        public string GetNightWork(string selectedDate)
+        {
+            string result = null;
+            try
+            {
+                string query = Query.GetInstance()
+                        .select("SUM(HOUR(TIMEDIFF(TIME(퇴근시간), '17:00:00'))) AS 총초과근무시간")
+                        .from("출근부")
+                        .where($"사원ID='{id_input}' AND TIME(퇴근시간) > '17:00:00' AND DATE_FORMAT(출근날짜, '%Y-%m') = '{selectedDate}'")
+                        .exec();
+
+                result = DBManager.GetInstance().InitDBManager().GetInfo(query);
+                if (result == "")
+                {
+                    result = "0";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("예외 발생: " + ex.ToString());
+            }
+            finally
+            {
+                DBManager.GetInstance().CloseConnection();
+            }
+            nightWork.Text = result;
+            nightWork.ForeColor = Color.Blue;
+
+            return result;
+        }
+        // [#2-3] 휴일 근로
         public string GetHolidayWork(string selectedDate)
         {
             string result = null;
@@ -239,7 +270,10 @@ namespace DBP_TeamProject.Forms.SalaryManagement
                         .exec();
 
                 result = DBManager.GetInstance().InitDBManager().GetInfo(query);
-
+                if (result == "")
+                {
+                    result = "0";
+                }
             }
             catch (Exception ex)
             {
@@ -255,39 +289,14 @@ namespace DBP_TeamProject.Forms.SalaryManagement
 
             return result;
         }
-        // [#2-3] 휴일 근로
-        public string GetNightWork(string selectedDate)
-        {
-            string result = null;
-            try
-            {
-                string query = Query.GetInstance()
-                        .select("SUM(HOUR(TIMEDIFF(TIME(퇴근시간), '17:00:00'))) AS 총초과근무시간")
-                        .from("출근부")
-                        .where($"사원ID='{id_input}' AND TIME(퇴근시간) > '17:00:00' AND DATE_FORMAT(출근날짜, '%Y-%m') = '{selectedDate}'")
-                        .exec();
-
-                result = DBManager.GetInstance().InitDBManager().GetInfo(query);
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("예외 발생: " + ex.ToString());
-            }
-            finally
-            {
-                DBManager.GetInstance().CloseConnection();
-            }
-            nightWork.Text = result;
-            nightWork.ForeColor = Color.Blue;
-
-            return result;
-        }
         // [#3] 근로시간 등록 버튼 클릭 이벤트
         private void salarySaveButton_Click(object sender, EventArgs e)
         {
             if (AreAllLabelsEmpty(additWorkGroupBox)) // 라벨의 값이 있는지 검사
             {
+                overTimeWork.Text = "";
+                nightWork.Text = "";
+                holidayWork.Text = "";
                 if (!IsDuplicateId(id_input))
                 {
                     SaveAdditSalaryTable(id_input, totalTime, overTime, nightTime, holidayTime); // [#3] 추가 수당 정보 입력

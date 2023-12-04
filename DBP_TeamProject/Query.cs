@@ -80,6 +80,11 @@ namespace DBP_TeamProject
             this.query += " GROUP BY " + query;
             return this;
         }
+        public Query orderBy(string query)
+        {
+            this.query += " ORDER BY " + query;
+            return this;
+        }
         public Query deleteFrom(string query)
         {
             this.query = "DELETE FROM " + query;

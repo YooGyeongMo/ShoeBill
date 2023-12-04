@@ -61,6 +61,7 @@ namespace DBP_TeamProject.Forms.SalaryManagement
                                 "((100 - (SELECT 국민연금+국민건강보험+국민건강보험_장기요양+고용보험료 FROM 공제))/100)) AS 실수령액")  // * (100-공제)/100 = [실수령액]
                                 .from("근로시간")
                                 .where(whereString)
+                                .orderBy("사원ID ASC")
                                 .exec();
 
                 DataTable dataTable = DBManager.GetInstance().InitDBManager().FindDataTable(query);

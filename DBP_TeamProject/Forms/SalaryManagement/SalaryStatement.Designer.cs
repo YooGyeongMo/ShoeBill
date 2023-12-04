@@ -53,9 +53,10 @@
             // 
             // salarySaveButton
             // 
-            salarySaveButton.Location = new Point(550, 283);
+            salarySaveButton.Location = new Point(707, 377);
+            salarySaveButton.Margin = new Padding(4);
             salarySaveButton.Name = "salarySaveButton";
-            salarySaveButton.Size = new Size(142, 59);
+            salarySaveButton.Size = new Size(183, 79);
             salarySaveButton.TabIndex = 2;
             salarySaveButton.Text = "근로 시간 등록하기";
             salarySaveButton.UseVisualStyleBackColor = true;
@@ -63,9 +64,10 @@
             // 
             // NightTimeLoadButton
             // 
-            NightTimeLoadButton.Location = new Point(258, 321);
+            NightTimeLoadButton.Location = new Point(332, 428);
+            NightTimeLoadButton.Margin = new Padding(4);
             NightTimeLoadButton.Name = "NightTimeLoadButton";
-            NightTimeLoadButton.Size = new Size(100, 43);
+            NightTimeLoadButton.Size = new Size(129, 57);
             NightTimeLoadButton.TabIndex = 3;
             NightTimeLoadButton.Text = "야간 근로 시간 조회";
             NightTimeLoadButton.UseVisualStyleBackColor = true;
@@ -74,18 +76,20 @@
             // AttendanceTime_GV
             // 
             AttendanceTime_GV.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            AttendanceTime_GV.Location = new Point(22, 113);
+            AttendanceTime_GV.Location = new Point(28, 151);
+            AttendanceTime_GV.Margin = new Padding(4);
             AttendanceTime_GV.Name = "AttendanceTime_GV";
             AttendanceTime_GV.RowHeadersWidth = 51;
             AttendanceTime_GV.RowTemplate.Height = 25;
-            AttendanceTime_GV.Size = new Size(442, 202);
+            AttendanceTime_GV.Size = new Size(568, 269);
             AttendanceTime_GV.TabIndex = 6;
             // 
             // calculateWorkTimeButton
             // 
-            calculateWorkTimeButton.Location = new Point(102, 147);
+            calculateWorkTimeButton.Location = new Point(131, 196);
+            calculateWorkTimeButton.Margin = new Padding(4);
             calculateWorkTimeButton.Name = "calculateWorkTimeButton";
-            calculateWorkTimeButton.Size = new Size(137, 27);
+            calculateWorkTimeButton.Size = new Size(176, 36);
             calculateWorkTimeButton.TabIndex = 7;
             calculateWorkTimeButton.Text = "추가 근로 시간 계산";
             calculateWorkTimeButton.UseVisualStyleBackColor = true;
@@ -94,68 +98,76 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(22, 33);
+            label1.Location = new Point(28, 44);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(59, 15);
+            label1.Size = new Size(74, 20);
             label1.TabIndex = 8;
             label1.Text = "사번 입력";
             // 
             // idTextBox
             // 
-            idTextBox.Location = new Point(85, 29);
+            idTextBox.Location = new Point(109, 39);
+            idTextBox.Margin = new Padding(4);
             idTextBox.Name = "idTextBox";
-            idTextBox.Size = new Size(100, 23);
+            idTextBox.Size = new Size(127, 27);
             idTextBox.TabIndex = 9;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(20, 39);
+            label2.Location = new Point(26, 52);
+            label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(83, 15);
+            label2.Size = new Size(104, 20);
             label2.TabIndex = 10;
             label2.Text = "연장근로 시간";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(20, 82);
+            label3.Location = new Point(26, 109);
+            label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
-            label3.Size = new Size(83, 15);
+            label3.Size = new Size(104, 20);
             label3.TabIndex = 11;
             label3.Text = "야간근로 시간";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(20, 119);
+            label4.Location = new Point(26, 159);
+            label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
-            label4.Size = new Size(83, 15);
+            label4.Size = new Size(104, 20);
             label4.TabIndex = 12;
             label4.Text = "휴일근로 시간";
             // 
             // overTimeWork
             // 
             overTimeWork.AutoSize = true;
-            overTimeWork.Location = new Point(124, 39);
+            overTimeWork.Location = new Point(159, 52);
+            overTimeWork.Margin = new Padding(4, 0, 4, 0);
             overTimeWork.Name = "overTimeWork";
-            overTimeWork.Size = new Size(0, 15);
+            overTimeWork.Size = new Size(0, 20);
             overTimeWork.TabIndex = 13;
             // 
             // nightWork
             // 
             nightWork.AutoSize = true;
-            nightWork.Location = new Point(124, 82);
+            nightWork.Location = new Point(159, 109);
+            nightWork.Margin = new Padding(4, 0, 4, 0);
             nightWork.Name = "nightWork";
-            nightWork.Size = new Size(0, 15);
+            nightWork.Size = new Size(0, 20);
             nightWork.TabIndex = 14;
             // 
             // holidayWork
             // 
             holidayWork.AutoSize = true;
-            holidayWork.Location = new Point(124, 119);
+            holidayWork.Location = new Point(159, 159);
+            holidayWork.Margin = new Padding(4, 0, 4, 0);
             holidayWork.Name = "holidayWork";
-            holidayWork.Size = new Size(0, 15);
+            holidayWork.Size = new Size(0, 20);
             holidayWork.TabIndex = 15;
             // 
             // additWorkGroupBox
@@ -167,20 +179,19 @@
             additWorkGroupBox.Controls.Add(label3);
             additWorkGroupBox.Controls.Add(overTimeWork);
             additWorkGroupBox.Controls.Add(label4);
-            additWorkGroupBox.Location = new Point(495, 74);
-            additWorkGroupBox.Margin = new Padding(2);
+            additWorkGroupBox.Location = new Point(636, 99);
             additWorkGroupBox.Name = "additWorkGroupBox";
-            additWorkGroupBox.Padding = new Padding(2);
-            additWorkGroupBox.Size = new Size(253, 190);
+            additWorkGroupBox.Size = new Size(325, 253);
             additWorkGroupBox.TabIndex = 16;
             additWorkGroupBox.TabStop = false;
             additWorkGroupBox.Text = "근로 시간 계산";
             // 
             // HolidayTimeLoadButton
             // 
-            HolidayTimeLoadButton.Location = new Point(364, 321);
+            HolidayTimeLoadButton.Location = new Point(468, 428);
+            HolidayTimeLoadButton.Margin = new Padding(4);
             HolidayTimeLoadButton.Name = "HolidayTimeLoadButton";
-            HolidayTimeLoadButton.Size = new Size(100, 43);
+            HolidayTimeLoadButton.Size = new Size(129, 57);
             HolidayTimeLoadButton.TabIndex = 17;
             HolidayTimeLoadButton.Text = "휴일 근로 시간 조회";
             HolidayTimeLoadButton.UseVisualStyleBackColor = true;
@@ -189,9 +200,11 @@
             // groupBox3
             // 
             groupBox3.Controls.Add(dateTimePicker1);
-            groupBox3.Location = new Point(213, 19);
+            groupBox3.Location = new Point(274, 25);
+            groupBox3.Margin = new Padding(4);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(251, 78);
+            groupBox3.Padding = new Padding(4);
+            groupBox3.Size = new Size(323, 104);
             groupBox3.TabIndex = 18;
             groupBox3.TabStop = false;
             groupBox3.Text = "월간 조회";
@@ -199,9 +212,10 @@
             // dateTimePicker1
             // 
             dateTimePicker1.CustomFormat = "";
-            dateTimePicker1.Location = new Point(25, 33);
+            dateTimePicker1.Location = new Point(32, 44);
+            dateTimePicker1.Margin = new Padding(4);
             dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(200, 23);
+            dateTimePicker1.Size = new Size(256, 27);
             dateTimePicker1.TabIndex = 8;
             // 
             // workTimeRegistPanel
@@ -214,18 +228,20 @@
             workTimeRegistPanel.Controls.Add(HolidayTimeLoadButton);
             workTimeRegistPanel.Controls.Add(additWorkGroupBox);
             workTimeRegistPanel.Controls.Add(NightTimeLoadButton);
-            workTimeRegistPanel.Location = new Point(0, 0);
+            workTimeRegistPanel.Location = new Point(17, 4);
+            workTimeRegistPanel.Margin = new Padding(4);
             workTimeRegistPanel.Name = "workTimeRegistPanel";
-            workTimeRegistPanel.Size = new Size(775, 392);
+            workTimeRegistPanel.Size = new Size(996, 523);
             workTimeRegistPanel.TabIndex = 20;
             // 
             // SalaryStatement
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(9F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(workTimeRegistPanel);
+            Margin = new Padding(4);
             Name = "SalaryStatement";
-            Size = new Size(848, 482);
+            Size = new Size(1090, 643);
             ((System.ComponentModel.ISupportInitialize)AttendanceTime_GV).EndInit();
             additWorkGroupBox.ResumeLayout(false);
             additWorkGroupBox.PerformLayout();
