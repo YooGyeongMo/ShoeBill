@@ -90,8 +90,8 @@ namespace DBP_TeamProject.Forms
             newApprove.Description = textBoxDescription.Text;
 
             newApprove.RelatedWork = comboBoxSubWork.Text;
-            newApprove.setFirstApprover(comboBoxFirstDepartment.Text, comboBoxFirstApprover.Text);
-            newApprove.setLastApprover(comboBoxLastDepartment.Text, comboBoxLastApprover.Text);
+            newApprove.setFirstApprover(comboBoxFirstDepartment.Text, textBoxFirstApprover.Text);
+            newApprove.setLastApprover(comboBoxLastDepartment.Text, textBoxLastApprover.Text);
         }
 
         private void approveCreate()
@@ -129,8 +129,8 @@ namespace DBP_TeamProject.Forms
             comboBoxLargeWork.Items.Clear();
             comboBoxFirstDepartment.Items.Clear();
             comboBoxLastDepartment.Items.Clear();
-            comboBoxFirstApprover.Items.Clear();
-            comboBoxLastApprover.Items.Clear();
+            textBoxFirstApprover.Clear();
+            textBoxLastApprover.Clear();
             comboBoxMediumWork.Items.Clear();
             comboBoxSubWork.Items.Clear();
             textBoxTitle.Clear();
@@ -200,14 +200,15 @@ namespace DBP_TeamProject.Forms
 
         private void comboBoxFirstDepartment_SelectedIndexChanged(object sender, EventArgs e)
         {
-            comboBoxFirstApprover.Items.Clear();
-            comboBoxFirstApprover.Items.AddRange(newApprove.firstApproverLoad(comboBoxFirstDepartment.Text).ToArray());
+            textBoxFirstApprover.Clear();
+            textBoxFirstApprover.Text = newApprove.firstApproverLoad(comboBoxFirstDepartment.Text);
         }
 
         private void comboBoxLastDepartment_SelectedIndexChanged(object sender, EventArgs e)
         {
-            comboBoxLastApprover.Items.Clear();
-            comboBoxLastApprover.Items.AddRange(newApprove.lastApproverLoad(comboBoxLastDepartment.Text).ToArray());
+            textBoxLastApprover.Clear();
+            textBoxLastApprover.Text = newApprove.lastApproverLoad(comboBoxLastDepartment.Text);
+            //comboBoxLastApprover.Items.AddRange(newApprove.lastApproverLoad(comboBoxLastDepartment.Text).ToArray());
         }
 
         private void ApproveCreateClick(object sender, EventArgs e)
@@ -352,11 +353,21 @@ namespace DBP_TeamProject.Forms
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(tabControl1.SelectedIndex == 2 && !loginedUser.Level.Equals("관리자"))
+            if (tabControl1.SelectedIndex == 2 && !loginedUser.Level.Equals("관리자"))
             {
                 tabControl1.SelectedIndex = 0;
                 MessageBox.Show("사장만 사용할 수 있는 페이지입니다!");
             }
+        }
+
+        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                FormApproveList formApproveList = new FormApproveList(int.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString()));
+                formApproveList.ShowDialog();
+            }
+            catch { }
         }
     }
 }

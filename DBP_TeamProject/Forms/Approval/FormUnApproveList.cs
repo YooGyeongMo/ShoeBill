@@ -29,7 +29,6 @@ namespace DBP_TeamProject.Forms.Approval
 
         private void setUnApproveList()
         {
-
             query.select("approverId, approver, approveTime, approveMemo, 이름")
                 .from("s5585452.Approver left join s5585452.사원 on s5585452.Approver.approver = s5585452.사원.사원Id")
                 .where($"approvalId = {approveId} and approveResult = 0");
