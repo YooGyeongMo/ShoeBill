@@ -29,8 +29,9 @@ namespace DBP_TeamProject.Forms.Approval
 
         private void setUnApproveList()
         {
-            query.select("approverId, approver, approveTime, approveMemo")
-                .from("s5585452.Approver")
+
+            query.select("approverId, approver, approveTime, approveMemo, 이름")
+                .from("s5585452.Approver left join s5585452.사원 on s5585452.Approver.approver = s5585452.사원.사원Id")
                 .where($"approvalId = {approveId} and approveResult = 0");
             DataTable dt = dbManager.FindDataTable(query.query);
 
@@ -42,6 +43,7 @@ namespace DBP_TeamProject.Forms.Approval
                 unApprove.ApproverId = int.Parse(dt.Rows[i][1].ToString());
                 unApprove.UnApproveDate = dt.Rows[i][2].ToString();
                 unApprove.UnApproveMemo = dt.Rows[i][3].ToString();
+                unApprove.ApproverName = dt.Rows[i][4].ToString();
                 unApproveList.Add(unApprove);
             }
         }
@@ -51,7 +53,7 @@ namespace DBP_TeamProject.Forms.Approval
             foreach (UnApprove unApprove in unApproveList)
             {
                 if (comboBox1.Items.Contains(unApprove.ApproverId)) continue;
-                comboBox1.Items.Add(unApprove.ApproverId);
+                comboBox1.Items.Add($"{unApprove.ApproverName} - {unApprove.ApproverId}");
             }
         }
 
@@ -61,7 +63,7 @@ namespace DBP_TeamProject.Forms.Approval
             comboBox2.Items.Clear();
             foreach (UnApprove unApprove in unApproveList)
             {
-                if (unApprove.ApproverId == int.Parse(comboBox1.SelectedItem.ToString()))
+                if (comboBox1.SelectedItem.ToString().Contains(unApprove.ApproverId.ToString()))
                 {
                     comboBox2.Items.Add(unApprove.UnApproveDate);
                 }
@@ -71,7 +73,7 @@ namespace DBP_TeamProject.Forms.Approval
         private void setUnApproveMemo()
         {
             textBox1.Clear();
-            textBox1.Text = unApproveList.Find(x => x.ApproverId == int.Parse(comboBox1.Text) && x.UnApproveDate == comboBox2.Text).UnApproveMemo;
+            textBox1.Text = unApproveList.Find(x => comboBox1.Text.Contains(x.ApproverId.ToString()) && x.UnApproveDate == comboBox2.Text).UnApproveMemo;
         }
 
         private void FormUnApproveList_Load(object sender, EventArgs e)

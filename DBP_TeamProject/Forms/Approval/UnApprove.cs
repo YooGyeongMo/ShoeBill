@@ -12,10 +12,12 @@ namespace DBP_TeamProject.Forms.Approval
         private int approverId;
         private string unApproveDate;
         private string unApproveMemo;
+        private string approverName;
 
         public int ApproveId { get => approveId; set => approveId = value; }
         public int ApproverId { get => approverId; set => approverId = value; }
         public string UnApproveDate { get => unApproveDate; set => unApproveDate = value; }
         public string UnApproveMemo { get => unApproveMemo; set => unApproveMemo = value; }
+        public string ApproverName { get => approverName; set => approverName = value; }
     }
 }

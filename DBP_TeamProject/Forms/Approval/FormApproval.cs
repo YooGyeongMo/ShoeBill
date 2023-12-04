@@ -41,8 +41,8 @@ namespace DBP_TeamProject.Forms
 
         private void approveTotalSearch()
         {
-            query.select("approveId as 결재아이디, userId as 기안자, subClass as 관련업무, approveTitle as 결재제목, approveMemo as 결재메모")
-                .from("s5585452.Approval")
+            query.select("approveId as 결재아이디, userId as 기안자 , 이름, subClass as 관련업무, approveTitle as 결재제목, approveMemo as 결재메모")
+                .from("s5585452.Approval left join s5585452.사원 on s5585452.Approval.userId = s5585452.사원.사원Id")
                 .where($"userId = {int.Parse(loginedUser.UserId)}");
             DataTable dt = dbManager.InitDBManager().FindDataTable(query.query);
             dataGridView1.DataSource = dt;
@@ -50,8 +50,8 @@ namespace DBP_TeamProject.Forms
 
         private void approveContinueDataSearch()
         {
-            query.select("approveId as 결재아이디, userId as 기안자, subClass as 관련업무, approveTitle as 결재제목, approveMemo as 결재메모")
-                .from("s5585452.Approval")
+            query.select("approveId as 결재아이디, userId as 기안자, 이름, subClass as 관련업무, approveTitle as 결재제목, approveMemo as 결재메모")
+                .from("s5585452.Approval left join s5585452.사원 on s5585452.Approval.userId = s5585452.사원.사원Id")
                 .where($"userId = {int.Parse(loginedUser.UserId)} and approveStatus = 0");
             DataTable dt = dbManager.InitDBManager().FindDataTable(query.query);
             dataGridView1.DataSource = dt;
@@ -59,8 +59,8 @@ namespace DBP_TeamProject.Forms
 
         private void approveEndDataSearch()
         {
-            query.select("approveId as 결재아이디, userId as 기안자, subClass as 관련업무, approveTitle as 결재제목, approveMemo as 결재메모")
-                .from("s5585452.Approval")
+            query.select("approveId as 결재아이디, userId as 기안자, 이름, subClass as 관련업무, approveTitle as 결재제목, approveMemo as 결재메모")
+                .from("s5585452.Approval left join s5585452.사원 on s5585452.Approval.userId = s5585452.사원.사원Id")
                 .where($"userId = {int.Parse(loginedUser.UserId)} and approveStatus = 1");
             DataTable dt = dbManager.InitDBManager().FindDataTable(query.query);
             dataGridView1.DataSource = dt;
@@ -68,8 +68,8 @@ namespace DBP_TeamProject.Forms
 
         private void approveListUpdate()
         {
-            query.select("approveId as 결재아이디, userId as 기안자, subClass as 관련업무, approveTitle as 결재제목, approveMemo as 결재메모")
-                .from("s5585452.Approval")
+            query.select("approveId as 결재아이디, userId as 기안자, 이름, subClass as 관련업무, approveTitle as 결재제목, approveMemo as 결재메모")
+                .from("s5585452.Approval left join s5585452.사원 on s5585452.Approval.userId = s5585452.사원.사원Id")
                 .where($"currApprover = {int.Parse(loginedUser.UserId)} and approveStatus = 0");
             DataTable dt = dbManager.InitDBManager().FindDataTable(query.query);
             dataGridView2.DataSource = dt;
@@ -352,7 +352,7 @@ namespace DBP_TeamProject.Forms
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(tabControl1.SelectedIndex == 2 && !loginedUser.Level.Equals("사장"))
+            if(tabControl1.SelectedIndex == 2 && !loginedUser.Level.Equals("관리자"))
             {
                 tabControl1.SelectedIndex = 0;
                 MessageBox.Show("사장만 사용할 수 있는 페이지입니다!");
