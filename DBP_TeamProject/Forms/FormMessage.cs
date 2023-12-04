@@ -144,7 +144,7 @@ namespace DBP_TeamProject.Forms
         }
 
         public void PopulateComboBox()
-        {   
+        {
             DBManager dbManager = DBManager.GetInstance();
             string query = "SELECT 사원ID, 부서이름, 이름, 직급 FROM 사원";
 
