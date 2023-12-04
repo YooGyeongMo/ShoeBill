@@ -270,6 +270,11 @@ namespace DBP_TeamProject.Forms
 
         private void for_department_leader_insert_and_update_btn_Click(object sender, EventArgs e)
         {
+            if (recent_department_name_list_for_leader_searching_combobox.SelectedIndex == -1)
+            {
+                MessageBox.Show("부서를 선택해주세요.");
+                return;
+            }
             string selectedDepartment = recent_department_name_list_for_leader_searching_combobox.SelectedItem.ToString();
             string newLeaderName = for_depatment_leader_input_employeeName_textBox.Text;
 
@@ -373,6 +378,11 @@ namespace DBP_TeamProject.Forms
 
         private void for_department_leader_delete_btn_Click(object sender, EventArgs e)
         {
+            if (recent_department_name_list_for_leader_searching_combobox.SelectedIndex == -1)
+            {
+                MessageBox.Show("부서를 선택해주세요.");
+                return;
+            }
             string selectedDepartment = recent_department_name_list_for_leader_searching_combobox.SelectedItem.ToString();
             string enteredLeaderName = for_depatment_leader_input_employeeName_textBox.Text;
 

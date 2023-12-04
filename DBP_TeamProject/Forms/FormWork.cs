@@ -249,7 +249,6 @@ namespace DBP_TeamProject.Forms
                 }
             }
             // 업무 등록 후 텍스트박스와 콤보박스 비우기
-            comboBox_bigcategory.SelectedIndex = -1;
             comboBox_midcategory.SelectedIndex = -1;
             comboBox_smallcategory.SelectedIndex = -1;
             textBox_memo.Text = "";

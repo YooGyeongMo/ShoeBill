@@ -84,6 +84,9 @@ namespace DBP_TeamProject.Forms.SalaryManagement
             else
             {
                 MessageBox.Show("등록된 사원이 없습니다.");
+                overTimeWork.Text = "";
+                nightWork.Text = "";
+                holidayWork.Text = "";
             }
         }
         public bool GetId(string id_input)
@@ -95,7 +98,7 @@ namespace DBP_TeamProject.Forms.SalaryManagement
                        .exec();
 
             bool result = DBManager.GetInstance().InitDBManager().GetId(query);
-
+            DBManager.GetInstance().CloseConnection();
             return result;
 
         }
@@ -156,6 +159,28 @@ namespace DBP_TeamProject.Forms.SalaryManagement
                 overTime = GetOverTimeWork(selectedDate); // [#2-1] 연장 근로
                 nightTime = GetNightWork(selectedDate); // [#2-2] 야간 근로
                 holidayTime = GetHolidayWork(selectedDate); // [#2-3] 휴일 근로  
+
+                if (overTime == "0" && nightTime == "0" && holidayTime == "0")
+                {
+                    MessageBox.Show("추가 근무가 없습니다.");
+                    return;
+                }
+                if ( int.Parse(overTime) < 0 ) // 연장 근로가 0보다 작으면
+                {
+                    overTime = "0";
+                }
+                if (int.Parse(totalTime) < 160) // 
+                {
+                    overTime = "0";
+                    nightTime = "0";
+                    holidayTime = "0";
+                }
+                overTimeWork.Text = overTime;
+                overTimeWork.ForeColor = Color.Blue;
+                nightWork.Text = nightTime;
+                nightWork.ForeColor = Color.Blue;
+                holidayWork.Text = holidayTime;
+                holidayWork.ForeColor = Color.Blue;           
             }
             else
             {
@@ -198,10 +223,9 @@ namespace DBP_TeamProject.Forms.SalaryManagement
                     .exec();
 
                 result = DBManager.GetInstance().InitDBManager().GetInfo(query);
-
                 if (result == "")
                 {
-                    MessageBox.Show("결과값이 없습니다.");
+                    result = "0";
                 }
                 else
                 {
@@ -221,8 +245,7 @@ namespace DBP_TeamProject.Forms.SalaryManagement
                 DBManager.GetInstance().CloseConnection();
             }
 
-            overTimeWork.Text = result;
-            overTimeWork.ForeColor = Color.Blue;
+
 
             return result;
         }
@@ -252,8 +275,6 @@ namespace DBP_TeamProject.Forms.SalaryManagement
             {
                 DBManager.GetInstance().CloseConnection();
             }
-            nightWork.Text = result;
-            nightWork.ForeColor = Color.Blue;
 
             return result;
         }
@@ -284,9 +305,6 @@ namespace DBP_TeamProject.Forms.SalaryManagement
                 DBManager.GetInstance().CloseConnection();
             }
 
-            holidayWork.Text = result;
-            holidayWork.ForeColor = Color.Blue;
-
             return result;
         }
         // [#3] 근로시간 등록 버튼 클릭 이벤트
@@ -299,6 +317,7 @@ namespace DBP_TeamProject.Forms.SalaryManagement
                 holidayWork.Text = "";
                 if (!IsDuplicateId(id_input))
                 {
+                    
                     SaveAdditSalaryTable(id_input, totalTime, overTime, nightTime, holidayTime); // [#3] 추가 수당 정보 입력
                     //MessageBox.Show("추가수당이 저장되었습니다!");
                 }
