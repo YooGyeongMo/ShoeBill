@@ -1,3 +1,4 @@
+using DBP_TeamProject.Forms;
 using DBP_TeamProject.Properties;
 using System.CodeDom.Compiler;
 using System.Runtime.InteropServices;
@@ -11,6 +12,8 @@ namespace DBP_TeamProject
         private Random random;
         private int tempIndex;
         private Form activeForm;
+        private System.Windows.Forms.Timer messageCheckTimer;
+        FormMessage formMessage = new FormMessage();
 
         public MainForm()
         {
@@ -169,6 +172,10 @@ namespace DBP_TeamProject
             try
             {
                 pictureBox.Image = Properties.Resources.ShoBill;
+                messageCheckTimer = new System.Windows.Forms.Timer();
+                messageCheckTimer.Interval = 3000; // 3초마다 확인
+                messageCheckTimer.Tick += new EventHandler(formMessage.MessageCheckTimer_Tick);
+                messageCheckTimer.Start();
             }
             catch (Exception ex)
             {

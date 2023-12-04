@@ -27,15 +27,10 @@ namespace DBP_TeamProject.Forms
             PopulateComboBox();
             ShowReceivedMessagesForUser(loginedUser.UserId);//자동으로 로그인한 유저 정보 받게 설정////////////////////////////////////////////////////////////////
 
-            // 타이머 초기화 및 설정
-            messageCheckTimer = new System.Windows.Forms.Timer();
-            messageCheckTimer.Interval = 5000; // 5초마다 확인
-            messageCheckTimer.Tick += new EventHandler(MessageCheckTimer_Tick);
-            messageCheckTimer.Start();
         }
 
 
-        private void MessageCheckTimer_Tick(object sender, EventArgs e)
+        public void MessageCheckTimer_Tick(object sender, EventArgs e)
         {
             ShowReceivedMessagesForUser(loginedUser.UserId); // 새로운 메시지 확인
 
@@ -311,25 +306,15 @@ namespace DBP_TeamProject.Forms
             int messageId = Convert.ToInt32(messageRow["id"]);
             int status = Convert.ToInt32(messageRow["checkstate"]);
 
-            if (status == 1 && !isNotificationShown) // 확인되지 않은 상태일 때만 메시지를 표시합니다.
-            {
-                isNotificationShown = true; // 팝업이 떠있음을 설정
+            isNotificationShown = true; // 팝업이 떠있음을 설정
 
-                DialogResult result = MessageBox.Show(message, "새로운 메시지 도착", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            UpdateMessageStatusInDB(messageId, 0); // 상태를 확인된 상태(0)로 업데이트
 
-                if (result == DialogResult.OK) // 사용자가 확인 버튼을 누르면
-                {
-                    await Task.Delay(3000); // 3초 대기
+            DialogResult result = MessageBox.Show(message, "새로운 메시지 도착", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    // 팝업이 닫힌 후에는 팝업이 더이상 떠있지 않도록 설정
-                    isNotificationShown = false;
-
-                    // 새로운 알림을 표시하기 위해 메시지 목록을 갱신
-                    UpdateMessageStatusInDB(messageId, 0); // 상태를 확인된 상태(0)로 업데이트
-                    ShowReceivedMessagesForUser(loginedUser.UserId);
-                }
-            }
+            ShowReceivedMessagesForUser(loginedUser.UserId);
         }
+
         private void UpdateMessageStatusInDB(int messageId, int newStatus)
         {
             DBManager dbManager = DBManager.GetInstance();

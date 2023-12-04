@@ -116,7 +116,7 @@
             // 
             richTextBox1.Location = new Point(12, 168);
             richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(740, 258);
+            richTextBox1.Size = new Size(740, 191);
             richTextBox1.TabIndex = 8;
             richTextBox1.Text = "";
             // 
@@ -124,16 +124,16 @@
             // 
             listBox1.FormattingEnabled = true;
             listBox1.ItemHeight = 25;
-            listBox1.Location = new Point(12, 465);
+            listBox1.Location = new Point(12, 390);
             listBox1.Name = "listBox1";
-            listBox1.Size = new Size(740, 129);
+            listBox1.Size = new Size(740, 229);
             listBox1.TabIndex = 9;
             listBox1.SelectedIndexChanged += listBox1_SelectedIndexChanged;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(12, 437);
+            label4.Location = new Point(12, 362);
             label4.Name = "label4";
             label4.Size = new Size(108, 25);
             label4.TabIndex = 10;
