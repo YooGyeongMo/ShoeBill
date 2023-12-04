@@ -27,6 +27,10 @@ namespace DBP_TeamProject.Forms
             PopulateComboBox();
             ShowReceivedMessagesForUser(loginedUser.UserId);//자동으로 로그인한 유저 정보 받게 설정////////////////////////////////////////////////////////////////
 
+            messageCheckTimer = new System.Windows.Forms.Timer();
+            messageCheckTimer.Interval = 3000; // 3초마다 확인
+            messageCheckTimer.Tick += new EventHandler(MessageCheckTimer_Tick);
+            messageCheckTimer.Start();
         }
 
 
@@ -140,7 +144,7 @@ namespace DBP_TeamProject.Forms
         }
 
         public void PopulateComboBox()
-        {
+        {   
             DBManager dbManager = DBManager.GetInstance();
             string query = "SELECT 사원ID, 부서이름, 이름, 직급 FROM 사원";
 
