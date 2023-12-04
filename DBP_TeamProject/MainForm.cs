@@ -172,10 +172,7 @@ namespace DBP_TeamProject
             try
             {
                 pictureBox.Image = Properties.Resources.ShoBill;
-                messageCheckTimer = new System.Windows.Forms.Timer();
-                messageCheckTimer.Interval = 3000; // 3초마다 확인
-                messageCheckTimer.Tick += new EventHandler(formMessage.MessageCheckTimer_Tick);
-                messageCheckTimer.Start();
+               ;
             }
             catch (Exception ex)
             {
@@ -187,6 +184,21 @@ namespace DBP_TeamProject
         private void label1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void MainForm_Shown(object sender, EventArgs e)
+        {
+            messageCheckTimer = new System.Windows.Forms.Timer();
+            messageCheckTimer.Interval = 3000; // 3초마다 확인
+            messageCheckTimer.Tick += new EventHandler(formMessage.MessageCheckTimer_Tick);
+            messageCheckTimer.Start();
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            messageCheckTimer.Stop();
+            messageCheckTimer.Dispose();
+            LoginedUser.getInstance().UserId = "";
         }
     }
 }
