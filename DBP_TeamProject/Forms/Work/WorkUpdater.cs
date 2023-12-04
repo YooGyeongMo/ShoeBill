@@ -146,7 +146,7 @@ namespace DBP_TeamProject.Forms
                 comboBox_etime.Text = endTime.Hours.ToString("00"); // 2자리 수로 표시
                 comboBox_emin.Text = endTime.Minutes.ToString("00");
 
-                if (!string.IsNullOrEmpty(selectedRow.Cells["업무등록일자"].Value.ToString()))
+                if (string.IsNullOrEmpty(selectedRow.Cells["업무등록일자"].Value.ToString()))
                 {
                     return;
                 }
@@ -322,8 +322,8 @@ namespace DBP_TeamProject.Forms
                             TimeSpan existingStartTime = ((TimeSpan)reader["업무시작시간"]);
                             TimeSpan existingEndTime = ((TimeSpan)reader["업무종료시간"]);
 
-                            MessageBox.Show(existingStartTime.ToString());
-                            MessageBox.Show(existingEndTime.ToString());
+                            //MessageBox.Show(existingStartTime.ToString());
+                            //MessageBox.Show(existingEndTime.ToString());
 
                             // 새로운 업무와 겹치는지 확인
                             if (IsTimeOverlap(newStartTime, newEndTime, existingStartTime, existingEndTime))
