@@ -163,6 +163,8 @@ namespace DBP_TeamProject.Forms.Approval
 
         public void createApprove()
         {
+
+
             query.insert("s5585452.Approval (userId, subClass, approveTitle, approvememo, currApprover, firstApprover, secondApprover, approveStatus)")
                 .values($"({loginedUser.UserId}, '{this.relatedWork}', '{this.title}', '{this.description}', {this.firstApprover}, {this.firstApprover}, {this.lastApprover}, false)").exec();
             int status = dbManager.InitDBManager().ExecuteNonQueury(query.query);

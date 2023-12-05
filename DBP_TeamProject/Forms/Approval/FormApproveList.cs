@@ -76,6 +76,11 @@ namespace DBP_TeamProject.Forms.Approval
 
         private void unApprovedMemoLoad()
         {
+            if (comboBoxApprover.SelectedItem == null)
+            {
+                MessageBox.Show("결재타입, 결재자, 결재날짜 모두 선택해주세요!");
+                return;
+            }
             textBox1.Text = approveList.Find(x => x.UnApproveDate.Equals(listBox1.SelectedItem.ToString()) && x.ApproveType == 0).UnApproveMemo;
         }
 
@@ -109,7 +114,7 @@ namespace DBP_TeamProject.Forms.Approval
         {
             if(listBox1.SelectedItem == null )
             {
-                MessageBox.Show("결재타입과 결재자모두 선택해주세요!");
+                MessageBox.Show("결재타입, 결재자, 결재날짜 모두 선택해주세요!");
                 return;
             }
             unApprovedMemoLoad();

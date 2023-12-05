@@ -89,13 +89,14 @@ namespace DBP_TeamProject.Forms
         }
 
         private void setApproveInfo()
-        {
+        { 
             newApprove.Title = textBoxTitle.Text;
             newApprove.Description = textBoxDescription.Text;
 
             newApprove.RelatedWork = comboBoxSubWork.Text;
             newApprove.setFirstApprover(comboBoxFirstDepartment.Text, textBoxFirstApprover.Text);
             newApprove.setLastApprover(comboBoxLastDepartment.Text, textBoxLastApprover.Text);
+
         }
 
         private void approveCreate()
@@ -121,6 +122,11 @@ namespace DBP_TeamProject.Forms
             else
             {
                 setApproveInfo();
+                if (newApprove.FirstApprover == newApprove.LastApprover)
+                {
+                    MessageBox.Show("중간, 최종결재자가 같습니다\r\n다른 결재자를 선택해주세요!");
+                    return;
+                }
                 newApprove.createApprove();
                 return;
             }
@@ -219,6 +225,7 @@ namespace DBP_TeamProject.Forms
 
         private void ApproveCreateClick(object sender, EventArgs e)
         {
+
             approveCreate();
         }
 
