@@ -22,6 +22,17 @@ namespace DBP_TeamProject.Forms
         string userId = LoginedUser.getInstance().UserId;
         private bool errorMessageShown = false;
 
+        private static FormMessage instance;
+
+        public static FormMessage GetInstance()
+        {
+            if (instance == null)
+            {
+                instance = new FormMessage();
+            }
+            return instance;
+        }
+
         public FormMessage()
         {
             InitializeComponent();
@@ -204,7 +215,7 @@ namespace DBP_TeamProject.Forms
                 "VALUES (@senderId, @recipientId, @title, @content, NOW(), @state)";
 
                 MySqlCommand cmd = new MySqlCommand(query, dbManager.Connection);
-                cmd.Parameters.AddWithValue("@senderId", userId); 
+                cmd.Parameters.AddWithValue("@senderId", userId);
                 cmd.Parameters.AddWithValue("@recipientId", recipientId);
                 cmd.Parameters.AddWithValue("@title", title);
                 cmd.Parameters.AddWithValue("@content", content);
@@ -264,7 +275,6 @@ namespace DBP_TeamProject.Forms
                         ShowNotification($"새로운 메시지: {messageTitle}", row);
                     }
                 }
-                dbManager.CloseConnection();
             }
             catch (Exception ex)
             {
@@ -404,7 +414,6 @@ namespace DBP_TeamProject.Forms
         }
         public void StopTimer()
         {
-
             if (messageCheckTimer2 != null)
             {
                 messageCheckTimer2.Stop();

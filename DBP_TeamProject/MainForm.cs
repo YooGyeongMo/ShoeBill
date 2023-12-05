@@ -14,7 +14,7 @@ namespace DBP_TeamProject
         private Form activeForm;
         private System.Windows.Forms.Timer messageCheckTimer;
         FormMessage formMessage = new FormMessage();
-        private FormMessage formMessage2 = new FormMessage();
+        FormMessage formMessage2 = FormMessage.GetInstance();
 
         public MainForm()
         {
