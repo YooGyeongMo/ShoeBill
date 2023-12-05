@@ -295,7 +295,7 @@ namespace DBP_TeamProject.Forms
                                 where($"대분류명 = '{departmentNameToDelete}'").
                                 exec();
                 DBManager.GetInstance().InitDBManager().ExecuteNonQueury(query);
-                MessageBox.Show("대분류가 삭제되었습니다.", "성공", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //MessageBox.Show("대분류가 삭제되었습니다.", "성공", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
@@ -372,18 +372,20 @@ namespace DBP_TeamProject.Forms
 
                 // 2. 임명될 사원의 현재 상태 확인
                 string checkEmployeeQuery = Query.GetInstance()
-                    .select("부서이름, 직급")
+                    .select("사원ID, 부서이름, 직급")
                     .from("사원")
                     .where($"이름 = '{newLeaderName}'")
                     .exec();
 
                 MySqlCommand employeeCmd = new MySqlCommand(checkEmployeeQuery, dbManager.Connection);
                 MySqlDataReader reader = employeeCmd.ExecuteReader();
+                string currName = null;
                 string currentDepartment = null;
                 string currentRole = null;
 
                 if (reader.Read())
                 {
+                    currName = reader["사원ID"].ToString();
                     currentDepartment = reader["부서이름"].ToString();
                     currentRole = reader["직급"].ToString();
                 }
@@ -419,7 +421,7 @@ namespace DBP_TeamProject.Forms
                     string updateEmployeeQuery = Query.GetInstance()
                         .update("사원")
                         .set($"직급 = '부서장', 부서이름 = '{selectedDepartment}'")
-                        .where($"이름 = '{newLeaderName}'")
+                        .where($"이름 = '{newLeaderName}' AND 사원ID = '{currName}'") // 동명이인 예외처리
                         .exec();
                     dbManager.ExecuteNonQueury(updateEmployeeQuery);
 

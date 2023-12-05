@@ -310,7 +310,7 @@ namespace DBP_TeamProject.Forms
                             where($"업무등록자 = '{userId}' AND 업무등록일자 = '{dateOnly}' AND 업무시작시간 != '{workStartTime}'").
                             exec();
 
-                MessageBox.Show(workStartTime.ToString());
+                //MessageBox.Show(workStartTime.ToString());
 
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {

@@ -15,6 +15,7 @@ namespace DBP_TeamProject.Forms.EmployeeManagement
     public partial class EmployeeModDel : UserControl
     {
         private string name = string.Empty;
+        private string id = string.Empty;
         private bool flag = false; // 데이터 그리드 뷰를 클릭했을 때 true가 됨
         public EmployeeModDel()
         {
@@ -59,16 +60,30 @@ namespace DBP_TeamProject.Forms.EmployeeManagement
                 errorMsgLabel.Text = "";
                 name = idTextBox.Text;
 
+                GetDataGridView();
+            }
+        }
+        public void GetDataGridView()
+        {
+            try
+            {
                 string query = Query.GetInstance().
-                    select("사원ID, 이름, 부서이름, 직급").
-                    from("사원").
-                    where($"이름='{name}'").
-                    exec();
+                        select("사원ID, 이름, 부서이름, 직급").
+                        from("사원").
+                        where($"이름='{name}'").
+                        exec();
 
                 DataTable dataTable = DBManager.GetInstance().InitDBManager().FindDataTable(query);
 
                 memberdataGridView.DataSource = dataTable;
                 memberdataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            }
+            catch(Exception ex) 
+            {
+                MessageBox.Show("에러메시지: " + ex);
+            }
+            finally
+            {
                 DBManager.GetInstance().CloseConnection();
             }
         }
@@ -92,13 +107,14 @@ namespace DBP_TeamProject.Forms.EmployeeManagement
                 string query = Query.GetInstance().
                     update("사원").
                     set($"부서이름 = '{deapartment}'").
-                    where($"이름='{name}'").
+                    where($"이름='{name}' AND 사원ID = '{id}'").  // 동명이인 생각
                     exec();
 
                 DBManager.GetInstance().InitDBManager().ExecuteNonQueury(query);
                 DBManager.GetInstance().CloseConnection();
 
                 MessageBox.Show("정보 수정에 성공했습니다");
+                GetDataGridView();
             }
         }
         public string GetRate(string name)
@@ -128,7 +144,7 @@ namespace DBP_TeamProject.Forms.EmployeeManagement
                 string rate = selectedRow.Cells["직급"].Value.ToString();
 
                 name = memName;
-                idLabel.Text = memID;
+                idLabel.Text = id = memID;
                 currDepartmentLabel.Text = departmentName;
                 currRateLabel.Text = rate;
             }
@@ -152,13 +168,19 @@ namespace DBP_TeamProject.Forms.EmployeeManagement
                     {
                         string query = Query.GetInstance().
                             deleteFrom("사원").
-                            where($"이름='{name}'").
+                            where($"이름='{name}' AND 사원ID = '{id}'").
                             exec();
                         DBManager.GetInstance().InitDBManager().ExecuteNonQueury(query);
                         DBManager.GetInstance().CloseConnection();
 
                         MessageBox.Show("성공적으로 삭제되었습니다.");
                     }
+                    GetDataGridView();
+                    idLabel.Text = "";
+                    currDepartmentLabel.Text = "";
+                    currRateLabel.Text = "";
+
+                    idTextBox.Text = "";
                 }
                 else
                 {

@@ -51,7 +51,12 @@ namespace DBP_TeamProject.Forms
         private void saveEmployeeButton_Click(object sender, EventArgs e)
         {
             string stringErrorMsg = "";
-
+            string input = idTextBox.Text;
+            if (!input.All(char.IsDigit))
+            {
+                MessageBox.Show("사원 아이디는 숫자로 입력해주세요");
+                return;
+            }
             if (IsAnyTextBoxesEmpty(loginGroupBox))
             {
                 stringErrorMsg = "로그인";
