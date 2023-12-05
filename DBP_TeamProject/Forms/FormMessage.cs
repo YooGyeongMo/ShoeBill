@@ -231,6 +231,10 @@ namespace DBP_TeamProject.Forms
                 {
                     MessageBox.Show("메시지 전송에 실패했습니다.");
                 }
+                if (cmd != null)
+                {
+                    cmd.Dispose();
+                }
             }
             catch (Exception ex)
             {
@@ -238,19 +242,21 @@ namespace DBP_TeamProject.Forms
             }
             finally
             {
+
                 dbManager.CloseConnection();
             }
         }
         private void ShowReceivedMessagesForUser()
         {
-            DBManager dbManager = DBManager.GetInstance();
             try
             {
                 string query = $"SELECT m.id, m.title, e.이름 as sender_name, m.state, m.checkstate " +
                                $"FROM message m " +
                                $"JOIN 사원 e ON m.sender_id = e.사원ID " +
                                $"WHERE recipient_id = {userId}";
-                DataTable dataTable = dbManager.FindDataTable(query);
+
+
+                DataTable dataTable = DBManager.GetInstance().InitDBManager().FindDataTable(query);
 
                 listBox1.Items.Clear();
 
@@ -287,7 +293,7 @@ namespace DBP_TeamProject.Forms
             }
             finally
             {
-                dbManager.CloseConnection();
+                DBManager.GetInstance().CloseConnection();
             }
 
         }
