@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using System.Diagnostics.Metrics;
+using System.Runtime.CompilerServices;
 
 namespace DBP_TeamProject.Forms.Approval
 {
@@ -48,7 +49,7 @@ namespace DBP_TeamProject.Forms.Approval
 
         public void getDepartments()
         {
-            query.select("distinct 부서이름").from("s5585452.사원");
+            query.select("distinct 부서이름").from("s5585452.부서");
             DataTable dt = dbManager.FindDataTable(query.query);
             departments.Clear();
             foreach(DataRow dr in dt.Rows)
@@ -126,53 +127,35 @@ namespace DBP_TeamProject.Forms.Approval
             }
             return subCategory;
         }
-
-        //public List<string> firstApproverLoad(string department)
-        //{
-        //    List<MemberInfo> members = departmentMember[department].ToList();
-        //    List<string> memberList = new List<string>();
-        //    foreach (MemberInfo member in members)
-        //    {
-        //        memberList.Add(member.MemberName);
-        //    }
-        //    return memberList;
-        //}
-
-        //public List<string> firstApproverLoad(string department)
-        //{
-        //    List<MemberInfo> members = departmentMember[department].ToList();
-        //    List<string> memberList = new List<string>();
-        //    foreach (MemberInfo member in members)
-        //    {
-        //        if(member.Position.Equals("부서장"))
-        //            memberList.Add(member.MemberName);
-        //    }
-        //    return memberList;
-        //}
-
         public string firstApproverLoad(string department)
         {
             List<MemberInfo> members = departmentMember[department].ToList();
-            return members.Find(x => x.Position.Equals("부서장") || x.Position.Equals("관리자")).MemberName;
+
+            foreach (MemberInfo member in members)
+            {
+                if (member.Position.Equals("부서장") || member.Position.Equals("관리자"))
+                {
+                    return member.MemberName;
+                }
+            }
+
+            MessageBox.Show("부서장이 없습니다!\r\n다른부서를 선택해주세요!");
+            return "";
         }
-
-        //public List<string> lastApproverLoad(string department)
-        //{
-        //    List<MemberInfo> members = departmentMember[department].ToList();
-        //    List<string> memberList = new List<string>();
-
-        //    foreach (MemberInfo member in members)
-        //    {
-        //        if(member.Position.Equals("부서장") || member.Position.Equals("관리자"))
-        //            memberList.Add(member.MemberName);
-        //    }
-        //    return memberList;
-        //}
-
         public string lastApproverLoad(string department)
         {
             List<MemberInfo> members = departmentMember[department].ToList();
-            return members.Find(x => x.Position.Equals("부서장") || x.Position.Equals("관리자")).MemberName;
+
+            foreach (MemberInfo member in members)
+            {
+                if (member.Position.Equals("부서장") || member.Position.Equals("관리자"))
+                {
+                    return member.MemberName;
+                }
+            }
+
+            MessageBox.Show("부서장이 없습니다!\r\n다른부서를 선택해주세요!");
+            return "";
         }
 
         public void createApprove()

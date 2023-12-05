@@ -136,6 +136,8 @@ namespace DBP_TeamProject.Forms
             textBoxTitle.Clear();
             textBoxDescription.Clear();
             comboBoxLargeWork.Items.AddRange(NewApprove.departments.ToArray());
+
+            
             comboBoxFirstDepartment.Items.AddRange(NewApprove.departments.ToArray());
             comboBoxLastDepartment.Items.AddRange(NewApprove.departments.ToArray());
         }
