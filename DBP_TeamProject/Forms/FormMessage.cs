@@ -402,6 +402,21 @@ namespace DBP_TeamProject.Forms
             messageCheckTimer.Tick += new EventHandler(MessageCheckTimer_Tick);
             messageCheckTimer.Start();
         }
+        public void StopTimer()
+        {
+
+            if (messageCheckTimer != null)
+            {
+                messageCheckTimer.Stop();
+                messageCheckTimer.Dispose();
+                messageCheckTimer = null;
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            StopTimer();
+        }
     }
 }
 

@@ -41,6 +41,7 @@
             listBox1 = new ListBox();
             label4 = new Label();
             timer1 = new System.Windows.Forms.Timer(components);
+            button3 = new Button();
             SuspendLayout();
             // 
             // button1
@@ -143,11 +144,22 @@
             // 
             timer1.Tick += timer1_Tick;
             // 
+            // button3
+            // 
+            button3.Location = new Point(937, 21);
+            button3.Name = "button3";
+            button3.Size = new Size(93, 79);
+            button3.TabIndex = 11;
+            button3.Text = "누르고 로그아웃";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
+            // 
             // FormMessage
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1181, 773);
+            Controls.Add(button3);
             Controls.Add(label4);
             Controls.Add(listBox1);
             Controls.Add(richTextBox1);
@@ -180,5 +192,6 @@
         private ListBox listBox1;
         private Label label4;
         private System.Windows.Forms.Timer timer1;
+        private Button button3;
     }
 }
