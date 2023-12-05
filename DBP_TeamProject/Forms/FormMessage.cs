@@ -17,7 +17,7 @@ namespace DBP_TeamProject.Forms
         DBManager dbManager = DBManager.GetInstance();
         Query query = Query.GetInstance();
         LoginedUser loginedUser = LoginedUser.getInstance();
-        private System.Windows.Forms.Timer messageCheckTimer;
+        private System.Windows.Forms.Timer messageCheckTimer2;
         private bool isNotificationShown = false;
         string userId = LoginedUser.getInstance().UserId;
         private bool errorMessageShown = false;
@@ -204,7 +204,7 @@ namespace DBP_TeamProject.Forms
                 "VALUES (@senderId, @recipientId, @title, @content, NOW(), @state)";
 
                 MySqlCommand cmd = new MySqlCommand(query, dbManager.Connection);
-                cmd.Parameters.AddWithValue("@senderId", userId); //자동으로 받아지게////////////////////////////////////////////////////////////////////////////////////////////////
+                cmd.Parameters.AddWithValue("@senderId", userId); 
                 cmd.Parameters.AddWithValue("@recipientId", recipientId);
                 cmd.Parameters.AddWithValue("@title", title);
                 cmd.Parameters.AddWithValue("@content", content);
@@ -345,8 +345,8 @@ namespace DBP_TeamProject.Forms
 
                 listBox1.Items.Add($"제목: {messageTitle}, 발신자: {senderName}, 상태: {status}");
             }
-            messageCheckTimer.Stop();
-            Task.Delay(3000).ContinueWith((task) => messageCheckTimer.Start(), TaskScheduler.FromCurrentSynchronizationContext());
+            messageCheckTimer2.Stop();
+            Task.Delay(3000).ContinueWith((task) => messageCheckTimer2.Start(), TaskScheduler.FromCurrentSynchronizationContext());
         }
 
         private async void timer1_Tick(object sender, EventArgs e)
@@ -397,19 +397,19 @@ namespace DBP_TeamProject.Forms
 
         private void FormMessage_Shown(object sender, EventArgs e)
         {
-            messageCheckTimer = new System.Windows.Forms.Timer();
-            messageCheckTimer.Interval = 3000; // 3초마다 확인
-            messageCheckTimer.Tick += new EventHandler(MessageCheckTimer_Tick);
-            messageCheckTimer.Start();
+            messageCheckTimer2 = new System.Windows.Forms.Timer();
+            messageCheckTimer2.Interval = 3000; // 3초마다 확인
+            messageCheckTimer2.Tick += new EventHandler(MessageCheckTimer_Tick);
+            messageCheckTimer2.Start();
         }
         public void StopTimer()
         {
 
-            if (messageCheckTimer != null)
+            if (messageCheckTimer2 != null)
             {
-                messageCheckTimer.Stop();
-                messageCheckTimer.Dispose();
-                messageCheckTimer = null;
+                messageCheckTimer2.Stop();
+                messageCheckTimer2.Dispose();
+                messageCheckTimer2 = null;
             }
         }
 
