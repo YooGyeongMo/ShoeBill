@@ -122,16 +122,30 @@ namespace DBP_TeamProject.Forms
             else
             {
                 setApproveInfo();
-                if (newApprove.FirstApprover == newApprove.LastApprover)
-                {
-                    MessageBox.Show("중간, 최종결재자가 같습니다\r\n다른 결재자를 선택해주세요!");
-                    return;
-                }
+                int status = checkApprove();
+                if (status == 0) return;
                 newApprove.createApprove();
                 return;
             }
             MessageBox.Show(nullControlType + "정보를 덜 입력하셨습니다.");
+        }
 
+        private int checkApprove()
+        {
+            int status = 1;
+            if (newApprove.FirstApprover == newApprove.LastApprover)
+            {
+                MessageBox.Show("중간, 최종결재자가 같습니다\r\n다른 결재자를 선택해주세요!");
+                status = 0;
+            }
+
+            if(newApprove.FirstApprover == int.Parse(loginedUser.UserId) || newApprove.LastApprover == int.Parse(loginedUser.UserId))
+            {
+                MessageBox.Show("기안자는 결재자가 될 수 없습니다!\r\n다른 결재자를 선택해주세요!");
+                status = 0;
+            }
+
+            return status;
         }
 
         private void loadComboBox()
