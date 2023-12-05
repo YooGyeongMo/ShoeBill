@@ -31,7 +31,8 @@ namespace DBP_TeamProject.Forms.Approval
             query.select("approverId, approver, approveTime, approveMemo, 이름, approveResult")
                 .from("s5585452.Approver left join s5585452.사원 on s5585452.Approver.approver = s5585452.사원.사원Id")
                 .where($"approvalId = {approveId}");
-            DataTable dt = dbManager.FindDataTable(query.query);
+            DataTable dt = dbManager.InitDBManager().FindDataTable(query.query);
+            dbManager.CloseConnection();
 
             approveList.Clear();
             for (int i = 0; i < dt.Rows.Count; i++)
@@ -75,6 +76,11 @@ namespace DBP_TeamProject.Forms.Approval
 
         private void unApprovedMemoLoad()
         {
+            if (comboBoxApprover.SelectedItem == null)
+            {
+                MessageBox.Show("결재타입, 결재자, 결재날짜 모두 선택해주세요!");
+                return;
+            }
             textBox1.Text = approveList.Find(x => x.UnApproveDate.Equals(listBox1.SelectedItem.ToString()) && x.ApproveType == 0).UnApproveMemo;
         }
 
@@ -108,7 +114,7 @@ namespace DBP_TeamProject.Forms.Approval
         {
             if(listBox1.SelectedItem == null )
             {
-                MessageBox.Show("결재타입과 결재자모두 선택해주세요!");
+                MessageBox.Show("결재타입, 결재자, 결재날짜 모두 선택해주세요!");
                 return;
             }
             unApprovedMemoLoad();

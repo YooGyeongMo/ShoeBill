@@ -14,6 +14,7 @@ namespace DBP_TeamProject
         private Form activeForm;
         private System.Windows.Forms.Timer messageCheckTimer;
         FormMessage formMessage = new FormMessage();
+        FormMessage formMessage2 = FormMessage.GetInstance();
 
         public MainForm()
         {
@@ -119,6 +120,7 @@ namespace DBP_TeamProject
             if (activeForm != null)
                 activeForm.Close();
             Reset();*/
+            formMessage2.StopTimer();
             this.Close();
 
             // 기존에 생성된 로그인 폼을 사용
@@ -196,8 +198,12 @@ namespace DBP_TeamProject
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            messageCheckTimer.Stop();
-            messageCheckTimer.Dispose();
+            formMessage2.StopTimer();
+            if (messageCheckTimer != null)
+            {
+                messageCheckTimer.Stop();
+                messageCheckTimer.Dispose();
+            }
             LoginedUser.getInstance().UserId = "";
         }
     }
