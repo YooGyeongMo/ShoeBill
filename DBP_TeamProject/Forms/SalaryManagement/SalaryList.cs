@@ -22,8 +22,6 @@ namespace DBP_TeamProject.Forms.SalaryManagement
         {
             InitializeComponent();
             InitializeDateTimePicker();
-
-
         }
 
         public void InitializeDateTimePicker()

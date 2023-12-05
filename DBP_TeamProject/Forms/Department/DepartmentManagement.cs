@@ -39,7 +39,6 @@ namespace DBP_TeamProject.Forms
             }
             string departmentName = department_name_input_textbox.Text;
 
-            dbManager.InitDBManager();
 
             try
             {
@@ -49,7 +48,7 @@ namespace DBP_TeamProject.Forms
                              .from("부서")
                              .where($"부서이름 = '{departmentName}'")
                              .exec();
-                if (dbManager.IsDuplicated(checkDuplicationQuery))
+                if (DBManager.GetInstance().InitDBManager().IsDuplicated(checkDuplicationQuery))
                 {
                     MessageBox.Show("동일한 부서 이름이 이미 존재합니다.", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
@@ -60,27 +59,29 @@ namespace DBP_TeamProject.Forms
                     .insert("부서 (부서이름)")
                     .values($"('{departmentName}')")
                     .exec();
-                dbManager.ExecuteNonQueury(insertQuery);
+                DBManager.GetInstance().InitDBManager().ExecuteNonQueury(insertQuery);
+
+
                 MessageBox.Show("부서가 성공적으로 추가되었습니다.", "성공", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 //분류 테이블 대분류명 중복체크
-                string insertCategoryDulQuery = Query.GetInstance()
+                string query = Query.GetInstance()
                                 .select("COUNT(*)")
                                 .from("분류_대분류")
                                 .where($"대분류명 = '{departmentName}'")
                                 .exec();
 
-                if (dbManager.IsDuplicated(insertCategoryDulQuery))
+                if (DBManager.GetInstance().InitDBManager().IsDuplicated(query))
                 {
                     MessageBox.Show("분류_대분류 테이블에 부서 이름이 이미 존재합니다.", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
-                string insertCartegoryQuery = Query.GetInstance()
+                string insert = Query.GetInstance()
                                  .insert("분류_대분류 (대분류명)")
                                  .values($"('{departmentName}')")
                                  .exec();
-                dbManager.ExecuteNonQueury(insertCartegoryQuery);
+                DBManager.GetInstance().InitDBManager().ExecuteNonQueury(insert);
 
                 UpdateUI();
             }
@@ -90,7 +91,7 @@ namespace DBP_TeamProject.Forms
             }
             finally
             {
-                dbManager.CloseConnection();
+                DBManager.GetInstance().CloseConnection();
             }
         }
 
@@ -123,8 +124,6 @@ namespace DBP_TeamProject.Forms
             string newDepartmentName = for_update_department_name_input_textbox.Text;
             string currentDepartmentName = recent_department_list_combobox.SelectedItem.ToString();
 
-            dbManager.InitDBManager();
-
             try
             {
                 // 새로운 부서 이름이 이미 존재하는지 확인
@@ -134,7 +133,7 @@ namespace DBP_TeamProject.Forms
                             .where($"부서이름 = '{newDepartmentName}'")
                             .exec();
 
-                MySqlCommand cmd = new MySqlCommand(checkNewDepartmentNameExistsQuery, dbManager.Connection);
+                MySqlCommand cmd = new MySqlCommand(checkNewDepartmentNameExistsQuery, DBManager.GetInstance().Connection);
                 int count = Convert.ToInt32(cmd.ExecuteScalar());
 
                 if (count > 0)
@@ -151,7 +150,7 @@ namespace DBP_TeamProject.Forms
                             .where($"부서이름 = '{currentDepartmentName}'")
                             .exec();
 
-                dbManager.ExecuteNonQueury(updateDepartmentQuery);
+                DBManager.GetInstance().InitDBManager().ExecuteNonQueury(updateDepartmentQuery);
 
                 MessageBox.Show($"부서 이름이 '{currentDepartmentName}'에서 '{newDepartmentName}'(으)로 성공적으로 업데이트되었습니다.", "성공", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -177,7 +176,7 @@ namespace DBP_TeamProject.Forms
                             .where($"대분류명 = '{currentDepartmentName}'")
                             .exec();
 
-                dbManager.ExecuteNonQueury(updateDepartmentCategoryQuery);
+                DBManager.GetInstance().InitDBManager().ExecuteNonQueury(updateDepartmentCategoryQuery);
 
                 UpdateDepartmentComboBox();
             }
@@ -189,7 +188,7 @@ namespace DBP_TeamProject.Forms
             finally
             {
                 UpdateUI();
-                dbManager.CloseConnection();
+                DBManager.GetInstance().CloseConnection();
             }
 
         }
