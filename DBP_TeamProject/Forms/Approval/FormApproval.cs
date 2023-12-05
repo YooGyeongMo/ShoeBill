@@ -209,6 +209,9 @@ namespace DBP_TeamProject.Forms
 
         private void tabControl1_Click(object sender, EventArgs e)
         {
+            newApprove.getDepartments();
+            newApprove.getDeparmentMember();
+            newApprove.getWorkCategory();
             loadComboBox();
         }
 
