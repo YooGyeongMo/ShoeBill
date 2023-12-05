@@ -428,10 +428,6 @@ namespace DBP_TeamProject.Forms
             }
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            StopTimer();
-        }
     }
 }
 
