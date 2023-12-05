@@ -88,6 +88,8 @@ namespace DBP_TeamProject.Forms.Approval
         {
             int approveType = comboBoxApproveType.SelectedIndex;
             setApproverList(approveType);
+            if(approveType == 1) listBox1.Enabled = false;
+            else listBox1.Enabled = true;
         }
 
         private void comboBox1_SelectedValueChanged(object sender, EventArgs e)
@@ -104,6 +106,11 @@ namespace DBP_TeamProject.Forms.Approval
 
         private void listBox1_Click(object sender, EventArgs e)
         {
+            if(listBox1.SelectedItem == null )
+            {
+                MessageBox.Show("결재타입과 결재자모두 선택해주세요!");
+                return;
+            }
             unApprovedMemoLoad();
         }
     }
