@@ -30,13 +30,15 @@ namespace DBP_TeamProject.Forms.Approval
             string unapproveTime = DateTime.Now.ToString("g");
             query.insert("s5585452.Approver(approvalId, approver, approveTime, approveResult, approveMemo)")
                 .values($"({approveId}, {loginedUser.UserId}, '{unapproveTime}', false, '{textBox4.Text}')");
-            int status1 = dbManager.ExecuteNonQueury(query.query);
+            int status1 = dbManager.InitDBManager().ExecuteNonQueury(query.query);
+            dbManager.CloseConnection();
 
             updateCurrApprover();
             query.update("s5585452.Approval")
                 .set($"currApprover = {currApprover}")
                 .where($"approveId = {approveId}");
-            int status2 = dbManager.ExecuteNonQueury(query.query);
+            int status2 = dbManager.InitDBManager().ExecuteNonQueury(query.query);
+            dbManager.CloseConnection();
             if (status1 > 0 && status2 > 0)
             {
                 MessageBox.Show("반려되었습니다!");
@@ -54,7 +56,8 @@ namespace DBP_TeamProject.Forms.Approval
             query.select("userId, currApprover, firstApprover, secondApprover")
                 .from("s5585452.Approval")
                 .where($"approveId = {approveId}");
-            DataTable dt = dbManager.FindDataTable(query.query);
+            DataTable dt = dbManager.InitDBManager().FindDataTable(query.query);
+            dbManager.CloseConnection();
             userId = int.Parse(dt.Rows[0][0].ToString());
             currApprover = int.Parse(dt.Rows[0][1].ToString());
             firstApprover = int.Parse(dt.Rows[0][2].ToString());

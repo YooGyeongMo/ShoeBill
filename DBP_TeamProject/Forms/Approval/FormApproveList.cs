@@ -31,7 +31,8 @@ namespace DBP_TeamProject.Forms.Approval
             query.select("approverId, approver, approveTime, approveMemo, 이름, approveResult")
                 .from("s5585452.Approver left join s5585452.사원 on s5585452.Approver.approver = s5585452.사원.사원Id")
                 .where($"approvalId = {approveId}");
-            DataTable dt = dbManager.FindDataTable(query.query);
+            DataTable dt = dbManager.InitDBManager().FindDataTable(query.query);
+            dbManager.CloseConnection();
 
             approveList.Clear();
             for (int i = 0; i < dt.Rows.Count; i++)

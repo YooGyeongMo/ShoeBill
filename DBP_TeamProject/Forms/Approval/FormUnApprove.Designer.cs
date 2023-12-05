@@ -48,7 +48,7 @@
             label1.Location = new Point(18, 45);
             label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(80, 21);
+            label1.Size = new Size(74, 20);
             label1.TabIndex = 0;
             label1.Text = "결재 번호";
             // 
@@ -57,7 +57,7 @@
             textBox1.Location = new Point(106, 42);
             textBox1.Margin = new Padding(4);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(141, 29);
+            textBox1.Size = new Size(141, 27);
             textBox1.TabIndex = 1;
             // 
             // groupBox1
@@ -68,6 +68,7 @@
             groupBox1.Controls.Add(textBox2);
             groupBox1.Controls.Add(label1);
             groupBox1.Controls.Add(textBox1);
+            groupBox1.Font = new Font("맑은 고딕", 9F, FontStyle.Regular, GraphicsUnit.Point);
             groupBox1.Location = new Point(12, 12);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(256, 260);
@@ -81,7 +82,7 @@
             label3.Location = new Point(18, 119);
             label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
-            label3.Size = new Size(80, 21);
+            label3.Size = new Size(74, 20);
             label3.TabIndex = 4;
             label3.Text = "결재 내용";
             // 
@@ -100,7 +101,7 @@
             label2.Location = new Point(18, 82);
             label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(80, 21);
+            label2.Size = new Size(74, 20);
             label2.TabIndex = 2;
             label2.Text = "결재 제목";
             // 
@@ -109,7 +110,7 @@
             textBox2.Location = new Point(106, 79);
             textBox2.Margin = new Padding(4);
             textBox2.Name = "textBox2";
-            textBox2.Size = new Size(141, 29);
+            textBox2.Size = new Size(141, 27);
             textBox2.TabIndex = 3;
             // 
             // textBox4
@@ -124,6 +125,7 @@
             // groupBox2
             // 
             groupBox2.Controls.Add(textBox4);
+            groupBox2.Font = new Font("맑은 고딕", 9F, FontStyle.Regular, GraphicsUnit.Point);
             groupBox2.Location = new Point(274, 12);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(242, 260);
@@ -133,6 +135,7 @@
             // 
             // button1
             // 
+            button1.Font = new Font("맑은 고딕", 9F, FontStyle.Regular, GraphicsUnit.Point);
             button1.Location = new Point(12, 278);
             button1.Name = "button1";
             button1.Size = new Size(504, 77);
@@ -143,7 +146,7 @@
             // 
             // FormUnApprove
             // 
-            AutoScaleDimensions = new SizeF(9F, 21F);
+            AutoScaleDimensions = new SizeF(11F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(529, 367);
             Controls.Add(button1);

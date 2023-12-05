@@ -50,7 +50,8 @@ namespace DBP_TeamProject.Forms.Approval
         public void getDepartments()
         {
             query.select("distinct 부서이름").from("s5585452.부서");
-            DataTable dt = dbManager.FindDataTable(query.query);
+            DataTable dt = dbManager.InitDBManager().FindDataTable(query.query);
+            dbManager.CloseConnection();
             departments.Clear();
             foreach(DataRow dr in dt.Rows)
             {
@@ -63,7 +64,8 @@ namespace DBP_TeamProject.Forms.Approval
             foreach (string i in departments.ToArray())
             {
                 query.select("사원ID, 이름, 부서이름, 직급").from("s5585452.사원").where($"부서이름 = '{i}'");
-                DataTable dt = dbManager.FindDataTable(query.query);
+                DataTable dt = dbManager.InitDBManager().FindDataTable(query.query);
+                dbManager.CloseConnection();
                 List<MemberInfo> members = new List<MemberInfo>();
                 foreach(DataRow dr in dt.Rows)
                 {
@@ -86,7 +88,8 @@ namespace DBP_TeamProject.Forms.Approval
                     .from("s5585452.분류_대분류 as large left join s5585452.분류_중분류 as middle on large.대분류ID = middle.대분류ID " +
                     "left join s5585452.분류_소분류 as sub on middle.중분류ID = sub.중분류ID")
                     .where($"대분류명 = '{i}'");
-                DataTable dt = dbManager.FindDataTable(query.query);
+                DataTable dt = dbManager.InitDBManager().FindDataTable(query.query);
+                dbManager.CloseConnection();
                 List<WorkList> workList = new List<WorkList>();
                 foreach (DataRow dr in dt.Rows)
                 {
@@ -163,7 +166,8 @@ namespace DBP_TeamProject.Forms.Approval
             query.insert("s5585452.Approval (userId, subClass, approveTitle, approvememo, currApprover, firstApprover, secondApprover, approveStatus)")
                 .values($"({loginedUser.UserId}, '{this.relatedWork}', '{this.title}', '{this.description}', {this.firstApprover}, {this.firstApprover}, {this.lastApprover}, false)").exec();
             int status = dbManager.InitDBManager().ExecuteNonQueury(query.query);
-            if(status > 0)
+            dbManager.CloseConnection();
+            if (status > 0)
             {
                 MessageBox.Show("새로운 결재가 등록되었습니다!");
             }

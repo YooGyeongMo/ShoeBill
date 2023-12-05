@@ -45,6 +45,7 @@ namespace DBP_TeamProject.Forms
                 .from("s5585452.Approval left join s5585452.사원 on s5585452.Approval.userId = s5585452.사원.사원Id")
                 .where($"userId = {int.Parse(loginedUser.UserId)}");
             DataTable dt = dbManager.InitDBManager().FindDataTable(query.query);
+            dbManager.CloseConnection();
             dataGridView1.DataSource = dt;
         }
 
@@ -54,6 +55,7 @@ namespace DBP_TeamProject.Forms
                 .from("s5585452.Approval left join s5585452.사원 on s5585452.Approval.userId = s5585452.사원.사원Id")
                 .where($"userId = {int.Parse(loginedUser.UserId)} and approveStatus = 0");
             DataTable dt = dbManager.InitDBManager().FindDataTable(query.query);
+            dbManager.CloseConnection();
             dataGridView1.DataSource = dt;
         }
 
@@ -63,6 +65,7 @@ namespace DBP_TeamProject.Forms
                 .from("s5585452.Approval left join s5585452.사원 on s5585452.Approval.userId = s5585452.사원.사원Id")
                 .where($"userId = {int.Parse(loginedUser.UserId)} and approveStatus = 1");
             DataTable dt = dbManager.InitDBManager().FindDataTable(query.query);
+            dbManager.CloseConnection();
             dataGridView1.DataSource = dt;
         }
 
@@ -72,6 +75,7 @@ namespace DBP_TeamProject.Forms
                 .from("s5585452.Approval left join s5585452.사원 on s5585452.Approval.userId = s5585452.사원.사원Id")
                 .where($"currApprover = {int.Parse(loginedUser.UserId)} and approveStatus = 0");
             DataTable dt = dbManager.InitDBManager().FindDataTable(query.query);
+            dbManager.CloseConnection();
             dataGridView2.DataSource = dt;
         }
 
@@ -224,6 +228,10 @@ namespace DBP_TeamProject.Forms
 
             try
             {
+                if(dataGridView2.SelectedRows[0].Cells[1].Value == null)
+                {
+                    return;
+                }
                 int userId = int.Parse(dataGridView2.SelectedRows[0].Cells[1].Value.ToString());
                 if (userId == int.Parse(loginedUser.UserId))
                 {
@@ -245,7 +253,8 @@ namespace DBP_TeamProject.Forms
                     query.insert("s5585452.Approver(approvalId, approver, approveTime, approveResult)")
                     .values($"({approveId}, {int.Parse(loginedUser.UserId)}, '{approveTime}', true)");
 
-                    int status1 = dbManager.ExecuteNonQueury(query.query);
+                    int status1 = dbManager.InitDBManager().ExecuteNonQueury(query.query);
+                    dbManager.CloseConnection();
                     int status2 = updateCurrApprover(approveId);
 
                     if (status1 > 0 && status2 > 0)
@@ -269,7 +278,8 @@ namespace DBP_TeamProject.Forms
             query.select("userId, currApprover, firstApprover, secondApprover")
                 .from("s5585452.Approval")
                 .where($"approveId = {approveId}");
-            DataTable dt = dbManager.FindDataTable(query.query);
+            DataTable dt = dbManager.InitDBManager().FindDataTable(query.query);
+            dbManager.CloseConnection();
 
             int userId = int.Parse(dt.Rows[0][0].ToString());
             int firstApprover = int.Parse(dt.Rows[0][2].ToString());
@@ -299,7 +309,10 @@ namespace DBP_TeamProject.Forms
                     .set($"currApprover = {firstApprover}")
                     .where($"approveId = {approveId}");
             }
-            return dbManager.ExecuteNonQueury(query.query);
+
+            int returnint = dbManager.InitDBManager().ExecuteNonQueury(query.query);
+            dbManager.CloseConnection();
+            return returnint;
         }
 
         private void buttonApproveDisagree_Click(object sender, EventArgs e)
@@ -307,6 +320,10 @@ namespace DBP_TeamProject.Forms
             // 아무것도 없을때 누르면 죽는거 해걸해야 함
             try
             {
+                if (dataGridView2.SelectedRows[0].Cells[1].Value == null)
+                {
+                    return;
+                }
                 int userId = int.Parse(dataGridView2.SelectedRows[0].Cells[1].Value.ToString());
                 if (userId == int.Parse(loginedUser.UserId))
                 {
